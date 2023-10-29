@@ -1,0 +1,60 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf‐8" />
+    <meta name="viewport" content="width=device‐width, initial‐scale=1.0" />
+    <link rel="stylesheet" href="~/css/Index.css" asp‐append‐version="true" />
+</head>
+<body>
+    <div class="container">
+        <div class=row>
+            <div class="col-sm-6">
+                <div class="symptom">
+                    <label for="eyeRedness">Eye Redness</label>
+                    <input type="checkbox" id="eyeRedness" data-onset="eyeRednesstext" data-location="eyeRednesstext2">
+                </div>
+
+                <div class="symptom">
+                    <label for="eyeItch">Eye Itch</label>
+                    <input type="checkbox" id="eyeItch" data-onset="eyeItchtext" data-location="eyeItchtext2">
+                </div>
+
+                <div class="symptom">
+                    <label for="eyeSwelling">Eye Swelling</label>
+                    <input type="checkbox" id="eyeSwelling" data-onset="eyeSwellingtext" data-location="eyeSwellingtext2">
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="col-md-6">
+                    <div class="onset">
+                        <p>Onset</p>
+                        <p id="eyeRednesstext" style="display:none">Does your eye redness come and go? <span class="close">&times;</span></p>
+                        <p id="eyeItchtext" style="display:none">Does your eye itch only in the morning/night? <span class="close">&times;</span></p>
+                        <p id="eyeSwellingtext" style="display:none">Is there any specific time when your eyes swell? <span class="close">&times;</span></p>
+                    </div>
+
+                    <div class="location">
+                        <p>Location</p>
+                        <p id="eyeRednesstext2" style="display:none">Does the eye redness affect both eyes? <span class="close">&times;</span></p>
+                        <p id="eyeItchtext2" style="display:none">Does the eye itch affect all parts of the eyes? <span class="close">&times;</span></p>
+                        <p id="eyeSwellingtext2" style="display:none">Is the swelling localized to one eye or both? <span class="close">&times;</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Add more symptoms and checkboxes here -->
+        <div class="row">
+           
+        </div>
+    </div>
+
+    <!-- Javascript file -->
+    <script src="~/js/Index.js"></script>
+</body>
+</html>

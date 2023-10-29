@@ -1,0 +1,22 @@
+﻿.container {
+    display: flex;
+    flex-direction: column;
+}
+
+.symptom {
+    display: flex;
+    align-items: center;
+}
+
+    .symptom label {
+        margin-right: 10px;
+    }
+
+.close {
+    cursor: pointer;
+}
+
+.onset, .location {
+    text-align: right;
+    width: 50%
+}
