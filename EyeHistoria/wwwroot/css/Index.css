@@ -8,15 +8,14 @@
     align-items: center;
 }
 
-    .symptom label {
-        margin-right: 10px;
-    }
+.symptom label {
+    margin-right: 10px;
+}
 
 .close {
     cursor: pointer;
 }
 
 .onset, .location {
-    text-align: right;
-    width: 50%
+    text-align: left;
 }
