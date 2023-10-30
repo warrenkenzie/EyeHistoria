@@ -1,6 +1,7 @@
 ﻿using EyeHistoria.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using System.Reflection.Metadata.Ecma335;
 
 namespace EyeHistoria.Controllers
 {
@@ -23,10 +24,26 @@ namespace EyeHistoria.Controllers
             return View();
         }
 
+        public IActionResult SubmitDiagnosis()
+        {
+            return View();
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        [HttpPost]
+        public ActionResult SubmitDiagnosis(IFormCollection formData)
+        {
+            string eyeRedness = formData["eyeRedness"].ToString();
+            string eyeItch = formData["eyeItch"].ToString();
+            string eyeSwelling = formData["eyeSwelling"].ToString();
+
+            ViewData["diagnosis"] = string.Format(eyeRedness + " " + eyeItch + " " + eyeSwelling);
+            return View();
         }
     }
 }
