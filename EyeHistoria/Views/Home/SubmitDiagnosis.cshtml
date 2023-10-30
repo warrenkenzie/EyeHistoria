@@ -1,12 +1,38 @@
-﻿<!DOCTYPE html>
+﻿@model IEnumerable<EyeHistoria.Models.Disease>
 
-<html lang="en">
-<head>
-    <meta charset="utf‐8" />
-    <meta name="viewport" content="width=device‐width, initial‐scale=1.0" />
-    <link rel="stylesheet" href="~/css/Index.css" asp‐append‐version="true" />
-</head>
-<body>
-    <span style="color:red;">@ViewData["diagnosis"]</span>
-</body>
-</html>
+@{
+    ViewData["Title"] = "SubmitDiagnosis";
+}
+
+<h1>SubmitDiagnosis</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.disease_name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.match)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                 @Html.DisplayFor(modelItem => item.disease_name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.match)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

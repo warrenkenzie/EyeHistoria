@@ -11,9 +11,9 @@ namespace EyeHistoria.Controllers
         // put the symptoms to find diagnosis
         List<string> list_of_symptoms = new List<string>();
 
-        // dummy diseases for diagnosis
-        List<string> cataract = new List<string> { "eyeRedness", "eyeSwelling" };
-        
+        // list of disease_obj
+        List<Disease> list_diseases_obj = new List<Disease>();
+
 
         private readonly ILogger<HomeController> _logger;
 
@@ -64,10 +64,12 @@ namespace EyeHistoria.Controllers
             list_of_symptoms.Add(eyeSwelling);
 
             int index = list_of_symptoms.Count();
-            int num_of_true = 0;
+            int num_of_matched_symptoms = 0;
             // goes through the list of diseases
             foreach (KeyValuePair<string, List<string>> disease in list_of_diseases)
             {
+                List<string> matched_symptoms = new List<string>();
+                List<string> unmatched_symptoms = new List<string>();
                 // iterates through symptoms sent
                 for (int i = 0; i < list_of_symptoms.Count(); i++)
                 {
@@ -77,18 +79,27 @@ namespace EyeHistoria.Controllers
                         // goes through the list symptoms of a disease and then true if the syptom matches list_of_symptoms
                         if (list_of_symptoms[i] == disease.Value[j])
                         {
-                            num_of_true++;
+                            matched_symptoms.Add(disease.Value[j]);
+                            num_of_matched_symptoms++;
                             break;
                         }
                     }
-                   
+                    unmatched_symptoms.Add(list_of_symptoms[i]);
+                    
                 }
-                checks.Add(num_of_true);
-                num_of_true = 0;
+
+                // calculate the match of list of symptoms to disease and if more than 50%, add it to list_diseases_obj
+                float matched = (float)num_of_matched_symptoms / 3 * 100;
+                Disease disease_obj = new Disease(disease.Key, matched, matched_symptoms, unmatched_symptoms);
+                list_diseases_obj.Add(disease_obj);
+
+                // reset num_of_matched_symptoms to 0 for the next iteration
+                num_of_matched_symptoms = 0;
+
             }
-            Console.WriteLine(checks.ToString());
-            ViewData["diagnosis"] = num_of_true;
-            return View();
+           
+            ViewData["diagnosis"] = num_of_matched_symptoms;
+            return View(list_diseases_obj);
         }
 
         // generates a dict of diseases
