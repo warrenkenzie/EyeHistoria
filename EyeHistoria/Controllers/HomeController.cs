@@ -84,8 +84,11 @@ namespace EyeHistoria.Controllers
                             break;
                         }
                     }
-                    unmatched_symptoms.Add(list_of_symptoms[i]);
-                    
+                    // if there are no matched symptoms, add it to unmatched_symptoms
+                    if (num_of_matched_symptoms == 0)
+                    {
+                        unmatched_symptoms.Add(list_of_symptoms[i]);
+                    }
                 }
 
                 // calculate the match of list of symptoms to disease and if more than 50%, add it to list_diseases_obj
