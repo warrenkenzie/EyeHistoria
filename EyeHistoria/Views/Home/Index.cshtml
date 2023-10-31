@@ -14,20 +14,23 @@
     <div class="container">
         <div class=row>
             <div class="col-sm-6">
-                <div class="symptom">
-                    <label for="eyeRedness">Eye Redness</label>
-                    <input type="checkbox" id="eyeRedness" data-onset="eyeRednesstext" data-location="eyeRednesstext2">
-                </div>
+                <form method="post" action="~/Home/SubmitDiagnosis">
+                    <div class="symptom">
+                        <label for="eyeRedness">Eye Redness</label>
+                        <input type="checkbox" id="eyeRedness" name="eyeRedness" value="eyeRedness" data-onset="eyeRednesstext" data-location="eyeRednesstext2">
+                    </div>
 
-                <div class="symptom">
-                    <label for="eyeItch">Eye Itch</label>
-                    <input type="checkbox" id="eyeItch" data-onset="eyeItchtext" data-location="eyeItchtext2">
-                </div>
+                    <div class="symptom">
+                        <label for="eyeItch">Eye Itch</label>
+                        <input type="checkbox" id="eyeItch" name="eyeItch" value="eyeItch" data-onset="eyeItchtext" data-location="eyeItchtext2">
+                    </div>
 
-                <div class="symptom">
-                    <label for="eyeSwelling">Eye Swelling</label>
-                    <input type="checkbox" id="eyeSwelling" data-onset="eyeSwellingtext" data-location="eyeSwellingtext2">
-                </div>
+                    <div class="symptom">
+                        <label for="eyeSwelling">Eye Swelling</label>
+                        <input type="checkbox" id="eyeSwelling" name="eyeSwelling" value="eyeSwelling" data-onset="eyeSwellingtext" data-location="eyeSwellingtext2">
+                    </div>
+                    <input type="submit" value="Submit Result" />
+                </form>
             </div>
             <div class="col-sm-6">
                     <div class="onset">

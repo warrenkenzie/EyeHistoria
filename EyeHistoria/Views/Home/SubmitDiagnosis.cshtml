@@ -1,0 +1,57 @@
+﻿@model IEnumerable<EyeHistoria.Models.Disease>
+
+@{
+    ViewData["Title"] = "SubmitDiagnosis";
+}
+
+<h1>SubmitDiagnosis</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.disease_name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.match)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.disease_name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.match)
+            </td>
+            <td>
+                <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_@Html.DisplayFor(modelItem => item.disease_name)" aria-expanded="false" aria-controls="collapse_@Html.DisplayFor(modelItem => item.disease_name)">
+                    Button with data-bs-target
+                </button>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="collapse" id="collapse_@Html.DisplayFor(modelItem => item.disease_name)">
+                    <!-- matched symptoms -->
+                    <div class="card card-body">
+                        <span style="color:green;">matched symptoms</span>
+                        @foreach (string matched_symptoms in item.matched_symptoms)
+                        {
+                             <div>@matched_symptoms</div>
+                        }
+                        <span style="color:red;">unmatched symptoms</span>
+                        @foreach (string unmatched_symptoms in item.unmatched_symptoms)
+                        {
+                             <div>@unmatched_symptoms</div>
+                        }
+                    </div>
+                </div>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
