@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Diagnostics.Metrics;
 using System.Diagnostics.SymbolStore;
 using EyeHistoria.Models;
 using Humanizer;
+using MessagePack;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace EyeHistoria.DAL
@@ -84,6 +86,48 @@ namespace EyeHistoria.DAL
             conn.Close();
             //Return id when no error occurs.
             return symptoms.SymptomID;
+        }
+
+        public List<Question> get_question_basedon_type(string question_type)
+        {
+            //Create a SqlCommand object from connection object
+            SqlCommand cmd = conn.CreateCommand();
+            // query
+            cmd.CommandText = @"SELECT * FROM Questions WHERE Type= @question_type";
+            
+            // parameteres
+            cmd.Parameters.AddWithValue("@question_type", question_type);
+
+            //A connection to database must be opened before any operations made.
+            conn.Open();
+
+            //Execute the SELECT SQL through a DataReader
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            List<Question> list_of_questions = new List<Question>();
+            while (reader.Read())
+            {
+                list_of_questions.Add(
+                    new Question()
+                    {
+                        QuestionID = reader.GetInt32(0),
+                        QuestionText = reader.GetString(1),
+                        Type = reader.GetString(2),
+                        Category = reader.GetString(3),
+                        SymptomID = reader.GetInt32(4),
+                        SymptomName = reader.GetString(5),
+                        AdminID = reader.GetInt32(6),
+                        LastModifiedBy = reader.GetString(7),
+                        Date = reader.GetDateTime(8),
+                        FollowUpID = (!reader.IsDBNull(9) ? reader.GetInt32(8) : null)
+                    }
+                );
+            }
+            //Close DataReader
+            reader.Close();
+            //Close the database connection
+            conn.Close();
+            return list_of_questions;
         }
 
     }

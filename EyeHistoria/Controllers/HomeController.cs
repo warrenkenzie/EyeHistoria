@@ -1,4 +1,5 @@
-﻿using EyeHistoria.Models;
+﻿using EyeHistoria.DAL;
+using EyeHistoria.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -14,6 +15,9 @@ namespace EyeHistoria.Controllers
         // list of disease_obj
         List<Disease> list_diseases_obj = new List<Disease>();
 
+        // DAL
+        private OurDAL symptomDAL = new OurDAL();
+
 
         private readonly ILogger<HomeController> _logger;
 
@@ -24,7 +28,21 @@ namespace EyeHistoria.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            IndexViewModel indexViewModel = new IndexViewModel();
+            // add the list of symptoms
+            indexViewModel.list_of_symptoms = symptomDAL.GetAllSymptoms();
+
+            // add the questions
+            indexViewModel.onset_questions = symptomDAL.get_question_basedon_type("Onset");
+            indexViewModel.location_questions = symptomDAL.get_question_basedon_type("Location");
+            indexViewModel.duration_questions = symptomDAL.get_question_basedon_type("Duration");
+            indexViewModel.characteristics_questions = symptomDAL.get_question_basedon_type("Characteristics");
+            indexViewModel.aggravation_questions = symptomDAL.get_question_basedon_type("Aggravation");
+            indexViewModel.relief_questions = symptomDAL.get_question_basedon_type("Relief");
+            indexViewModel.timing_questions = symptomDAL.get_question_basedon_type("Timing");
+            indexViewModel.severity_questions = symptomDAL.get_question_basedon_type("Severity");
+
+            return View(indexViewModel);
         }
 
         public IActionResult Privacy()
