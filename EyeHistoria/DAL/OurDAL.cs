@@ -7,6 +7,7 @@ using EyeHistoria.Models;
 using Humanizer;
 using MessagePack;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.CodeAnalysis;
 
 namespace EyeHistoria.DAL
 {
@@ -128,6 +129,41 @@ namespace EyeHistoria.DAL
             //Close the database connection
             conn.Close();
             return list_of_questions;
+        }
+
+        public List<Diagnosis> Get_Diagnostics()
+        {
+            //Create a SqlCommand object from connection object
+            SqlCommand cmd = conn.CreateCommand();
+            // query
+            cmd.CommandText = @"SELECT * FROM Diagnosis";
+
+            //A connection to database must be opened before any operations made.
+            conn.Open();
+
+            //Execute the SELECT SQL through a DataReader
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            List<Diagnosis> list_of_diagnostic = new List<Diagnosis>();
+            while (reader.Read())
+            {
+                list_of_diagnostic.Add(
+                    new Diagnosis()
+                    {
+                        DiagnosisID = reader.GetInt32(0),
+                        DiagnosisName = reader.GetString(1),
+                        List_of_diagnosis_symptoms = reader.GetString(2).Split(',').Select(symptom => symptom.Trim()).ToList(),
+                        AdminID = reader.GetInt32(3),
+                        LastModifiedBy = reader.GetString(4),
+                        Date = reader.GetDateTime(5)
+                    }
+                );
+            }
+            //Close DataReader
+            reader.Close();
+            //Close the database connection
+            conn.Close();
+            return list_of_diagnostic;
         }
 
     }

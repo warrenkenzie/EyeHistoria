@@ -5,13 +5,13 @@ namespace EyeHistoria.Models
 {
     public class Disease
     {
-        public string disease_name { get; set; }
+        public string Disease_name { get; set; }
 
-        public float match { get; set; }
+        public float Match { get; set; }
 
-        public List<string> matched_symptoms { get; set; }
+        public List<string> Matched_symptoms { get; set; }
 
-        public List<string> unmatched_symptoms { get; set; }
+        public List<string> Unmatched_symptoms { get; set; }
 
         // default constructor
         public Disease()
@@ -20,12 +20,12 @@ namespace EyeHistoria.Models
         }
 
         // constructor
-        public Disease(string Disease, float Match, List<string> Matched_symptoms, List<string> Unmatched_symptoms)
+        public Disease(string disease, float match, List<string> matched_symptoms, List<string> unmatched_symptoms)
         {
-            disease_name = Disease;
-            match = Match;
-            matched_symptoms = Matched_symptoms;
-            unmatched_symptoms = Unmatched_symptoms;
+            Disease_name = disease;
+            Match = match;
+            Matched_symptoms = matched_symptoms;
+            Unmatched_symptoms = unmatched_symptoms;
         }
     }
 }

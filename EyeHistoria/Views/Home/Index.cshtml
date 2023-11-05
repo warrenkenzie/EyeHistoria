@@ -16,7 +16,7 @@
         <div class=row>
             <div class="col-sm-6">
                 <form method="post" action="~/Home/SubmitDiagnosis">
-                    @foreach (var symptom_item in Model.list_of_symptoms)
+                    @foreach (var symptom_item in Model.List_of_symptoms)
                     {
                         <div class="symptom">
                             <label for="@symptom_item.SymptomName">@symptom_item.SymptomName</label>
@@ -38,7 +38,7 @@
             <div class="col-sm-6">
                     <div class="onset">
                         <p>Onset</p>
-                        @foreach (var onset_question in Model.onset_questions)
+                        @foreach (var onset_question in Model.Onset_questions)
                         {
                             <p id="@onset_question.SymptomName@Html.Raw("_onset")" style="display:none">@onset_question.QuestionText <span class="close">&times;</span></p>
                         }
@@ -46,7 +46,7 @@
 
                     <div class="location">
                         <p>Location</p>
-                        @foreach (var location_question in Model.location_questions)
+                        @foreach (var location_question in Model.Location_questions)
                         {
                             <p id="@location_question.SymptomName@Html.Raw("_location")" style="display:none">@location_question.QuestionText <span class="close">&times;</span></p>
                         }
@@ -54,42 +54,42 @@
 
                     <div class="duration">
                         <p>Duration</p>
-                        @foreach (var duration_question in Model.duration_questions)
+                        @foreach (var duration_question in Model.Duration_questions)
                         {
                             <p id="@duration_question.SymptomName@Html.Raw("_duration")" style="display:none">@duration_question.QuestionText <span class="close">&times;</span></p>
                         }
                     </div>
                     <div class="characteristics">
                         <p>Characteristics</p>
-                        @foreach (var characteristics_question in Model.characteristics_questions)
+                        @foreach (var characteristics_question in Model.Characteristics_questions)
                         {
                             <p id="@characteristics_question.SymptomName@Html.Raw("_characteristics")" style="display:none">@characteristics_question.QuestionText <span class="close">&times;</span></p>
                         }
                     </div>
                     <div class="aggravation">
-                        <p>Aggravation</p>
-                        @foreach (var aggravation_question in Model.aggravation_questions)
+                        <div>Aggravation</div>
+                        @foreach (var aggravation_question in Model.Aggravation_questions)
                         {
                             <p id="@aggravation_question.SymptomName@Html.Raw("_aggravation")" style="display:none">@aggravation_question.QuestionText <span class="close">&times;</span></p>
                         }
                     </div>
                     <div class="relief">
                         <p>Relief</p>
-                        @foreach (var relief_question in Model.relief_questions)
+                        @foreach (var relief_question in Model.Relief_questions)
                         {
                             <p id="@relief_question.SymptomName@Html.Raw("_relief")" style="display:none">@relief_question.QuestionText <span class="close">&times;</span></p>
                         }
                     </div>
                     <div class="timing">
                         <p>Timing</p>
-                        @foreach (var timing_question in Model.timing_questions)
+                        @foreach (var timing_question in Model.Timing_questions)
                         {
                             <p id="@timing_question.SymptomName@Html.Raw("_timing")" style="display:none">@timing_question.QuestionText <span class="close">&times;</span></p>
                         }
                     </div>
                     <div class="severity">
                         <p>Severity</p>
-                        @foreach (var severity_question in Model.severity_questions)
+                        @foreach (var severity_question in Model.Severity_questions)
                         {
                             <p id="@severity_question.SymptomName@Html.Raw("_severity")" style="display:none">@severity_question.QuestionText <span class="close">&times;</span></p>
                         }
