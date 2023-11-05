@@ -1,5 +1,6 @@
 ﻿using EyeHistoria.Models;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Reflection.Metadata.Ecma335;
@@ -55,6 +56,7 @@ namespace EyeHistoria.Controllers
             List<int> checks = new List<int>();
 
             // put the list of symptoms in a list
+            int eyeRednessOption = Convert.ToInt32(formData["eyeRednessOption"]);
             string eyeRedness = formData["eyeRedness"].ToString();
             string eyeItch = formData["eyeItch"].ToString();
             string eyeSwelling = formData["eyeSwelling"].ToString();
@@ -93,7 +95,7 @@ namespace EyeHistoria.Controllers
 
                 // calculate the match of list of symptoms to disease and if more than 50%, add it to list_diseases_obj
                 float matched = (float)num_of_matched_symptoms / 3 * 100;
-                Disease disease_obj = new Disease(disease.Key, matched, matched_symptoms, unmatched_symptoms);
+                Disease disease_obj = new Disease(disease.Key, matched, eyeRednessOption, matched_symptoms, unmatched_symptoms);
                 list_diseases_obj.Add(disease_obj);
 
                 // reset num_of_matched_symptoms to 0 for the next iteration

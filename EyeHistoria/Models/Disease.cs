@@ -8,6 +8,7 @@ namespace EyeHistoria.Models
         public string disease_name { get; set; }
 
         public float match { get; set; }
+        public int painMeasure { get; set; }
 
         public List<string> matched_symptoms { get; set; }
 
@@ -20,10 +21,11 @@ namespace EyeHistoria.Models
         }
 
         // constructor
-        public Disease(string Disease, float Match, List<string> Matched_symptoms, List<string> Unmatched_symptoms)
+        public Disease(string Disease, float Match, int PainMeasure, List<string> Matched_symptoms, List<string> Unmatched_symptoms)
         {
             disease_name = Disease;
             match = Match;
+            painMeasure = PainMeasure;
             matched_symptoms = Matched_symptoms;
             unmatched_symptoms = Unmatched_symptoms;
         }

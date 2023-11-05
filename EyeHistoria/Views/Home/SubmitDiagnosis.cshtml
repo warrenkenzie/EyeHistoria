@@ -27,6 +27,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.match)
             </td>
+             <td>
+                @Html.DisplayFor(modelItem => item.painMeasure)
+            </td>
             <td>
                 <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_@Html.DisplayFor(modelItem => item.disease_name)" aria-expanded="false" aria-controls="collapse_@Html.DisplayFor(modelItem => item.disease_name)">
                     Button with data-bs-target
