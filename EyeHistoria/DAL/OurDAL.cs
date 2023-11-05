@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Data.SqlClient;
 using EyeHistoria.Models;
 using Humanizer;
@@ -35,7 +36,7 @@ namespace EyeHistoria.DAL
             conn.Open();
             //Execute the SELECT SQL through a DataReader
             SqlDataReader reader = cmd.ExecuteReader();
-            //Read all records until the end, save data into a staff list
+            //Read all records until the end, save data into a symptoms list
             List<Symptoms> symptomsList = new List<Symptoms>();
             while (reader.Read())
             {
@@ -43,7 +44,10 @@ namespace EyeHistoria.DAL
                 new Symptoms
                 {
                     SymptomID = reader.GetInt32(0), //0: 1st column
-                    Name = reader.GetString(1) //1: 2nd column
+                    SymptomName = reader.GetString(1), //1: 2nd column
+                    AdminID = reader.GetInt32(2), //2: 3rd column
+                    LastModifiedBy = reader.GetString(3), //3: 4th column
+                    Date = reader.GetDateTime(4) //4: 5th column
                 }
                 );
             }
@@ -53,6 +57,7 @@ namespace EyeHistoria.DAL
             conn.Close();
             return symptomsList;
         }
+     
 
     }
 }
