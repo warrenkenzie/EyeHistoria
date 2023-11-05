@@ -2,6 +2,7 @@
 {
     public class Symptoms
     {
+
         public int SymptomID { get; set; }
 
         public string SymptomName { get; set; }
