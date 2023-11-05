@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using EyeHistoria.DAL;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace EyeHistoria.Controllers
 {
@@ -10,7 +11,7 @@ namespace EyeHistoria.Controllers
         private OurDAL context = new OurDAL();
 
         // GET: AdminController
-        public ActionResult View()
+        public ActionResult Index()
         {
             List<Symptoms> symptomsList = context.GetAllSymptoms();
             return View(symptomsList);
@@ -25,21 +26,30 @@ namespace EyeHistoria.Controllers
         // GET: AdminController/Create
         public ActionResult Create()
         {
-            return View();
+            Symptoms symptoms = new Symptoms();
+            symptoms.AdminID = 1;
+            symptoms.LastModifiedBy = "Jonathan Hong Yi Hao";
+            symptoms.Date = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+            return View(symptoms);
         }
 
         // POST: AdminController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(Symptoms symptoms)
         {
-            try
+            if (ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index));
+                //Add staff record to database
+                symptoms.SymptomID = context.Add(symptoms);
+                //Redirect user to Staff/Index view
+                return RedirectToAction("Index");
             }
-            catch
+            else
             {
-                return View();
+                //Input validation fails, return to the Create view
+                //to display error message
+                return View(symptoms);
             }
         }
 

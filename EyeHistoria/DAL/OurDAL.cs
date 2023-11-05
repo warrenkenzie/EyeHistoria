@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Diagnostics.SymbolStore;
 using EyeHistoria.Models;
 using Humanizer;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -57,7 +58,33 @@ namespace EyeHistoria.DAL
             conn.Close();
             return symptomsList;
         }
-     
+
+        public int Add(Symptoms symptoms)
+        {
+            //Create a SqlCommand object from connection object
+            SqlCommand cmd = conn.CreateCommand();
+            //Specify an INSERT SQL statement which will
+            //return the auto-generated StaffID after insertion
+            cmd.CommandText = @"INSERT INTO Symptoms (SymptomName, AdminID, LastModifiedBy, 
+                                Date) 
+                                OUTPUT INSERTED.SymptomID 
+                                VALUES(@symptomname, @adminid, @lastmodifiedby, @date)";
+            //Define the parameters used in SQL statement, value for each parameter
+            //is retrieved from respective class's property.
+            cmd.Parameters.AddWithValue("@symptomname", symptoms.SymptomName);
+            cmd.Parameters.AddWithValue("@adminid", symptoms.AdminID);
+            cmd.Parameters.AddWithValue("@lastmodifiedby", symptoms.LastModifiedBy);
+            cmd.Parameters.AddWithValue("@date", symptoms.Date);
+            //A connection to database must be opened before any operations made.
+            conn.Open();
+            //ExecuteScalar is used to retrieve the auto-generated
+            //StaffID after executing the INSERT SQL statement
+            symptoms.SymptomID = (int)cmd.ExecuteScalar();
+            //A connection should be closed after operations.
+            conn.Close();
+            //Return id when no error occurs.
+            return symptoms.SymptomID;
+        }
 
     }
 }
