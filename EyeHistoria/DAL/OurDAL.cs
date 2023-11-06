@@ -194,5 +194,69 @@ namespace EyeHistoria.DAL
             return diagnosis.DiagnosisID;
         }
 
+        public bool IsSymptomExist(string symptomName, int symptomID)
+        {
+            bool symptomFound = false;
+            //Create a SqlCommand object and specify the SQL statement 
+            //to get a staff record with the email address to be validated
+            SqlCommand cmd = conn.CreateCommand();
+            cmd.CommandText = @"SELECT SymptomID FROM Symptoms 
+                                WHERE SymptomName=@selectedSymptomName";
+            cmd.Parameters.AddWithValue("@selectedSymptomName", symptomName);
+            //Open a database connection and execute the SQL statement
+            conn.Open();
+            SqlDataReader reader = cmd.ExecuteReader();
+            if (reader.HasRows)
+            { //Records found
+                while (reader.Read())
+                {
+                    if (reader.GetInt32(0) != symptomID)
+                        //The email address is used by another staff
+                        symptomFound = true;
+                    else
+                        symptomFound = false;
+                }
+            }
+            else
+            { //No record
+                symptomFound = false; // The email address given does not exist
+            }
+            reader.Close();
+            conn.Close();
+            return symptomFound;
+        }
+
+        public void ExecuteYourStoredProcedure(Symptoms symptoms)
+        {
+            using (SqlCommand command = new SqlCommand("AddSymptomsWithQuestions", conn))
+            {
+                command.CommandType = CommandType.StoredProcedure;
+
+                // Add parameters to the stored procedure
+                command.Parameters.AddWithValue("@SymptomName", symptoms.SymptomName);
+                command.Parameters.AddWithValue("@AdminID", symptoms.AdminID);
+                command.Parameters.AddWithValue("@LastModifiedBy", symptoms.LastModifiedBy);
+
+                try
+                {
+                    conn.Open();
+                    command.ExecuteNonQuery();
+                    Console.WriteLine("Stored procedure executed successfully.");
+                }
+                catch (SqlException ex)
+                {
+                    if (ex.Number == 2627)
+                    {
+                        // This Symptom already exists in the database.
+                        Console.WriteLine("This Symptom already exists in the database.");
+                    }
+                    else
+                    {
+                        // Handle other SQL errors
+                        Console.WriteLine("An error occurred while executing the stored procedure.");
+                    }
+                }
+            }
+        }
     }
 }

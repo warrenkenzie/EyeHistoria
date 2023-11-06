@@ -8,6 +8,7 @@ namespace EyeHistoria.Models
 
         public int SymptomID { get; set; }
 
+        [ValidateSymptomExists]
         public string SymptomName { get; set; }
 
         public int AdminID { get; set; }

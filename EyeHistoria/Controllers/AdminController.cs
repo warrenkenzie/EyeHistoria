@@ -48,7 +48,7 @@ namespace EyeHistoria.Controllers
             if (ModelState.IsValid)
             {
                 //Add staff record to database
-                symptoms.SymptomID = context.Add(symptoms);
+                context.ExecuteYourStoredProcedure(symptoms);
                 //Redirect user to Staff/Index view
                 return RedirectToAction("Index");
             }
