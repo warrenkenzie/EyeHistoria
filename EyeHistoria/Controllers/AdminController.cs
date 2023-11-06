@@ -25,6 +25,12 @@ namespace EyeHistoria.Controllers
             return View(diagnosisList);
         }
 
+        public ActionResult ViewQuestions()
+        {
+            List<Question> questionlist = context.GetQuestions();
+            return View(questionlist);
+        }
+
         // GET: AdminController/Details/5
         public ActionResult Details(int id)
         {
@@ -86,6 +92,34 @@ namespace EyeHistoria.Controllers
                 //Input validation fails, return to the Create view
                 //to display error message
                 return View(diagnosis);
+            }
+        }
+
+        public ActionResult AddQuestion()
+        {
+            Question question = new Question();
+            question.AdminID = 1;
+            question.LastModifiedBy = "Jonathan Hong Yi Hao";
+            return View(question);
+        }
+
+        // POST: AdminController/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddQuestion(Question question)
+        {
+            if (ModelState.IsValid)
+            {
+                //Add staff record to database
+                question.QuestionID = context.AddOuestion(question);
+                //Redirect user to Staff/Index view
+                return RedirectToAction("ViewDiagnositics");
+            }
+            else
+            {
+                //Input validation fails, return to the Create view
+                //to display error message
+                return View(question);
             }
         }
 

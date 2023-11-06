@@ -194,5 +194,74 @@ namespace EyeHistoria.DAL
             return diagnosis.DiagnosisID;
         }
 
+        public List<Question> GetQuestions()
+        {
+            //Create a SqlCommand object from connection object
+            SqlCommand cmd = conn.CreateCommand();
+            // query
+            cmd.CommandText = @"SELECT * FROM Questions";
+
+            //A connection to database must be opened before any operations made.
+            conn.Open();
+
+            //Execute the SELECT SQL through a DataReader
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            List<Question> questionlist = new List<Question>();
+            while (reader.Read())
+            {
+                questionlist.Add(
+                    new Question()
+                    {
+                        QuestionID = reader.GetInt32(0),
+                        QuestionText = reader.GetString(1),
+                        Type = reader.GetString(2),
+                        Category = reader.GetString(3),
+                        SymptomID = reader.GetInt32(4),
+                        SymptomName = reader.GetString(5),
+                        AdminID = reader.GetInt32(6),
+                        LastModifiedBy = reader.GetString(7),
+                        Date = reader.GetDateTime(8),
+                        FollowUpID = reader.GetInt32(9)
+                    }
+                );
+            }
+            //Close DataReader
+            reader.Close();
+            //Close the database connection
+            conn.Close();
+            return questionlist;
+        }
+        public int AddOuestion(Question question)
+        {
+            //Create a SqlCommand object from connection object
+            SqlCommand cmd = conn.CreateCommand();
+            //Specify an INSERT SQL statement which will
+            //return the auto-generated StaffID after insertion
+            cmd.CommandText = @"INSERT INTO Questions (Question, Type, Category, SymptomID,
+                                SymptomName, AdminID, LastModifiedBy, Date, FollowupID)
+                                OUTPUT INSERTED.QuestionID
+                                VALUES(@question, @type, @category, @symptomid, @symptomname, @adminid, @lastmodifiedby, @date, @followupid)";
+            //Define the parameters used in SQL statement, value for each parameter
+            //is retrieved from respective class's property.
+            cmd.Parameters.AddWithValue("@question", question.QuestionID);
+            cmd.Parameters.AddWithValue("@type", question.Type);
+            cmd.Parameters.AddWithValue("@category", question.Category);
+            cmd.Parameters.AddWithValue("@symptomid", question.SymptomID);
+            cmd.Parameters.AddWithValue("@symptomname", question.SymptomName);
+            cmd.Parameters.AddWithValue("@adminid", question.AdminID);
+            cmd.Parameters.AddWithValue("@lastmmodifiedby", question.LastModifiedBy);
+            cmd.Parameters.AddWithValue("@date", question.Date);
+            cmd.Parameters.AddWithValue("@followupid", question.FollowUpID);
+            //A connection to database must be opened before any operations made.
+            conn.Open();
+            //ExecuteScalar is used to retrieve the auto-generated
+      
+            question.QuestionID = (int)cmd.ExecuteScalar();
+            //A connection should be closed after operations.
+            conn.Close();
+            //Return id when no error occurs.
+            return question.QuestionID;
+        }
     }
 }
