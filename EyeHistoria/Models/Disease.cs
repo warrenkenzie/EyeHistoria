@@ -13,6 +13,7 @@ namespace EyeHistoria.Models
 
         public List<string> Unmatched_symptoms { get; set; }
 
+
         // default constructor
         public Disease()
         {

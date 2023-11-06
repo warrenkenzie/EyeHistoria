@@ -30,6 +30,13 @@
                                         data-timing="@symptom_item.SymptomName@Html.Raw("_timing")"
                                         data-severity="@symptom_item.SymptomName@Html.Raw("_severity")">
                         </div>
+                        <p> Pain Level </p>
+                        for (int i =1; i < 6; i++)
+                        {
+                            <input type="radio" class="btn-check" name="@symptom_item.SymptomName@Html.Raw("_Option")" id="@symptom_item.SymptomName@i" autocomplete="off" value="@i">
+                            <label class="btn btn-outline-primary" for="@symptom_item.SymptomName@i">@i</label>
+                        }
+                       
                     }
     
                     <input type="submit" value="Submit Result" />

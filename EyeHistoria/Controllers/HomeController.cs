@@ -61,8 +61,6 @@ namespace EyeHistoria.Controllers
         [HttpPost]
         public ActionResult SubmitDiagnosis(IFormCollection formData)
         {
-            // initialise list of diseases
-            Dictionary<string, List<string>> list_of_diseases = Generate_list_of_diseases();
 
             // put the symptoms to find diagnosis
             List<string> list_of_symptoms_ticked = new List<string>();
@@ -74,10 +72,13 @@ namespace EyeHistoria.Controllers
             foreach (Symptoms symptom in list_of_SQL_symptoms)
             {
                 list_of_symptoms_ticked.Add(formData[symptom.SymptomName].ToString());
+
             }
 
             // get all the diagnosis from SQL
             List<Diagnosis> list_of_diagnosis_SQL = symptomDAL.Get_Diagnostics();
+
+
 
             int num_of_matched_symptoms = 0;
             // goes through the list of diseases
@@ -94,6 +95,8 @@ namespace EyeHistoria.Controllers
                         // goes through the list symptoms of a disease and then true if the syptom matches list_of_symptoms
                         if (list_of_symptoms_ticked[i] == diagnosis.List_of_diagnosis_symptoms[j])
                         {
+                            // pain measuer code
+                            // formData[list_of_symptoms_ticked[i] + "_Option"].ToString() 
                             matched_symptoms.Add(diagnosis.List_of_diagnosis_symptoms[j]);
                             num_of_matched_symptoms++;
                             break;
@@ -121,20 +124,6 @@ namespace EyeHistoria.Controllers
            
             ViewData["diagnosis"] = num_of_matched_symptoms;
             return View(list_diseases_obj);
-        }
-
-        // generates a dict of diseases
-        Dictionary<string, List<string>> Generate_list_of_diseases()
-        {
-            Dictionary<string, List<string>> list_of_diseases = new Dictionary<string, List<string>>();
-            List<string> cataract = new List<string> { "Eye Redness", "Eye Irritation", "Eye Pain" };
-            List<string> blindness = new List<string> { "Eye Irritation" };
-            List<string> swollenEyes = new List<string> { "Eye Irritation", "Eye Irritation" };  
-            list_of_diseases.Add("cataract", cataract);
-            list_of_diseases.Add("blindness", blindness);
-            list_of_diseases.Add("swollenEyes", swollenEyes);
-
-            return list_of_diseases;
         }
     }
 }
