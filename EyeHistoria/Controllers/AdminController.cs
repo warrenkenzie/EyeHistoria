@@ -18,6 +18,13 @@ namespace EyeHistoria.Controllers
             return View(symptomsList);
         }
 
+        // GET: AdminController
+        public ActionResult ViewDiagnosis()
+        {
+            List<Diagnosis> diagnosisList = context.Get_Diagnostics();
+            return View(diagnosisList);
+        }
+
         // GET: AdminController/Details/5
         public ActionResult Details(int id)
         {
@@ -50,6 +57,35 @@ namespace EyeHistoria.Controllers
                 //Input validation fails, return to the Create view
                 //to display error message
                 return View(symptoms);
+            }
+        }
+
+        // GET: AdminController/Create
+        public ActionResult AddDiagnosis()
+        {
+            Diagnosis diagnosis = new Diagnosis();
+            diagnosis.AdminID = 1;
+            diagnosis.LastModifiedBy = "Jonathan Hong Yi Hao";
+            return View(diagnosis);
+        }
+
+        // POST: AdminController/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddDiagnosis(Diagnosis diagnosis)
+        {
+            if (ModelState.IsValid)
+            {
+                //Add staff record to database
+                diagnosis.DiagnosisID = context.AddDiagnosis(diagnosis);
+                //Redirect user to Staff/Index view
+                return RedirectToAction("ViewDiagnositics");
+            }
+            else
+            {
+                //Input validation fails, return to the Create view
+                //to display error message
+                return View(diagnosis);
             }
         }
 

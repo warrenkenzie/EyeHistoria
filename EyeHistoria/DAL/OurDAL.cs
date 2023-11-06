@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics.Metrics;
 using System.Diagnostics.SymbolStore;
@@ -164,6 +165,33 @@ namespace EyeHistoria.DAL
             //Close the database connection
             conn.Close();
             return list_of_diagnostic;
+        }
+        public int AddDiagnosis(Diagnosis diagnosis)
+        {
+            //Create a SqlCommand object from connection object
+            SqlCommand cmd = conn.CreateCommand();
+            //Specify an INSERT SQL statement which will
+            //return the auto-generated StaffID after insertion
+            cmd.CommandText = @"INSERT INTO Diagnosis (DiagnosisName, Symptoms, AdminID, 
+                                LastModifiedBy, Date) 
+                                OUTPUT INSERTED.DiagnosisID 
+                                VALUES(@diagnosisname, @symptoms, @adminid, @lastmodifiedby, @date)";
+            //Define the parameters used in SQL statement, value for each parameter
+            //is retrieved from respective class's property.
+            cmd.Parameters.AddWithValue("@diagnosisname", diagnosis.DiagnosisName);
+            cmd.Parameters.AddWithValue("@symptoms", diagnosis.List_of_diagnosis_symptoms);
+            cmd.Parameters.AddWithValue("@adminid", diagnosis.AdminID);
+            cmd.Parameters.AddWithValue("@lastmodifiedby", diagnosis.LastModifiedBy);
+            cmd.Parameters.AddWithValue("@date", DateTime.Today);
+            //A connection to database must be opened before any operations made.
+            conn.Open();
+            //ExecuteScalar is used to retrieve the auto-generated
+            //StaffID after executing the INSERT SQL statement
+            diagnosis.DiagnosisID = (int)cmd.ExecuteScalar();
+            //A connection should be closed after operations.
+            conn.Close();
+            //Return id when no error occurs.
+            return diagnosis.DiagnosisID;
         }
 
     }
