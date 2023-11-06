@@ -63,33 +63,6 @@ namespace EyeHistoria.DAL
             return symptomsList;
         }
 
-        public int Add(Symptoms symptoms)
-        {
-            //Create a SqlCommand object from connection object
-            SqlCommand cmd = conn.CreateCommand();
-            //Specify an INSERT SQL statement which will
-            //return the auto-generated StaffID after insertion
-            cmd.CommandText = @"INSERT INTO Symptoms (SymptomName, AdminID, LastModifiedBy, 
-                                Date) 
-                                OUTPUT INSERTED.SymptomID 
-                                VALUES(@symptomname, @adminid, @lastmodifiedby, @date)";
-            //Define the parameters used in SQL statement, value for each parameter
-            //is retrieved from respective class's property.
-            cmd.Parameters.AddWithValue("@symptomname", symptoms.SymptomName);
-            cmd.Parameters.AddWithValue("@adminid", symptoms.AdminID);
-            cmd.Parameters.AddWithValue("@lastmodifiedby", symptoms.LastModifiedBy);
-            cmd.Parameters.AddWithValue("@date", DateTime.Today);
-            //A connection to database must be opened before any operations made.
-            conn.Open();
-            //ExecuteScalar is used to retrieve the auto-generated
-            //StaffID after executing the INSERT SQL statement
-            symptoms.SymptomID = (int)cmd.ExecuteScalar();
-            //A connection should be closed after operations.
-            conn.Close();
-            //Return id when no error occurs.
-            return symptoms.SymptomID;
-        }
-
         public List<Question> get_question_basedon_type(string question_type)
         {
             //Create a SqlCommand object from connection object
@@ -194,74 +167,67 @@ namespace EyeHistoria.DAL
             return diagnosis.DiagnosisID;
         }
 
-        public List<Question> GetQuestions()
+        public bool IsSymptomExist(string symptomName, int symptomID)
         {
-            //Create a SqlCommand object from connection object
+            bool symptomFound = false;
+            //Create a SqlCommand object and specify the SQL statement 
+            //to get a staff record with the email address to be validated
             SqlCommand cmd = conn.CreateCommand();
-            // query
-            cmd.CommandText = @"SELECT * FROM Questions";
-
-            //A connection to database must be opened before any operations made.
+            cmd.CommandText = @"SELECT SymptomID FROM Symptoms 
+                                WHERE SymptomName=@selectedSymptomName";
+            cmd.Parameters.AddWithValue("@selectedSymptomName", symptomName);
+            //Open a database connection and execute the SQL statement
             conn.Open();
-
-            //Execute the SELECT SQL through a DataReader
             SqlDataReader reader = cmd.ExecuteReader();
-
-            List<Question> questionlist = new List<Question>();
-            while (reader.Read())
-            {
-                questionlist.Add(
-                    new Question()
-                    {
-                        QuestionID = reader.GetInt32(0),
-                        QuestionText = reader.GetString(1),
-                        Type = reader.GetString(2),
-                        Category = reader.GetString(3),
-                        SymptomID = reader.GetInt32(4),
-                        SymptomName = reader.GetString(5),
-                        AdminID = reader.GetInt32(6),
-                        LastModifiedBy = reader.GetString(7),
-                        Date = reader.GetDateTime(8),
-                        FollowUpID = reader.GetInt32(9)
-                    }
-                );
+            if (reader.HasRows)
+            { //Records found
+                while (reader.Read())
+                {
+                    if (reader.GetInt32(0) != symptomID)
+                        //The email address is used by another staff
+                        symptomFound = true;
+                    else
+                        symptomFound = false;
+                }
             }
-            //Close DataReader
+            else
+            { //No record
+                symptomFound = false; // The email address given does not exist
+            }
             reader.Close();
-            //Close the database connection
             conn.Close();
-            return questionlist;
+            return symptomFound;
         }
-        public int AddOuestion(Question question)
+
+        public void ExecuteYourStoredProcedure(Symptoms symptoms)
         {
-            //Create a SqlCommand object from connection object
-            SqlCommand cmd = conn.CreateCommand();
-            //Specify an INSERT SQL statement which will
-            //return the auto-generated StaffID after insertion
-            cmd.CommandText = @"INSERT INTO Questions (Question, Type, Category, SymptomID,
-                                SymptomName, AdminID, LastModifiedBy, Date, FollowupID)
-                                OUTPUT INSERTED.QuestionID
-                                VALUES(@question, @type, @category, @symptomid, @symptomname, @adminid, @lastmodifiedby, @date, @followupid)";
-            //Define the parameters used in SQL statement, value for each parameter
-            //is retrieved from respective class's property.
-            cmd.Parameters.AddWithValue("@question", question.QuestionID);
-            cmd.Parameters.AddWithValue("@type", question.Type);
-            cmd.Parameters.AddWithValue("@category", question.Category);
-            cmd.Parameters.AddWithValue("@symptomid", question.SymptomID);
-            cmd.Parameters.AddWithValue("@symptomname", question.SymptomName);
-            cmd.Parameters.AddWithValue("@adminid", question.AdminID);
-            cmd.Parameters.AddWithValue("@lastmmodifiedby", question.LastModifiedBy);
-            cmd.Parameters.AddWithValue("@date", question.Date);
-            cmd.Parameters.AddWithValue("@followupid", question.FollowUpID);
-            //A connection to database must be opened before any operations made.
-            conn.Open();
-            //ExecuteScalar is used to retrieve the auto-generated
-      
-            question.QuestionID = (int)cmd.ExecuteScalar();
-            //A connection should be closed after operations.
-            conn.Close();
-            //Return id when no error occurs.
-            return question.QuestionID;
+            using (SqlCommand command = new SqlCommand("AddSymptomsWithQuestions", conn))
+            {
+                command.CommandType = CommandType.StoredProcedure;
+                // Add parameters to the stored procedure
+                command.Parameters.AddWithValue("@SymptomName", symptoms.SymptomName);
+                command.Parameters.AddWithValue("@AdminID", symptoms.AdminID);
+                command.Parameters.AddWithValue("@LastModifiedBy", symptoms.LastModifiedBy);
+                try
+                {
+                    conn.Open();
+                    command.ExecuteNonQuery();
+                    Console.WriteLine("Stored procedure executed successfully.");
+                }
+                catch (SqlException ex)
+                {
+                    if (ex.Number == 2627)
+                    {
+                        // This Symptom already exists in the database.
+                        Console.WriteLine("This Symptom already exists in the database.");
+                    }
+                    else
+                    {
+                        // Handle other SQL errors
+                        Console.WriteLine("An error occurred while executing the stored procedure.");
+                    }
+                }
+            }
         }
     }
 }
