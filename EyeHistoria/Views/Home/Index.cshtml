@@ -67,7 +67,7 @@
                         }
                     </div>
                     <div class="aggravation">
-                        <div>Aggravation</div>
+                        <p>Aggravation</p>
                         @foreach (var aggravation_question in Model.Aggravation_questions)
                         {
                             <p id="@aggravation_question.SymptomName@Html.Raw("_aggravation")" style="display:none">@aggravation_question.QuestionText <span class="close">&times;</span></p>
