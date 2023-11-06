@@ -9,13 +9,13 @@ namespace EyeHistoria.Models
         protected override ValidationResult IsValid(
         object value, ValidationContext validationContext)
         {
-            // Get the email value to validate
+            // Get the symptom name value to validate
             string symptomName = Convert.ToString(value);
 
 
-            // Casting the validation context to the "Staff" model class
+            // Casting the validation context to the "Symptoms" model class
             Symptoms symptoms = (Symptoms)validationContext.ObjectInstance;
-            // Get the Staff Id from the staff instance
+            // Get the Symptom Id from the symptom instance
             int symptomID = symptoms.SymptomID;
             if (context.IsSymptomExist(symptomName, symptomID))
                 // validation failed
