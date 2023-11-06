@@ -132,15 +132,19 @@ namespace EyeHistoria.Controllers
         // POST: AdminController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(Question question)
         {
-            try
+            if (ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index));
+                //Update staff record to database
+                context.UpdateQuestion(question);
+                return RedirectToAction("Index");
             }
-            catch
+            else
             {
-                return View();
+                //Input validation fails, return to the view
+                //to display error message
+                return View(question);
             }
         }
 
@@ -153,16 +157,11 @@ namespace EyeHistoria.Controllers
         // POST: AdminController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(Question question)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            // Delete the staff record from database
+            context.Delete(question.QuestionID);
+                return RedirectToAction("Index");
         }
     }
 }

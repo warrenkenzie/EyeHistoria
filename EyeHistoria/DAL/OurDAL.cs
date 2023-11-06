@@ -302,6 +302,48 @@ namespace EyeHistoria.DAL
             //Return id when no error occurs.
             return question.QuestionID;
         }
+
+        public int UpdateQuestion(Question question)
+        {
+            //Create a SqlCommand object from connection object
+            SqlCommand cmd = conn.CreateCommand();
+            //Specify an UPDATE SQL statement
+            cmd.CommandText = @"UPDATE Questions SET Question=@question, 
+                                type=@type, catregory=@category 
+                                WHERE QuestionID = @selectedQuestionID";
+            //Define the parameters used in SQL statement, value for each parameter
+            //is retrieved from respective class's property.
+            cmd.Parameters.AddWithValue("@question",question.QuestionText);
+            cmd.Parameters.AddWithValue("@type", question.Type);
+            cmd.Parameters.AddWithValue("@category", question.Category);
+            cmd.Parameters.AddWithValue("@selectedQuestionID", question);
+            //Open a database connection
+            conn.Open();
+            //ExecuteNonQuery is used for UPDATE and DELETE
+            int count = cmd.ExecuteNonQuery();
+            //Close the database connection
+            conn.Close();
+            return count;
+        }
+
+        public int Delete(int questionid)
+        {
+            //Instantiate a SqlCommand object, supply it with a DELETE SQL statement
+            //to delete a staff record specified by a Staff ID
+            SqlCommand cmd = conn.CreateCommand();
+            cmd.CommandText = @"DELETE FROM Questions
+ WHERE QuestionID = @selectQuestionID";
+            cmd.Parameters.AddWithValue("@selectQuestionID", questionid);
+            //Open a database connection
+            conn.Open();
+            int rowAffected = 0;
+            //Execute the DELETE SQL to remove the staff record
+            rowAffected += cmd.ExecuteNonQuery();
+            //Close database connection
+            conn.Close();
+            //Return number of row of staff record updated or deleted
+            return rowAffected;
+        }
     }
 }
 
