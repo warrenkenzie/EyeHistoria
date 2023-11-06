@@ -258,7 +258,9 @@ namespace EyeHistoria.DAL
                         AdminID = reader.GetInt32(6),
                         LastModifiedBy = reader.GetString(7),
                         Date = reader.GetDateTime(8),
-                        FollowUpID = reader.GetInt32(9)
+                        FollowUpID = !reader.IsDBNull(9) ?
+                                      reader.GetInt32(9) : (int?)null
+
                     }
                 );
             }
