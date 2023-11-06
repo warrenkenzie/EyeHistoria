@@ -61,7 +61,6 @@ namespace EyeHistoria.Controllers
         [HttpPost]
         public ActionResult SubmitDiagnosis(IFormCollection formData)
         {
-
             // put the symptoms to find diagnosis
             List<string> list_of_symptoms_ticked = new List<string>();
 
@@ -76,11 +75,23 @@ namespace EyeHistoria.Controllers
             }
 
             // get all the diagnosis from SQL
-            List<Diagnosis> list_of_diagnosis_SQL = symptomDAL.Get_Diagnostics();
+            // List<Diagnosis> list_of_diagnosis_SQL = symptomDAL.Get_Diagnostics();
+            Dictionary<string, int> dictionary = new Dictionary<string, int>();
+            // Add some key-value pairs to the dictionary.
+            dictionary["Blurred Vision"] = 5;
+            dictionary["Light Sensitivity"] = 2;
+            dictionary["Double Vision"] = 3;
+            dictionary["Night Blindness"] = 5;
 
-
+            List<Diagnosis> list_of_diagnosis_SQL = new List<Diagnosis>();
+            list_of_diagnosis_SQL.Add(
+                new Diagnosis(1, "Cataracts", new List<string> { "Blurred Vision", "Light Sensitivity", "Double Vision", "Night Blindness" },
+                dictionary
+                , 1, "Jonathan Hong Yi Hao", new DateTime(2023, 11, 5, 14, 34, 26, 753))
+                );
 
             int num_of_matched_symptoms = 0;
+            float match = 0;
             // goes through the list of diseases
             foreach (Diagnosis diagnosis in list_of_diagnosis_SQL)
             {
@@ -97,6 +108,22 @@ namespace EyeHistoria.Controllers
                         {
                             // pain measuer code
                             // formData[list_of_symptoms_ticked[i] + "_Option"].ToString() 
+                            int valuesss = Convert.ToInt32(formData[list_of_symptoms_ticked[i] + "_Option"]);
+                            Console.WriteLine(valuesss);
+
+                            // !   CALUCLATE PAIN MEASURE  ! //
+                            if(Convert.ToInt32(formData[list_of_symptoms_ticked[i] + "_Option"]) > diagnosis.List_of_diagnosis_symptoms_with_their_pain_level[list_of_symptoms_ticked[i]])
+                            {
+                                match += (float)(Convert.ToInt32(formData[list_of_symptoms_ticked[i] + "_Option"]) - diagnosis.List_of_diagnosis_symptoms_with_their_pain_level[list_of_symptoms_ticked[i]]) * 25 / diagnosis.List_of_diagnosis_symptoms.Count();
+                            }
+                            else if(Convert.ToInt32(formData[list_of_symptoms_ticked[i] + "_Option"]) < diagnosis.List_of_diagnosis_symptoms_with_their_pain_level[list_of_symptoms_ticked[i]])
+                            {
+                                match += (float)(diagnosis.List_of_diagnosis_symptoms_with_their_pain_level[list_of_symptoms_ticked[i]] - Convert.ToInt32(formData[list_of_symptoms_ticked[i] + "_Option"])) * 25 / diagnosis.List_of_diagnosis_symptoms.Count();
+                            }
+                            else if(Convert.ToInt32(formData[list_of_symptoms_ticked[i] + "_Option"]) == diagnosis.List_of_diagnosis_symptoms_with_their_pain_level[list_of_symptoms_ticked[i]])
+                            {
+                                match += (float) 100 / (diagnosis.List_of_diagnosis_symptoms.Count());
+                            }
                             matched_symptoms.Add(diagnosis.List_of_diagnosis_symptoms[j]);
                             num_of_matched_symptoms++;
                             break;
@@ -112,14 +139,14 @@ namespace EyeHistoria.Controllers
                 //  !!!!!! CALCULATIONS !!!!!!
 
                 // calculate the match of list of symptoms to disease and if more than 50%, add it to list_diseases_obj
-                float matched = (float)num_of_matched_symptoms / list_of_SQL_symptoms.Count() * 100;
+                //float match = (float)num_of_matched_symptoms / list_of_SQL_symptoms.Count() * 100;
 
-                Disease disease_obj = new Disease(diagnosis.DiagnosisName, matched, matched_symptoms, unmatched_symptoms);
+                Disease disease_obj = new Disease(diagnosis.DiagnosisName, match, matched_symptoms, unmatched_symptoms);
                 list_diseases_obj.Add(disease_obj);
 
                 // reset num_of_matched_symptoms to 0 for the next iteration
                 num_of_matched_symptoms = 0;
-
+                match = 0;
             }
            
             ViewData["diagnosis"] = num_of_matched_symptoms;
