@@ -69,21 +69,40 @@ namespace EyeHistoria.Controllers
         // GET: AdminController/Create
         public ActionResult AddDiagnosis()
         {
-            Diagnosis diagnosis = new Diagnosis();
+            AddDiagnosisViewModel diagnosis = new AddDiagnosisViewModel();
             diagnosis.AdminID = 1;
             diagnosis.LastModifiedBy = "Jonathan Hong Yi Hao";
-            return View(diagnosis);
+            ViewData["list_of_all_symptoms_from_SQL"] = context.GetAllSymptoms();
+            return View(diagnosis); 
         }
 
         // POST: AdminController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult AddDiagnosis(Diagnosis diagnosis)
+        public ActionResult AddDiagnosis(AddDiagnosisViewModel diagnosis)
         {
             if (ModelState.IsValid)
             {
+                List<Symptoms> list_of_all_symptoms = context.GetAllSymptoms();
+
+                // convert AddDiagnosisViewModel to Diagnosis
+                Diagnosis diagnosis_processed = new Diagnosis();
+                diagnosis_processed.DiagnosisID = diagnosis.DiagnosisID;
+                diagnosis_processed.DiagnosisName = diagnosis.DiagnosisName;
+                diagnosis_processed.AdminID = diagnosis.AdminID;
+                diagnosis_processed.LastModifiedBy = diagnosis.LastModifiedBy;
+                diagnosis_processed.Date = diagnosis.Date;
+                diagnosis_processed.List_of_diagnosis_symptoms = new List<string>();
+                for (int i = 0;i < diagnosis.List_of_diagnosis_symptoms_checkbox.Count(); i++)
+                {
+                    if (diagnosis.List_of_diagnosis_symptoms_checkbox[i] == true)
+                    {
+                        diagnosis_processed.List_of_diagnosis_symptoms.Add(list_of_all_symptoms[i].SymptomName);
+                    }
+                }
+
                 //Add staff record to database
-                diagnosis.DiagnosisID = context.AddDiagnosis(diagnosis);
+                diagnosis_processed.DiagnosisID = context.AddDiagnosis(diagnosis_processed);
                 //Redirect user to Staff/Index view
                 return RedirectToAction("ViewDiagnositics");
             }
@@ -137,7 +156,7 @@ namespace EyeHistoria.Controllers
             if (ModelState.IsValid)
             {
                 //Update staff record to database
-                context.UpdateQuestion(question);
+                //context.UpdateQuestion(question);
                 return RedirectToAction("Index");
             }
             else
@@ -160,8 +179,8 @@ namespace EyeHistoria.Controllers
         public ActionResult Delete(Question question)
         {
             // Delete the staff record from database
-            context.Delete(question.QuestionID);
-                return RedirectToAction("Index");
+            //context.Delete(question.QuestionID);
+            return RedirectToAction("Index");
         }
     }
 }

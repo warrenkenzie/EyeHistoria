@@ -152,7 +152,19 @@ namespace EyeHistoria.DAL
             //Define the parameters used in SQL statement, value for each parameter
             //is retrieved from respective class's property.
             cmd.Parameters.AddWithValue("@diagnosisname", diagnosis.DiagnosisName);
-            cmd.Parameters.AddWithValue("@symptoms", diagnosis.List_of_diagnosis_symptoms);
+            string str_List_of_diagnosis_symptoms = "";
+            for (int i = 0; i < diagnosis.List_of_diagnosis_symptoms.Count(); i++)
+            {
+                if(i != (diagnosis.List_of_diagnosis_symptoms.Count() - 1))
+                {
+                    str_List_of_diagnosis_symptoms += diagnosis.List_of_diagnosis_symptoms[i] + ",";
+                }
+                else
+                {
+                    str_List_of_diagnosis_symptoms += diagnosis.List_of_diagnosis_symptoms[i];
+                }
+            }    
+            cmd.Parameters.AddWithValue("@symptoms", str_List_of_diagnosis_symptoms);
             cmd.Parameters.AddWithValue("@adminid", diagnosis.AdminID);
             cmd.Parameters.AddWithValue("@lastmodifiedby", diagnosis.LastModifiedBy);
             cmd.Parameters.AddWithValue("@date", DateTime.Today);

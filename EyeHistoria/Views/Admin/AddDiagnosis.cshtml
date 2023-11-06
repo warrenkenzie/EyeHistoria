@@ -1,4 +1,4 @@
-﻿@model EyeHistoria.Models.Diagnosis
+﻿@model EyeHistoria.Models.AddDiagnosisViewModel
 
 <h4>Diagnosis</h4>
 <hr />
@@ -12,9 +12,21 @@
                 <span asp-validation-for="DiagnosisName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="List_of_diagnosis_symptoms" class="control-label"></label>
-                <input asp-for="List_of_diagnosis_symptoms" class="form-control" />
-                <span asp-validation-for="List_of_diagnosis_symptoms" class="text-danger"></span>
+                <label asp-for="List_of_diagnosis_symptoms_checkbox" class="control-label"></label>
+                <div>
+                    @{
+                        // pass list_of_all_symptoms_from_SQL from controller to this view
+                        List<Symptoms> list_of_all_symptoms_from_SQL = ViewData["list_of_all_symptoms_from_SQL"] as List<Symptoms>;
+                    }
+                    @for (int i = 0; i < list_of_all_symptoms_from_SQL.Count(); i++)
+                    {
+                        <label>
+                            <input type="checkbox" asp-for="@Model.List_of_diagnosis_symptoms_checkbox[i]">
+                            @list_of_all_symptoms_from_SQL[i].SymptomName;
+                        </label> <br/>
+                    }
+                </div>
+                <span asp-validation-for="List_of_diagnosis_symptoms_checkbox" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="AdminID" class="control-label"></label>
