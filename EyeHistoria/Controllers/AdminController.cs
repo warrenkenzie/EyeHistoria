@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using EyeHistoria.DAL;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Data.SqlTypes;
 
 namespace EyeHistoria.Controllers
 {
@@ -29,7 +30,6 @@ namespace EyeHistoria.Controllers
             Symptoms symptoms = new Symptoms();
             symptoms.AdminID = 1;
             symptoms.LastModifiedBy = "Jonathan Hong Yi Hao";
-            symptoms.Date = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
             return View(symptoms);
         }
 

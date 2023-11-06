@@ -17,18 +17,13 @@
             </div>
             <div class="form-group">
                 <label asp-for="AdminID" class="control-label"></label>
-                <input asp-for="AdminID" class="form-control"  />
+                <input asp-for="AdminID" class="form-control" readonly />
                 <span asp-validation-for="AdminID" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="LastModifiedBy" class="control-label"></label>
-                <input asp-for="LastModifiedBy" class="form-control" />
+                <input asp-for="LastModifiedBy" class="form-control" readonly />
                 <span asp-validation-for="LastModifiedBy" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Date" class="control-label"></label>
-                <input asp-for="Date" class="form-control" />
-                <span asp-validation-for="Date" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

@@ -77,7 +77,7 @@ namespace EyeHistoria.DAL
             cmd.Parameters.AddWithValue("@symptomname", symptoms.SymptomName);
             cmd.Parameters.AddWithValue("@adminid", symptoms.AdminID);
             cmd.Parameters.AddWithValue("@lastmodifiedby", symptoms.LastModifiedBy);
-            cmd.Parameters.AddWithValue("@date", symptoms.Date);
+            cmd.Parameters.AddWithValue("@date", DateTime.Today);
             //A connection to database must be opened before any operations made.
             conn.Open();
             //ExecuteScalar is used to retrieve the auto-generated
