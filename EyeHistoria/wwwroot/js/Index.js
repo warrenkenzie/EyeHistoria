@@ -1,4 +1,16 @@
-var myList = ["Eye Redness", "Eye Irritation", "Blurred Vision", "Double Vision", "Eye Floaters", "Eye Twitching", "Light Sensitivity", "Eye Pain", "Eye Tearing", "Change In Iris Colour", "Night Blindness", "Tunnel Vision", "Eye Discharge", "Misalignment Of Eyes", "Distorted Vision", "Eye Bleeding"];
+// fetches list of symptoms from controller
+fetch('/Home/GetSymptomsList') // Adjust the URL to match your application's route
+    .then(response => response.json())
+    .then(data => {
+        // data is list of symptoms from SQL
+
+        for (let i = 0; i < myList.length; i++) {
+            document.getElementById(data[i]["symptomName"]).addEventListener("click", function () {
+                myFunction(data[i]["symptomName"]);
+            });
+        }
+    })
+    .catch(error => console.error('Error:', error));
 
 
 function myFunction(checkboxId) {
@@ -31,13 +43,6 @@ function myFunction(checkboxId) {
         timingText.style.display = "none";
         severityText.style.display = "none";
     }
-}
-
-// based on myList, for now myList is fixed
-for (let i = 0; i < myList.length; i++) {
-    document.getElementById(myList[i]).addEventListener("click", function () {
-        myFunction(myList[i]);
-    });
 }
 
 var closebtns = document.getElementsByClassName("close");

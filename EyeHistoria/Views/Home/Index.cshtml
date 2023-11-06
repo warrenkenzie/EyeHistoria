@@ -98,7 +98,11 @@
         </div>
     </div>
 
+    <!-- Passing Model.List_of_symptoms to Index.js -->
+    <div id="symptoms-data" data-symptoms="@Html.Raw(Json.Serialize(Model.List_of_symptoms))"></div>
+
     <!-- Javascript file -->
-    <script src="~/js/Index.js"></script>
+    <script src="~/js/Index.js">
+    </script>
 </body>
 </html>

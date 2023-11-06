@@ -3,6 +3,7 @@ using EyeHistoria.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Reflection;
 using System.Reflection.Metadata.Ecma335;
 
 namespace EyeHistoria.Controllers
@@ -41,6 +42,14 @@ namespace EyeHistoria.Controllers
 
             return View(indexViewModel);
         }
+
+        // passes symptomDAL.GetAllSymptoms() to Index.js
+        public JsonResult GetSymptomsList()
+        {
+            // Assuming Model.List_of_symptoms is your list of symptoms
+            return Json(symptomDAL.GetAllSymptoms());
+        }
+
 
         public IActionResult Privacy()
         {
