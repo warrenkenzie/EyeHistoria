@@ -67,7 +67,7 @@
                         }
                     </div>
                     <div class="aggravation">
-                        <div>Aggravation</div>
+                        <p>Aggravation</p>
                         @foreach (var aggravation_question in Model.Aggravation_questions)
                         {
                             <p id="@aggravation_question.SymptomName@Html.Raw("_aggravation")" style="display:none">@aggravation_question.QuestionText <span class="close">&times;</span></p>
@@ -98,7 +98,11 @@
         </div>
     </div>
 
+    <!-- Passing Model.List_of_symptoms to Index.js -->
+    <div id="symptoms-data" data-symptoms="@Html.Raw(Json.Serialize(Model.List_of_symptoms))"></div>
+
     <!-- Javascript file -->
-    <script src="~/js/Index.js"></script>
+    <script src="~/js/Index.js">
+    </script>
 </body>
 </html>
