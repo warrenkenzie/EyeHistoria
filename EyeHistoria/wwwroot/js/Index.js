@@ -2,9 +2,9 @@
 fetch('/Home/GetSymptomsList') // Adjust the URL to match your application's route
     .then(response => response.json())
     .then(data => {
-        // data is list of symptoms from SQL
 
-        for (let i = 0; i < myList.length; i++) {
+        // data is list of symptoms from SQL
+        for (let i = 0; i < data.length; i++) {
             document.getElementById(data[i]["symptomName"]).addEventListener("click", function () {
                 myFunction(data[i]["symptomName"]);
             });
