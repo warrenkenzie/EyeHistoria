@@ -94,7 +94,7 @@ namespace EyeHistoria.DAL
                         AdminID = reader.GetInt32(6),
                         LastModifiedBy = reader.GetString(7),
                         Date = reader.GetDateTime(8),
-                        FollowUpID = (!reader.IsDBNull(9) ? reader.GetInt32(8) : null)
+                        FollowUpID = (!reader.IsDBNull(9) ? reader.GetInt32(9) : null)
                     }
                 );
             }
