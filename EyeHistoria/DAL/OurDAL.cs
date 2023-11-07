@@ -94,7 +94,7 @@ namespace EyeHistoria.DAL
                         AdminID = reader.GetInt32(6),
                         LastModifiedBy = reader.GetString(7),
                         Date = reader.GetDateTime(8),
-                        FollowUpID = (!reader.IsDBNull(9) ? reader.GetInt32(8) : null)
+                        FollowUpID = (!reader.IsDBNull(9) ? reader.GetInt32(9) : null)
                     }
                 );
             }
@@ -283,19 +283,28 @@ namespace EyeHistoria.DAL
                                 VALUES(@question, @type, @category, @symptomid, @symptomname, @adminid, @lastmodifiedby, @date, @followupid)";
             //Define the parameters used in SQL statement, value for each parameter
             //is retrieved from respective class's property.
-            cmd.Parameters.AddWithValue("@question", question.QuestionID);
+            cmd.Parameters.AddWithValue("@question", question.QuestionText);
             cmd.Parameters.AddWithValue("@type", question.Type);
             cmd.Parameters.AddWithValue("@category", question.Category);
             cmd.Parameters.AddWithValue("@symptomid", question.SymptomID);
             cmd.Parameters.AddWithValue("@symptomname", question.SymptomName);
             cmd.Parameters.AddWithValue("@adminid", question.AdminID);
-            cmd.Parameters.AddWithValue("@lastmmodifiedby", question.LastModifiedBy);
-            cmd.Parameters.AddWithValue("@date", question.Date);
-            cmd.Parameters.AddWithValue("@followupid", question.FollowUpID);
+            cmd.Parameters.AddWithValue("@lastmodifiedby", question.LastModifiedBy);
+            cmd.Parameters.AddWithValue("@date", DateTime.Now);
+
+            if (question.FollowUpID != 0)
+            {
+                cmd.Parameters.AddWithValue("@followupid", question.FollowUpID.Value);
+            }
+
+            else 
+            {
+                cmd.Parameters.AddWithValue("@followupid", DBNull.Value);
+            }
             //A connection to database must be opened before any operations made.
             conn.Open();
             //ExecuteScalar is used to retrieve the auto-generated
-
+            //StaffID after executing the INSERT SQL statement
             question.QuestionID = (int)cmd.ExecuteScalar();
             //A connection should be closed after operations.
             conn.Close();
