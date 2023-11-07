@@ -40,7 +40,10 @@
                         <p>Onset</p>
                         @foreach (var onset_question in Model.Onset_questions)
                         {
-                            <p id="@onset_question.SymptomName@Html.Raw("_onset")" style="display:none">@onset_question.QuestionText <span class="close">&times;</span></p>
+                            <p id="@onset_question.SymptomName@Html.Raw("_onset")" style="display:none">
+                                @onset_question.QuestionText 
+                                <span class="close">&times;</span>
+                            </p>
                         }
                     </div>
 

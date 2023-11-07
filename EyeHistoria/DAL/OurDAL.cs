@@ -68,7 +68,7 @@ namespace EyeHistoria.DAL
             //Create a SqlCommand object from connection object
             SqlCommand cmd = conn.CreateCommand();
             // query
-            cmd.CommandText = @"SELECT * FROM Questions WHERE Type= @question_type";
+            cmd.CommandText = @"SELECT * FROM Questions WHERE Type= @question_type AND Category = 'General'";
             
             // parameteres
             cmd.Parameters.AddWithValue("@question_type", question_type);

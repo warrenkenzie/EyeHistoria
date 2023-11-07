@@ -12,6 +12,7 @@
         public string LastModifiedBy { get; set; }
         public DateTime Date { get; set; }
         public int? FollowUpID { get; set; }
+        public List<string> Follow_up_questions { get; set; }
 
         public Question()
         {
