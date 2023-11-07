@@ -54,7 +54,20 @@ namespace EyeHistoria.Controllers
             if (ModelState.IsValid)
             {
                 //Add staff record to database
-                context.ExecuteYourStoredProcedure(symptoms);
+                Random random = new Random();
+                int randomNumber = random.Next(1, 4);
+                if (randomNumber == 1)
+                {
+                    context.AddSymptomsWithQuestionsTemplateOne(symptoms);
+                }
+                else if (randomNumber == 2)
+                {
+                    context.AddSymptomsWithQuestionsTemplateTwo(symptoms);
+                }
+                else
+                {
+                    context.AddSymptomsWithQuestionsTemplateThree(symptoms);
+                }
                 //Redirect user to Staff/Index view
                 return RedirectToAction("Index");
             }
@@ -130,7 +143,7 @@ namespace EyeHistoria.Controllers
             if (ModelState.IsValid)
             {
                 //Add staff record to database
-                question.QuestionID = context.AddOuestion(question);
+                question.QuestionID = context.AddQuestion(question);
                 //Redirect user to Staff/Index view
                 return RedirectToAction("ViewQuestions");
             }

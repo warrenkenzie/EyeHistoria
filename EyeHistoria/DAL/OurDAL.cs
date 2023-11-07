@@ -211,9 +211,71 @@ namespace EyeHistoria.DAL
             return symptomFound;
         }
 
-        public void ExecuteYourStoredProcedure(Symptoms symptoms)
+        public void AddSymptomsWithQuestionsTemplateOne(Symptoms symptoms)
         {
-            using (SqlCommand command = new SqlCommand("AddSymptomsWithQuestions", conn))
+            using (SqlCommand command = new SqlCommand("AddSymptomsWithQuestionsTemplateOne", conn))
+            {
+                command.CommandType = CommandType.StoredProcedure;
+                // Add parameters to the stored procedure
+                command.Parameters.AddWithValue("@SymptomName", symptoms.SymptomName);
+                command.Parameters.AddWithValue("@AdminID", symptoms.AdminID);
+                command.Parameters.AddWithValue("@LastModifiedBy", symptoms.LastModifiedBy);
+                try
+                {
+                    conn.Open();
+                    command.ExecuteNonQuery();
+                    Console.WriteLine("Stored procedure executed successfully.");
+                }
+                catch (SqlException ex)
+                {
+                    if (ex.Number == 2627)
+                    {
+                        // This Symptom already exists in the database.
+                        Console.WriteLine("This Symptom already exists in the database.");
+                    }
+                    else
+                    {
+                        // Handle other SQL errors
+                        Console.WriteLine("An error occurred while executing the stored procedure.");
+                    }
+                }
+            }
+        }
+
+        public void AddSymptomsWithQuestionsTemplateTwo(Symptoms symptoms)
+        {
+            using (SqlCommand command = new SqlCommand("AddSymptomsWithQuestionsTemplateTwo", conn))
+            {
+                command.CommandType = CommandType.StoredProcedure;
+                // Add parameters to the stored procedure
+                command.Parameters.AddWithValue("@SymptomName", symptoms.SymptomName);
+                command.Parameters.AddWithValue("@AdminID", symptoms.AdminID);
+                command.Parameters.AddWithValue("@LastModifiedBy", symptoms.LastModifiedBy);
+                try
+                {
+                    conn.Open();
+                    command.ExecuteNonQuery();
+                    Console.WriteLine("Stored procedure executed successfully.");
+                }
+                catch (SqlException ex)
+                {
+                    if (ex.Number == 2627)
+                    {
+                        // This Symptom already exists in the database.
+                        Console.WriteLine("This Symptom already exists in the database.");
+                    }
+                    else
+                    {
+                        // Handle other SQL errors
+                        Console.WriteLine("An error occurred while executing the stored procedure.");
+                    }
+                }
+            }
+        }
+
+        public void AddSymptomsWithQuestionsTemplateThree(Symptoms symptoms)
+        {
+            using (SqlCommand command = new SqlCommand("AddSymptomsWithQuestionsTemplateThree", conn))
             {
                 command.CommandType = CommandType.StoredProcedure;
                 // Add parameters to the stored procedure
@@ -283,7 +345,7 @@ namespace EyeHistoria.DAL
             return questionlist;
         }
 
-        public int AddOuestion(Question question)
+        public int AddQuestion(Question question)
         {
             //Create a SqlCommand object from connection object
             SqlCommand cmd = conn.CreateCommand();
