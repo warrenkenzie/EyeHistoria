@@ -13,6 +13,9 @@
                 @Html.DisplayNameFor(model => model.DiagnosisName)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.List_of_diagnosis_symptoms)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.AdminID)
             </th>
             <th>
@@ -32,6 +35,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.DiagnosisName)
+            </td>
+            <td>
+                @string.Join(", ", item.List_of_diagnosis_symptoms)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.AdminID)

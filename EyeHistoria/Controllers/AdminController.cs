@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using EyeHistoria.DAL;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Data.SqlTypes;
+using Microsoft.CodeAnalysis;
 
 namespace EyeHistoria.Controllers
 {
@@ -193,7 +194,7 @@ namespace EyeHistoria.Controllers
         {
             // Delete the staff record from database
             context.Delete(question.QuestionID);
-                return RedirectToAction("Index");
+            return RedirectToAction("Index");
         }
     }
 }

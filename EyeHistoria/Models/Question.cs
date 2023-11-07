@@ -12,7 +12,6 @@
         public string LastModifiedBy { get; set; }
         public DateTime Date { get; set; }
         public int? FollowUpID { get; set; }
-        public List<string> Follow_up_questions { get; set; }
 
         public Question()
         {
@@ -32,5 +31,7 @@
             Date = date;
             FollowUpID = followUpID;
         }
+
+        public List<string> List_of_diagnosis_symptoms { get; set; }
     }
 }
