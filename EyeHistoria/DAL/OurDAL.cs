@@ -353,7 +353,7 @@ namespace EyeHistoria.DAL
             //to delete a staff record specified by a Staff ID
             SqlCommand cmd = conn.CreateCommand();
             cmd.CommandText = @"DELETE FROM Questions
- WHERE QuestionID = @selectQuestionID";
+                                WHERE QuestionID = @selectQuestionID";` `s b1111111111111111111111111111111111111111111111111111111111111111111
             cmd.Parameters.AddWithValue("@selectQuestionID", questionid);
             //Open a database connection
             conn.Open();
