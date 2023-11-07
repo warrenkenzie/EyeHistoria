@@ -13,7 +13,13 @@
                 @Html.DisplayNameFor(model => model.DiagnosisName)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.LearnMore)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.List_of_diagnosis_symptoms)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tests)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.AdminID)
@@ -37,8 +43,16 @@
                 @Html.DisplayFor(modelItem => item.DiagnosisName)
             </td>
             <td>
+                <a href="@item.LearnMore" target="_blank">
+                    @Html.DisplayFor(modelItem => item.LearnMore)
+                </a>
+            </td>
+            <td>
                 @string.Join(", ", item.List_of_diagnosis_symptoms)
             </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Tests)
+                </td>
             <td>
                 @Html.DisplayFor(modelItem => item.AdminID)
             </td>

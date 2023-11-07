@@ -126,10 +126,12 @@ namespace EyeHistoria.DAL
                     {
                         DiagnosisID = reader.GetInt32(0),
                         DiagnosisName = reader.GetString(1),
-                        List_of_diagnosis_symptoms = reader.GetString(2).Split(',').Select(symptom => symptom.Trim()).ToList(),
-                        AdminID = reader.GetInt32(3),
-                        LastModifiedBy = reader.GetString(4),
-                        Date = reader.GetDateTime(5)
+                        LearnMore = reader.GetString(2),
+                        List_of_diagnosis_symptoms = reader.GetString(3).Split(',').Select(symptom => symptom.Trim()).ToList(),
+                        Tests = reader.GetString(4),
+                        AdminID = reader.GetInt32(5),
+                        LastModifiedBy = reader.GetString(6),
+                        Date = reader.GetDateTime(7)
                     }
                 );
             }

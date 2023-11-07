@@ -10,8 +10,12 @@ namespace EyeHistoria.Models
         [Display(Name = "Diagnosis")]
         public string DiagnosisName { get; set; }
 
+        public string LearnMore { get; set; }
+
         [Display(Name = "Symptoms")]
         public List<string> List_of_diagnosis_symptoms { get; set;}
+
+        public string Tests {  get; set; }
 
         [Display(Name = "Admin ID")]
         public int AdminID { get; set; }
