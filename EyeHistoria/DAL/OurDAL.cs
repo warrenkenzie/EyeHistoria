@@ -147,13 +147,14 @@ namespace EyeHistoria.DAL
             SqlCommand cmd = conn.CreateCommand();
             //Specify an INSERT SQL statement which will
             //return the auto-generated StaffID after insertion
-            cmd.CommandText = @"INSERT INTO Diagnosis (DiagnosisName, Symptoms, AdminID, 
+            cmd.CommandText = @"INSERT INTO Diagnosis (DiagnosisName, LearnMore, Symptoms, Tests, AdminID, 
                                 LastModifiedBy, Date) 
                                 OUTPUT INSERTED.DiagnosisID 
-                                VALUES(@diagnosisname, @symptoms, @adminid, @lastmodifiedby, @date)";
+                                VALUES(@diagnosisname, @learnmore, @symptoms, @tests, @adminid, @lastmodifiedby, @date)";
             //Define the parameters used in SQL statement, value for each parameter
             //is retrieved from respective class's property.
             cmd.Parameters.AddWithValue("@diagnosisname", diagnosis.DiagnosisName);
+            cmd.Parameters.AddWithValue("@learnmore", diagnosis.LearnMore);
             string str_List_of_diagnosis_symptoms = "";
             for (int i = 0; i < diagnosis.List_of_diagnosis_symptoms.Count(); i++)
             {
@@ -165,7 +166,8 @@ namespace EyeHistoria.DAL
                 {
                     str_List_of_diagnosis_symptoms += diagnosis.List_of_diagnosis_symptoms[i];
                 }
-            }    
+            }
+            cmd.Parameters.AddWithValue("@tests", diagnosis.Tests);
             cmd.Parameters.AddWithValue("@symptoms", str_List_of_diagnosis_symptoms);
             cmd.Parameters.AddWithValue("@adminid", diagnosis.AdminID);
             cmd.Parameters.AddWithValue("@lastmodifiedby", diagnosis.LastModifiedBy);

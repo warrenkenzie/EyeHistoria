@@ -103,6 +103,8 @@ namespace EyeHistoria.Controllers
                 Diagnosis diagnosis_processed = new Diagnosis();
                 diagnosis_processed.DiagnosisID = diagnosis.DiagnosisID;
                 diagnosis_processed.DiagnosisName = diagnosis.DiagnosisName;
+                diagnosis_processed.LearnMore = diagnosis.LearnMore;
+                diagnosis_processed.Tests = diagnosis.Tests;
                 diagnosis_processed.AdminID = diagnosis.AdminID;
                 diagnosis_processed.LastModifiedBy = diagnosis.LastModifiedBy;
                 diagnosis_processed.Date = diagnosis.Date;
@@ -118,7 +120,7 @@ namespace EyeHistoria.Controllers
                 //Add staff record to database
                 diagnosis_processed.DiagnosisID = context.AddDiagnosis(diagnosis_processed);
                 //Redirect user to Staff/Index view
-                return RedirectToAction("ViewDiagnositics");
+                return RedirectToAction("ViewDiagnosis");
             }
             else
             {

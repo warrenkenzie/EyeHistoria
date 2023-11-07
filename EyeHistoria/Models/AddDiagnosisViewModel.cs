@@ -10,8 +10,14 @@ namespace EyeHistoria.Models
         [Display(Name = "Diagnosis")]
         public string DiagnosisName { get; set; }
 
+        [Display(Name = "Reference Link")]
+        public string LearnMore { get; set; }
+
         [Display(Name = "Symptoms")]
         public List<Boolean> List_of_diagnosis_symptoms_checkbox { get; set; }
+
+        [Display(Name = "Possible Tests")]
+        public string Tests { get; set; }
 
         [Display(Name = "Admin ID")]
         public int AdminID { get; set; }
