@@ -95,7 +95,7 @@ namespace EyeHistoria.Controllers
             }
         }
 
-        public ActionResult AddQuestion()
+        public ActionResult AddQuestions()
         {
             Question question = new Question();
             question.AdminID = 1;
@@ -106,14 +106,14 @@ namespace EyeHistoria.Controllers
         // POST: AdminController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult AddQuestion(Question question)
+        public ActionResult AddQuestions(Question question)
         {
             if (ModelState.IsValid)
             {
                 //Add staff record to database
                 question.QuestionID = context.AddOuestion(question);
                 //Redirect user to Staff/Index view
-                return RedirectToAction("ViewDiagnositics");
+                return RedirectToAction("ViewQuestions");
             }
             else
             {
