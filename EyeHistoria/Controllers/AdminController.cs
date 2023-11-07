@@ -114,7 +114,7 @@ namespace EyeHistoria.Controllers
             }
         }
 
-        public ActionResult AddQuestion()
+        public ActionResult AddQuestions()
         {
             Question question = new Question();
             question.AdminID = 1;
@@ -125,14 +125,14 @@ namespace EyeHistoria.Controllers
         // POST: AdminController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult AddQuestion(Question question)
+        public ActionResult AddQuestions(Question question)
         {
             if (ModelState.IsValid)
             {
                 //Add staff record to database
                 question.QuestionID = context.AddOuestion(question);
                 //Redirect user to Staff/Index view
-                return RedirectToAction("ViewDiagnositics");
+                return RedirectToAction("ViewQuestions");
             }
             else
             {
@@ -143,7 +143,7 @@ namespace EyeHistoria.Controllers
         }
 
         // GET: AdminController/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult UpdateQuestion(int id)
         {
             return View();
         }
@@ -151,13 +151,13 @@ namespace EyeHistoria.Controllers
         // POST: AdminController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Question question)
+        public ActionResult UpdateQuestion(Question question)
         {
             if (ModelState.IsValid)
             {
                 //Update staff record to database
-                //context.UpdateQuestion(question);
-                return RedirectToAction("Index");
+                context.UpdateQuestion(question);
+                return RedirectToAction("ViewQuestions");
             }
             else
             {
@@ -168,7 +168,7 @@ namespace EyeHistoria.Controllers
         }
 
         // GET: AdminController/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult DeleteQuestions(int id)
         {
             return View();
         }
@@ -176,11 +176,11 @@ namespace EyeHistoria.Controllers
         // POST: AdminController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(Question question)
+        public ActionResult DeleteQuestions(Question question)
         {
             // Delete the staff record from database
-            //context.Delete(question.QuestionID);
-            return RedirectToAction("Index");
+            context.Delete(question.QuestionID);
+                return RedirectToAction("Index");
         }
     }
 }

@@ -8,6 +8,7 @@ namespace EyeHistoria.Models
         [Display(Name =  "ID")]
         public int SymptomID { get; set; }
 
+        [Required(ErrorMessage = "Oops! You must enter a symptom!")]
         [ValidateSymptomExists]
         [Display(Name = "Symptom")]
         public string SymptomName { get; set; }
