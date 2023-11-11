@@ -196,7 +196,7 @@ namespace EyeHistoria.Controllers
         {
             // Delete the staff record from database
             context.Delete(question.QuestionID);
-            return RedirectToAction("Index");
+            return RedirectToAction("ViewQuestions");
         }
     }
 }
