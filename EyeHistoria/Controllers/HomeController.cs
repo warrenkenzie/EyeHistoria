@@ -30,15 +30,30 @@ namespace EyeHistoria.Controllers
             // add the list of symptoms
             indexViewModel.List_of_symptoms = symptomDAL.GetAllSymptoms();
 
-            // add the questions
-            indexViewModel.Onset_questions = symptomDAL.get_question_basedon_type("Onset");
+            List<string> OLDCARTS = new List<string> { "Onset", "Location", "Duration" , "Characteristics" , "Aggravation", "Relief", "Timing", "Severity" };
+            // add list of general questions
+            List<GeneralQuestion> generalQuestions = new List<GeneralQuestion>();
+
+            List<Question> GeneralquestionList = symptomDAL.Get_All_GeneralQuestions();
+            foreach(Question question in GeneralquestionList)
+            {
+                generalQuestions.Add(
+                    new GeneralQuestion
+                    {
+                        General_Question = question,
+                        Follow_Questions = symptomDAL.Get_Follow_Qn_BasedOn_FollowUpId(question.QuestionID)
+                    }
+                );
+            }
+            indexViewModel.General_Questions = generalQuestions;
+            /*indexViewModel.Onset_questions = symptomDAL.get_question_basedon_type("Onset");
             indexViewModel.Location_questions = symptomDAL.get_question_basedon_type("Location");
             indexViewModel.Duration_questions = symptomDAL.get_question_basedon_type("Duration");
             indexViewModel.Characteristics_questions = symptomDAL.get_question_basedon_type("Characteristics");
             indexViewModel.Aggravation_questions = symptomDAL.get_question_basedon_type("Aggravation");
             indexViewModel.Relief_questions = symptomDAL.get_question_basedon_type("Relief");
             indexViewModel.Timing_questions = symptomDAL.get_question_basedon_type("Timing");
-            indexViewModel.Severity_questions = symptomDAL.get_question_basedon_type("Severity");
+            indexViewModel.Severity_questions = symptomDAL.get_question_basedon_type("Severity");*/
 
             return View(indexViewModel);
         }

@@ -63,15 +63,12 @@ namespace EyeHistoria.DAL
             return symptomsList;
         }
 
-        public List<Question> get_question_basedon_type(string question_type)
+        public List<Question> Get_All_GeneralQuestions()
         {
             //Create a SqlCommand object from connection object
             SqlCommand cmd = conn.CreateCommand();
             // query
-            cmd.CommandText = @"SELECT * FROM Questions WHERE Type= @question_type AND Category = 'General'";
-            
-            // parameteres
-            cmd.Parameters.AddWithValue("@question_type", question_type);
+            cmd.CommandText = @"SELECT * FROM Questions WHERE Category = 'General'";
 
             //A connection to database must be opened before any operations made.
             conn.Open();
@@ -103,6 +100,47 @@ namespace EyeHistoria.DAL
             //Close the database connection
             conn.Close();
             return list_of_questions;
+        }
+
+        public List<Question> Get_Follow_Qn_BasedOn_FollowUpId(int FollowUpId)
+        {
+            //Create a SqlCommand object from connection object
+            SqlCommand cmd = conn.CreateCommand();
+            // query
+            cmd.CommandText = @"SELECT * FROM Questions WHERE FollowUpID = @followUp_Id";
+
+            cmd.Parameters.AddWithValue("@followUp_Id", FollowUpId);
+
+            //A connection to database must be opened before any operations made.
+            conn.Open();
+
+            //Execute the SELECT SQL through a DataReader
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            List<Question> list_of_followUp_questions = new List<Question>();
+            while (reader.Read())
+            {
+                list_of_followUp_questions.Add(
+                    new Question()
+                    {
+                        QuestionID = reader.GetInt32(0),
+                        QuestionText = reader.GetString(1),
+                        Type = reader.GetString(2),
+                        Category = reader.GetString(3),
+                        SymptomID = reader.GetInt32(4),
+                        SymptomName = reader.GetString(5),
+                        AdminID = reader.GetInt32(6),
+                        LastModifiedBy = reader.GetString(7),
+                        Date = reader.GetDateTime(8),
+                        FollowUpID = (!reader.IsDBNull(9) ? reader.GetInt32(9) : null)
+                    }
+                );
+            }
+            //Close DataReader
+            reader.Close();
+            //Close the database connection
+            conn.Close();
+            return list_of_followUp_questions;
         }
 
         public List<Diagnosis> Get_Diagnostics()
