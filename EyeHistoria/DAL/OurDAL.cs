@@ -132,7 +132,8 @@ namespace EyeHistoria.DAL
                         AdminID = reader.GetInt32(6),
                         LastModifiedBy = reader.GetString(7),
                         Date = reader.GetDateTime(8),
-                        FollowUpID = (!reader.IsDBNull(9) ? reader.GetInt32(9) : null)
+                        FollowUpID = (!reader.IsDBNull(9) ? reader.GetInt32(9) : null),
+                        Data_questionID = (!reader.IsDBNull(10) ? reader.GetInt32(10) : null)
                     }
                 );
             }
@@ -179,6 +180,109 @@ namespace EyeHistoria.DAL
             conn.Close();
             return list_of_diagnostic;
         }
+
+
+        public List<Diagnosis_symptoms> Get_List_Diagnostic_Symptom_BasedOn_DiagnosisID(int DiagnosisID)
+        {
+            //Create a SqlCommand object from connection object
+            SqlCommand cmd = conn.CreateCommand();
+            // query
+            cmd.CommandText = @"SELECT * FROM Diagnosis_symptoms WHERE DiagnosisID = @diagnosisID";
+
+            cmd.Parameters.AddWithValue("@diagnosisID", DiagnosisID);
+            //A connection to database must be opened before any operations made.
+            conn.Open();
+
+            //Execute the SELECT SQL through a DataReader
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            List<Diagnosis_symptoms> list_of_diagnostic = new List<Diagnosis_symptoms>();
+            while (reader.Read())
+            {
+                list_of_diagnostic.Add(
+                    new Diagnosis_symptoms()
+                    {
+                        Diagnosis_symptomsID = reader.GetInt32(0),
+                        SymptomName = reader.GetString(1),
+                        DiagnosisID = reader.GetInt32(2)
+                    }
+                );
+            }
+            //Close DataReader
+            reader.Close();
+            //Close the database connection
+            conn.Close();
+            return list_of_diagnostic;
+        }
+
+        public List<Data_question> Get_List_Data_question_BasedOn_Diagnosis_symptomsID(int Diagnosis_symptomsID)
+        {
+            //Create a SqlCommand object from connection object
+            SqlCommand cmd = conn.CreateCommand();
+            // query
+            cmd.CommandText = @"SELECT * FROM Data_question WHERE Diagnosis_symptomsID = @diagnosis_symptomsID";
+
+            cmd.Parameters.AddWithValue("@diagnosis_symptomsID", Diagnosis_symptomsID);
+            //A connection to database must be opened before any operations made.
+            conn.Open();
+
+            //Execute the SELECT SQL through a DataReader
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            List<Data_question> list_of_Data_question = new List<Data_question>();
+            while (reader.Read())
+            {
+                list_of_Data_question.Add(
+                    new Data_question()
+                    {
+                        Data_questionId = reader.GetInt32(0),
+                        DataType = reader.GetString(1),
+                        DataValue = reader.GetString(2),
+                        Type = reader.GetString(3)
+                    }
+                );
+            }
+            //Close DataReader
+            reader.Close();
+            //Close the database connection
+            conn.Close();
+            return list_of_Data_question;
+        }
+
+        public Data_question Get_Data_question_BasedOn_Data_questionID(int? Data_questionID)
+        {
+            //Create a SqlCommand object from connection object
+            SqlCommand cmd = conn.CreateCommand();
+            // query
+            cmd.CommandText = @"SELECT * FROM Data_question WHERE Data_questionID = @data_questionID";
+
+            cmd.Parameters.AddWithValue("@data_questionID", Data_questionID);
+            //A connection to database must be opened before any operations made.
+            conn.Open();
+
+            //Execute the SELECT SQL through a DataReader
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            Data_question data_question = null;
+            if (reader.Read())
+            {
+                data_question = new Data_question
+                {
+                    Data_questionId = reader.GetInt32(0),
+                    DataType = reader.GetString(1),
+                    DataValue = reader.GetString(2),
+                    Type = reader.GetString(3)
+                };
+                
+            }
+            //Close DataReader
+            reader.Close();
+            //Close the database connection
+            conn.Close();
+            return data_question;
+        }
+
+
         public int AddDiagnosis(Diagnosis diagnosis)
         {
             //Create a SqlCommand object from connection object
