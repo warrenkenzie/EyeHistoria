@@ -1,21 +1,42 @@
-﻿.container {
-    display: flex;
-    flex-direction: column;
+﻿body {
+    margin: 0;
+    font-family: Trebuchet MS;
 }
 
-.symptom {
-    display: flex;
-    align-items: center;
+
+.logo {
+    font-family: Space Grotesk;
+    font-size: 30px;
+    font-style: bold;
+    margin: 0;
+    padding-left: 10px;
+    padding-top: 5px;
+    color: white;
+}
+nav ul {
+    width: 100%;
+    
+    
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+   overflow:hidden;
+    background-color: #333;
+}
+li a {
+    
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 15px 17px;
+    text-decoration: none;
+}
+.active {
+    background-color: #3759b9;
+}
+nav li:hover {
+    background-color: #111;
 }
 
-.symptom label {
-    margin-right: 10px;
-}
 
-.close {
-    cursor: pointer;
-}
-
-.onset, .location {
-    text-align: left;
 }
