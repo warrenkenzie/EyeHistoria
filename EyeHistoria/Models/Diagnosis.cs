@@ -28,5 +28,7 @@ namespace EyeHistoria.Models
         [Display(Name = "Date Created")]
         [DataType(DataType.Date)]
         public DateTime Date { get; set;}
+
+        public List<Diagnosis_symptoms> List_diagnosis_symptoms { get; set;}
     }
 }
