@@ -39,12 +39,16 @@ namespace EyeHistoria.Models
         public DateTime Date { get; set; }
         public int? FollowUpID { get; set; }
 
+        public int? Data_questionID { get; set; }
+
+        public Data_question Data_question { get; set; }
+
         public Question()
         {
 
         }
 
-        public Question(int questionID, string questionText, string type, string category, int symptomID, string symptomName, int adminID, string lastModifiedBy, DateTime date, int? followUpID)
+        public Question(int questionID, string questionText, string type, string category, int symptomID, string symptomName, int adminID, string lastModifiedBy, DateTime date, int? followUpID, int? data_questionID, Data_question data_question)
         {
             QuestionID = questionID;
             QuestionText = questionText;
@@ -56,6 +60,8 @@ namespace EyeHistoria.Models
             LastModifiedBy = lastModifiedBy;
             Date = date;
             FollowUpID = followUpID;
+            Data_questionID = data_questionID;
+            Data_question = data_question;
         }
 
         public List<string> List_of_diagnosis_symptoms { get; set; }
