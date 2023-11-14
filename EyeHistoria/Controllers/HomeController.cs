@@ -24,6 +24,11 @@ namespace EyeHistoria.Controllers
             _logger = logger;
         }
 
+        public IActionResult LogIn()
+        {
+            return View();
+        }
+
         public IActionResult Index()
         {
             IndexViewModel indexViewModel = new IndexViewModel();
