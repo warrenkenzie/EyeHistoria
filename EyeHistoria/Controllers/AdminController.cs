@@ -5,6 +5,10 @@ using EyeHistoria.DAL;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Data.SqlTypes;
 using Microsoft.CodeAnalysis;
+using System.Drawing.Text;
+using Humanizer;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Collections.Generic;
 
 namespace EyeHistoria.Controllers
 {
@@ -150,10 +154,7 @@ namespace EyeHistoria.Controllers
             Question question = new Question();
             question.AdminID = 1;
             question.LastModifiedBy = "Jonathan Hong Yi Hao";
-            // Assume you have a method in your context to retrieve symptoms from the database
-            var symptoms = context.Get_List_Data_question();
-      
-            ViewData["QuestionList"] = new SelectList(symptoms, "Data_questionsID", "CombinedDisplay");
+            // Assume you have a method in your context to retrieve symptoms from the 
             return View(question);
         }
 
