@@ -1,0 +1,76 @@
+﻿.container {
+    padding-top: 20px;
+    max-width: 100%;
+    padding: 20px;
+    background-color: #D4E9F9;
+}
+hr {
+    display: flex;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #000000;
+    padding: 0;
+    margin-bottom: 20px;
+    justify-content: center;
+    width: 90%;
+}
+h1 {
+    display: flex;
+    justify-content: center;
+    color: #283E56;
+    margin-bottom: 10px;
+}
+
+table {
+    width: 100%;
+    margin-top: 50px;
+    border-collapse: collapse;
+}
+.table1{
+    background-color:white;
+}
+th, td {
+    padding: 20px;
+    text-align: left;
+    border-bottom: 1px solid #dee2e6;
+}
+
+    td button {
+        background-color: #283E56;
+        color: #ffffff;
+        border: none;
+        padding: 8px 15px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        border-radius: 5px;
+    }
+
+        td button:hover {
+            background-color: #0056b3;
+        }
+
+.collapse {
+    &:not(.show)
+
+{
+    display: none;
+}
+
+}
+
+.collapsing {
+    height: 0;
+    overflow: hidden;
+    @include transition($transition-collapse);
+    &.collapse-horizontal
+
+{
+    width: 0;
+    height: auto;
+    @include transition($transition-collapse-width);
+}
+}
+th {
+    background-color: #283E56;
+    color: white; 
+}
