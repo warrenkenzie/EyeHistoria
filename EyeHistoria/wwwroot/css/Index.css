@@ -3,40 +3,75 @@
     font-family: Trebuchet MS;
 }
 
-
-.logo {
-    font-family: Space Grotesk;
-    font-size: 30px;
+.picture {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Make sure the body covers the entire viewport height */
     margin: 0;
-    padding-left: 10px;
-    padding-top: 5px;
-    color: white;
+    background-color: #D4E9F9;
+}
+img {
+    max-height: 25%;
+    max-width: 25%;
 }
 
-nav ul {
-    width: 100%;
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #333;
+
+.navbar-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px; /* Adjust the height as needed */
+    background-color: #D4E9F9; /* Add a background color to the navbar */
+
 }
 
-li a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 15px 17px;
-    text-decoration: none;
-}
+    /* Remove default list styling */
+    .navbar-nav, .navbar-nav li {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+        /* Style the navbar links */
+        .navbar-nav li {
+            margin: 0 15px; /* Adjust the spacing between links */
+        }
 
-.active {
-    background-color: #3759b9;
-}
+        /* Style the links */
+        .navbar-nav a {
+            text-decoration: none;
+            color: #283E56; /* Set the link color */
+            font-weight: bold;
+            font-size: 16px; /* Adjust the font size */
+            transition: color 0.3s ease; /* Add a smooth transition effect for color changes */
+            padding-bottom: 10px;
+            border-bottom: 2px solid transparent;
+            transition: border-bottom 0.3s ease;
+        }
+           
 
-nav li:hover {
-    background-color: #111;
-}
+            /* Hover styles */
+            .navbar-nav a:hover {
+               
+                border-bottom-color: #283E56;
+            }
+
+                /* Change the line color when hovered */
+                .navbar-nav a:hover:after {
+                    border-bottom-color: #283E56;
+                }
+
+            /* Style the active link */
+            .navbar-nav a.active {
+                border-bottom-color: #283E56;
+            }
+
+                /* If you want the line to be visible on the active link as well, add the following styles */
+                .navbar-nav a.active:after {
+                    background-color: yellow; /* Set the color for the line on the active link */
+                }
+
+            
 
 
 

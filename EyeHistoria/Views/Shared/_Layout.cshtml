@@ -8,26 +8,31 @@
 		  asp-append-version="true" />
 </head>
 <body>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@500&family=Mulish:wght@200&family=Raleway:wght@300;600&family=Space+Grotesk:wght@300&family=Ubuntu:wght@500&display=swap" rel="stylesheet">
     <header>
+        
         <nav>
+            <div class="picture">
+                <img src="~/lib/images/logo .png" />
+            </div>
+            
            
                 
                     
                     <ul class="navbar-nav flex-grow-1">
-                        <span class="logo">EyeHistoria</span>
-                        <li style="float:right">
+                        <li >
                             <a class="active" asp-controller="" asp-controller="Admin" asp-action="Index">Home</a>
                         </li>
-                        <li style="float:right">
+                        <li>
                             <a class="nav-link" asp-area="" asp-controller="#" asp-action="Privacy">Privacy</a>
                         </li>
-                        <li style="float:right">
+                        <li>
                             <a class="nav-link" asp-area="" asp-controller="Admin" asp-action="Index">View Symptoms</a>
                         </li>
-                        <li style="float:right">
+                        <li>
                             <a class="nav-link" asp-area="" asp-controller="Admin" asp-action="ViewDiagnosis">View Diagnosis</a>
                         </li>
-                        <li style="float:right">
+                        <li>
                             <a class="nav-link" href="~/Admin/ViewQuestions">FAQs</a>
                         </li>
             </ul>

@@ -1,0 +1,104 @@
+﻿body {
+    font-family: 'Trebuchet MS';
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    border: none;
+}
+h4 {
+    margin: 10px;
+    margin-top: 20px;
+}
+
+.col-sm-6 {
+    width: 48%;
+}
+
+form {
+  
+    border:none;
+    border-right: 1px solid #ddd;
+   
+    
+}
+label {
+    display: flex;
+    margin: 0px;
+}
+
+
+
+.symptom_names {
+    border: 3px solid;
+    border-color: #3759b9;
+    color: #3759b9;
+    border-radius: 10px;
+    text-align: center;
+    padding: 8px;
+    transition: 0.3s;
+    /*display: block;
+    font-weight: bold;
+    margin-bottom: 5px;*/
+}
+
+
+.symptom_names:hover {
+    background-color: #3759b9;
+    color: #ffffff;
+}
+
+input[type="checkbox"] {
+    margin-top: 5px;
+}
+.symptom input[type="checkbox"]:checked + .symptom_names{
+    background-color: #3759b9;
+    color: white;
+}
+    
+
+input[type="submit"] {
+    background-color: #4caf50;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.col-sm-6 div {
+    margin-bottom: 20px;
+}
+
+p {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 5px;
+}
+
+.close {
+    color: red;
+    font-weight: bold;
+    cursor: pointer;
+}

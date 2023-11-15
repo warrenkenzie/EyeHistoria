@@ -6,40 +6,43 @@ body {
 }
 
 
-.logo {
-    font-family: Space Grotesk;
-    font-size: 30px;
-    margin: 0;
-    padding-left: 10px;
-    padding-top: 5px;
-    color: white;
+
+
+.navbar-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px; /* Adjust the height as needed */
+    background-color: #D4E9F9; /* Add a background color to the navbar */
 }
 
-nav ul {
-    width: 100%;
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #333;
-}
+/* Remove default list styling */
+    .navbar-nav, .navbar-nav li {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+/* Style the navbar links */
+        .navbar-nav li {
+            margin: 0 15px; /* Adjust the spacing between links */
+        }
 
-.nav-link {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 15px 17px;
-    text-decoration: none;
-}
+        /* Style the links */
+        .navbar-nav a {
+            text-decoration: none;
+            color: #283E56; /* Set the link color */
+            font-weight: bold;
+            font-size: 16px; /* Adjust the font size */
+        }
 
-.active {
-    background-color: #3759b9;
-}
-
-nav li:hover {
-    background-color: #111;
-}
-
+            /* Style the active link */
+            .navbar-nav a.active {
+                color: #283E56; /* Set the color for the active link */
+            }
+            . a:hover {
+                color: #D4E9F9;
+                background-color: #283E56;
+            }
 .footer {
     position: absolute;
     bottom: 0;
