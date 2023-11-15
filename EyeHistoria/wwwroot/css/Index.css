@@ -1,21 +1,120 @@
-﻿.container {
-    display: flex;
-    flex-direction: column;
+﻿body {
+    margin: 0;
+    font-family: Trebuchet MS;
 }
 
-.symptom {
+.picture {
     display: flex;
     align-items: center;
+    justify-content: center;
+    /* Make sure the body covers the entire viewport height */
+    margin: 0;
+    background-color: #D4E9F9;
+}
+.logo-pic {
+    max-height: 25%;
+    max-width: 25%;
 }
 
-.symptom label {
-    margin-right: 10px;
+
+.navbar-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px; /* Adjust the height as needed */
+    background-color: #D4E9F9; /* Add a background color to the navbar */
+
 }
 
-.close {
-    cursor: pointer;
+    /* Remove default list styling */
+    .navbar-nav, .navbar-nav li {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+        /* Style the navbar links */
+        .navbar-nav li {
+            margin: 0 15px; /* Adjust the spacing between links */
+        }
+
+        /* Style the links */
+        .navbar-nav a {
+            text-decoration: none;
+            color: #283E56; /* Set the link color */
+            font-weight: bold;
+            font-size: 16px; /* Adjust the font size */
+            transition: color 0.3s ease; /* Add a smooth transition effect for color changes */
+            padding-bottom: 10px;
+            border-bottom: 2px solid transparent;
+            transition: border-bottom 0.3s ease;
+        }
+           
+
+            /* Hover styles */
+            .navbar-nav a:hover {
+               
+                border-bottom-color: #283E56;
+            }
+
+                /* Change the line color when hovered */
+                .navbar-nav a:hover:after {
+                    border-bottom-color: #283E56;
+                }
+
+            /* Style the active link */
+            .navbar-nav a.active {
+                border-bottom-color: #283E56;
+            }
+
+                /* If you want the line to be visible on the active link as well, add the following styles */
+                .navbar-nav a.active:after {
+                    background-color: yellow; /* Set the color for the line on the active link */
+                }
+
+
+.hero-section {
+    position: relative;
+    text-align: center;
 }
 
-.onset, .location {
-    text-align: left;
+    .hero-section img {
+        width: 100%;
+        height: 50%;
+    }
+
+.hero-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color:#283E56 ;
+    background-color: antiquewhite;
+    background: rgba(255,255,255,0.5);
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 10px;
 }
+
+    .hero-content h1 {
+        font-size: 2em;
+        margin-bottom: 10px;
+    }
+
+    .hero-content p {
+        font-size: 1.2em;
+        margin-bottom: 20px;
+    }
+
+    .hero-content button {
+        padding: 10px 20px;
+        font-size: 1em;
+        background-color: #3759b9;
+        color: white;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+        .hero-content button:hover {
+            background-color: #263d79;
+
+
