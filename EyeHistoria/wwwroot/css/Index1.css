@@ -5,14 +5,13 @@
     padding: 0;
 }
 
-
-form {
+.symptom_checker {
     max-width: 100%;
     margin: 0 auto;
     padding: 20px;
     background-color: #f4f4f4;
     border-radius: 8px;
-    /* box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -35,23 +34,23 @@ form {
     margin: 10px;
 }
 
-    .symptom_names:hover {
-        background-color: #3759b9;
-        color: #ffffff;
-    }
+.symptom_names:hover {
+    background-color: #3759b9;
+    color: #ffffff;
+}
 
 input[type="checkbox"] {
     display: none;
 }
 
-    input[type="checkbox"] + .symptom_names {
-        cursor: pointer;
-    }
+input[type="checkbox"] + .symptom_names {
+    cursor: pointer;
+}
 
-    input[type="checkbox"]:checked + .symptom_names {
-        background-color: #3759b9;
-        color: white;
-    }
+input[type="checkbox"]:checked + .symptom_names {
+    background-color: #3759b9;
+    color: white;
+}
 
 input[type="submit"] {
     background-color: #4caf50;
@@ -63,9 +62,9 @@ input[type="submit"] {
     transition: background-color 0.3s;
 }
 
-    input[type="submit"]:hover {
-        background-color: #45a049;
-    }
+input[type="submit"]:hover {
+    background-color: #45a049;
+}
 
 .col-sm-6 div {
     margin: 5px;
@@ -107,3 +106,4 @@ li {
     font-weight: bold;
     cursor: pointer;
 }
+

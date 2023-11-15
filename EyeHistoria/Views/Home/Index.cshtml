@@ -27,11 +27,11 @@
         </div>
     </section>
     <div class="container">
-        <form method="post" action="~/Home/SubmitDiagnosis">    
         <h4>Select Patient's Symptoms</h4>
-        <div class=row>
+            <div class="row">
+            <form method="post" action="~/Home/SubmitDiagnosis">
             <div class="col-sm-6">
-                
+                <div class="symptom_checker">
                     @foreach (var symptom_item in Model.List_of_symptoms)
                     {
                         <div class="symptom">
@@ -50,8 +50,8 @@
                         </div>
 
                     }
-    
-                    <input type="submit" value="Submit Result" />
+                </div>
+                <input type="submit" value="Submit Result" />
             </div>
             <div class="OLDCARTS">
                 @{
@@ -105,9 +105,10 @@
                     }
                 }   
                     
+          
             </div>
+            </form>
         </div>
-        </form>
     </div>
 
     <!-- Passing Model.List_of_symptoms to Index.js -->
