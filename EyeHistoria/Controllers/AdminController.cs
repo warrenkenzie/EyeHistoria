@@ -28,7 +28,7 @@ namespace EyeHistoria.Controllers
         public ActionResult LogOut()
         {
             HttpContext.Session.SetString("Role", "Guest");
-            return RedirectToAction("Index", "HomeController");
+            return RedirectToAction("Index", "Home");
         }
 
         // GET: AdminController
