@@ -12,7 +12,10 @@ fetch('/Home/GetSymptomsList') // Adjust the URL to match your application's rou
     })
     .catch(error => console.error('Error:', error));
 
-
+function scrollToSymptoms() {
+    const symptomsSection = document.querySelector('.col-sm-6');
+    symptomsSection.scrollIntoView({ behavior: 'smooth' });
+}
 function myFunction(checkboxId) {
     var checkBox = document.getElementById(checkboxId);
     var onsetText = document.getElementById(checkBox.dataset.onset);

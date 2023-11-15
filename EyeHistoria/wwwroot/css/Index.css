@@ -11,7 +11,7 @@
     margin: 0;
     background-color: #D4E9F9;
 }
-img {
+.logo-pic {
     max-height: 25%;
     max-width: 25%;
 }
@@ -71,7 +71,50 @@ img {
                     background-color: yellow; /* Set the color for the line on the active link */
                 }
 
-            
 
+.hero-section {
+    position: relative;
+    text-align: center;
+}
+
+    .hero-section img {
+        width: 100%;
+        height: 50%;
+    }
+
+.hero-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color:#283E56 ;
+    background-color: antiquewhite;
+    background: rgba(255,255,255,0.5);
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+}
+
+    .hero-content h1 {
+        font-size: 2em;
+        margin-bottom: 10px;
+    }
+
+    .hero-content p {
+        font-size: 1.2em;
+        margin-bottom: 20px;
+    }
+
+    .hero-content button {
+        padding: 10px 20px;
+        font-size: 1em;
+        background-color: #3759b9;
+        color: white;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+        .hero-content button:hover {
+            background-color: #263d79;
 
 

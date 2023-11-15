@@ -18,6 +18,14 @@
 
 </head>
 <body>
+    <section class="hero-section">
+        <img src="~/lib/images/poto.jpg" alt="Wide Image">
+        <div class="hero-content">
+            <h1>Welcome to EyeHistoria</h1>
+            <p>Explore the symptoms and submit diagnosis.</p>
+            <button onclick="scrollToSymptoms()">Explore Symptoms</button>
+        </div>
+    </section>
     <div class="container">
         <h4>Select Patient's Symptoms</h4>
 
@@ -46,7 +54,7 @@
                     <input type="submit" value="Submit Result" />
                 </form>
             </div>
-            <div class="col-sm-6">
+            <div class="OLDCARTS">
                 @{
                     List<string> OLDCARTS = new List<string> { "Onset", "Location", "Duration", "Characteristics", "Aggravation", "Relief", "Timing", "Severity" };
                     // iterates through OLDCARTS acronym

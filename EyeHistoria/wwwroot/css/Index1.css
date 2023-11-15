@@ -5,70 +5,53 @@
     padding: 0;
 }
 
-.container {
-    max-width: 900px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 8px;
-    
-}
-
-.row {
-    display: flex;
-    justify-content: space-between;
-    border: none;
-}
-h4 {
-    margin: 10px;
-    margin-top: 20px;
-}
-
-.col-sm-6 {
-    width: 48%;
-}
 
 form {
-  
-    border:none;
-    border-right: 1px solid #ddd;
-   
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f4f4f4;
+    border-radius: 8px;
+    /* box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.symptom {
+    box-sizing: border-box;
     
 }
-label {
-    display: flex;
-    margin: 0px;
-}
-
-
 
 .symptom_names {
-    border: 3px solid;
-    border-color: #3759b9;
+    flex: 1;
+    border: 2px solid #3759b9;
     color: #3759b9;
-    border-radius: 10px;
+    border-radius: 5px;
     text-align: center;
     padding: 8px;
-    transition: 0.3s;
-    /*display: block;
-    font-weight: bold;
-    margin-bottom: 5px;*/
+    transition: background-color 0.3s, color 0.3s;
+    cursor: pointer;
+    margin: 10px;
 }
 
-
-.symptom_names:hover {
-    background-color: #3759b9;
-    color: #ffffff;
-}
+    .symptom_names:hover {
+        background-color: #3759b9;
+        color: #ffffff;
+    }
 
 input[type="checkbox"] {
-    margin-top: 5px;
+    display: none;
 }
-.symptom input[type="checkbox"]:checked + .symptom_names{
-    background-color: #3759b9;
-    color: white;
-}
-    
+
+    input[type="checkbox"] + .symptom_names {
+        cursor: pointer;
+    }
+
+    input[type="checkbox"]:checked + .symptom_names {
+        background-color: #3759b9;
+        color: white;
+    }
 
 input[type="submit"] {
     background-color: #4caf50;
@@ -77,10 +60,29 @@ input[type="submit"] {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.3s;
 }
 
+    input[type="submit"]:hover {
+        background-color: #45a049;
+    }
+
 .col-sm-6 div {
+    margin: 5px;
+    margin-bottom: 25px;
+}
+
+h2 {
+    text-align: center;
+    color: #333;
     margin-bottom: 20px;
+}
+
+
+
+
+.OLDCARTS > div {
+    width: 48%; /* Adjust the width as needed */
 }
 
 p {
@@ -96,6 +98,9 @@ ul {
 li {
     margin-bottom: 5px;
 }
+
+
+
 
 .close {
     color: red;
