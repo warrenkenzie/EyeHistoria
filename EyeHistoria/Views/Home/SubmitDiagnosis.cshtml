@@ -3,6 +3,7 @@
 @{
     ViewData["Title"] = "SubmitDiagnosis";
 }
+<link rel="stylesheet" type="text/css" href="~/css/Diagnosis.css">
 
 <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 <link rel="stylesheet" href="~/EyeHistoria.styles.css"
@@ -10,18 +11,21 @@
 <link rel="stylesheet" type="text/css" href="~/css/Index.css">
 
 
-<h1>SubmitDiagnosis</h1>
+<h1>Patient's Diagnosis</h1>
 
+<hr />
 
+<div class="table1">
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Disease_name)
+                Diseases/Conditions
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Match)
+                Match Rate
             </th>
+            <th></th>
             <th></th>
         </tr>
     </thead>
@@ -36,11 +40,9 @@
             </td>
             <td>
                 <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_@Html.DisplayFor(modelItem => item.Disease_name)" aria-expanded="false" aria-controls="collapse_@Html.DisplayFor(modelItem => item.Disease_name)">
-                    Button with data-bs-target
+                    View Matched Symptoms Details
                 </button>
             </td>
-        </tr>
-        <tr>
             <td>
                 <div class="collapse" id="collapse_@Html.DisplayFor(modelItem => item.Disease_name)">
                     <!-- matched symptoms -->
@@ -62,3 +64,4 @@
 }
     </tbody>
 </table>
+</div>
