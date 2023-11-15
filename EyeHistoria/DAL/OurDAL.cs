@@ -249,6 +249,38 @@ namespace EyeHistoria.DAL
             return list_of_Data_question;
         }
 
+        public List<Data_question> Get_List_Data_question()
+        {
+            //Create a SqlCommand object from connection object
+            SqlCommand cmd = conn.CreateCommand();
+            // query
+            cmd.CommandText = @"SELECT * FROM Data_question";
+            //A connection to database must be opened before any operations made.
+            conn.Open();
+
+            //Execute the SELECT SQL through a DataReader
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            List<Data_question> list_of_Data_question = new List<Data_question>();
+            while (reader.Read())
+            {
+                list_of_Data_question.Add(
+                    new Data_question()
+                    {
+                        Data_questionId = reader.GetInt32(0),
+                        DataType = reader.GetString(1),
+                        DataValue = reader.GetString(2),
+                        Type = reader.GetString(3)
+                    }
+                );
+            }
+            //Close DataReader
+            reader.Close();
+            //Close the database connection
+            conn.Close();
+            return list_of_Data_question;
+        }
+
         public Data_question Get_Data_question_BasedOn_Data_questionID(int? Data_questionID)
         {
             //Create a SqlCommand object from connection object
@@ -280,6 +312,38 @@ namespace EyeHistoria.DAL
             //Close the database connection
             conn.Close();
             return data_question;
+        }
+
+        public Diagnosis_symptoms GetDiagnosis_Symptoms(int? diagnosis_symptomsid)
+        {
+            //Create a SqlCommand object from connection object
+            SqlCommand cmd = conn.CreateCommand();
+            // query
+            cmd.CommandText = @"SELECT * FROM Diagnosis_symptoms WHERE DiagnosisID = @diagnosisid";
+
+            cmd.Parameters.AddWithValue("@diagnosisid", diagnosis_symptomsid);
+            //A connection to database must be opened before any operations made.
+            conn.Open();
+
+            //Execute the SELECT SQL through a DataReader
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            Diagnosis_symptoms diagnosis_symptoms = null;
+            if (reader.Read())
+            {
+                diagnosis_symptoms = new Diagnosis_symptoms
+                {
+                    Diagnosis_symptomsID = reader.GetInt32(0),
+                    SymptomName = reader.GetString(1),
+                    DiagnosisID = reader.GetInt32(2)
+                };
+
+            }
+            //Close DataReader
+            reader.Close();
+            //Close the database connection
+            conn.Close();
+            return diagnosis_symptoms;
         }
 
 
@@ -532,6 +596,30 @@ namespace EyeHistoria.DAL
             return question.QuestionID;
         }
 
+        public int AddDiagnosisSymptoms(Diagnosis_symptoms diagnosis_Symptoms)
+        {
+            //Create a SqlCommand object from connection object
+            SqlCommand cmd = conn.CreateCommand();
+            //Specify an INSERT SQL statement which will
+            //return the auto-generated StaffID after insertion
+            cmd.CommandText = @"INSERT INTO Diagnosis_symptoms (SymptomName, DiagnosisID)
+                                OUTPUT INSERTED.Diagnosis_symptomsID
+                                VALUES(@symptomname, @diagnosisid)";
+            //Define the parameters used in SQL statement, value for each parameter
+            //is retrieved from respective class's property.
+            cmd.Parameters.AddWithValue("@symptomname", diagnosis_Symptoms.SymptomName);
+            cmd.Parameters.AddWithValue("@diagnosisid", diagnosis_Symptoms.DiagnosisID);
+            //A connection to database must be opened before any operations made.
+            conn.Open();
+            //ExecuteScalar is used to retrieve the auto-generated
+            //StaffID after executing the INSERT SQL statement
+            diagnosis_Symptoms.Diagnosis_symptomsID = (int)cmd.ExecuteScalar();
+            //A connection should be closed after operations.
+            conn.Close();
+            //Return id when no error occurs.
+            return diagnosis_Symptoms.Diagnosis_symptomsID;
+        }
+
         public int UpdateQuestion(Question question)
         {
             //Create a SqlCommand object from connection object
@@ -673,6 +761,47 @@ namespace EyeHistoria.DAL
             conn.Close();
             //Return number of row of staff record updated or deleted
             return rowAffected;
+        }
+
+        public int AddFollowUpQuestion(Question question)
+        {
+            //Create a SqlCommand object from connection object
+            SqlCommand cmd = conn.CreateCommand();
+            //Specify an INSERT SQL statement which will
+            //return the auto-generated StaffID after insertion
+            cmd.CommandText = @"INSERT INTO Questions (Question, Type, Category, SymptomID,
+                                SymptomName, AdminID, LastModifiedBy, Date, FollowupID)
+                                OUTPUT INSERTED.QuestionID
+                                VALUES(@question, @type, @category, @symptomid, @symptomname, @adminid, @lastmodifiedby, @date, @followupid)";
+            //Define the parameters used in SQL statement, value for each parameter
+            //is retrieved from respective class's property.
+            cmd.Parameters.AddWithValue("@question", question.QuestionText);
+            cmd.Parameters.AddWithValue("@type", question.Type);
+            cmd.Parameters.AddWithValue("@category", question.Category);
+            cmd.Parameters.AddWithValue("@symptomid", question.SymptomID);
+            cmd.Parameters.AddWithValue("@symptomname", question.SymptomName);
+            cmd.Parameters.AddWithValue("@adminid", question.AdminID);
+            cmd.Parameters.AddWithValue("@lastmodifiedby", question.LastModifiedBy);
+            cmd.Parameters.AddWithValue("@date", DateTime.Now);
+
+            if (question.FollowUpID != 0)
+            {
+                cmd.Parameters.AddWithValue("@followupid", question.FollowUpID.Value);
+            }
+
+            else
+            {
+                cmd.Parameters.AddWithValue("@followupid", DBNull.Value);
+            }
+            //A connection to database must be opened before any operations made.
+            conn.Open();
+            //ExecuteScalar is used to retrieve the auto-generated
+            //StaffID after executing the INSERT SQL statement
+            question.QuestionID = (int)cmd.ExecuteScalar();
+            //A connection should be closed after operations.
+            conn.Close();
+            //Return id when no error occurs.
+            return question.QuestionID;
         }
     }
 }
