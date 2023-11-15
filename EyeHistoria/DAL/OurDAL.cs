@@ -600,6 +600,80 @@ namespace EyeHistoria.DAL
             conn.Close();
             return list_of_data_questionID;
         }
+
+        //GET SYMPTOMS BY ID
+        public Symptoms GetSymptomID(int? symptomID)
+        {
+            //Create a SqlCommand object from connection object
+            SqlCommand cmd = conn.CreateCommand();
+
+            cmd.CommandText = @"SELECT * FROM Symptoms WHERE symptomID = @symptomID";
+
+            cmd.Parameters.AddWithValue("@symptomID", symptomID);
+            //A connection to database must be opened before any operations made.
+            conn.Open();
+
+            //Execute the SELECT SQL through a DataReader
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            Symptoms symptom = null;
+            if (reader.Read())
+            {
+                symptom = new Symptoms
+                {
+                    SymptomID = reader.GetInt32(0),
+                    SymptomName = reader.GetString(1),
+                    AdminID = reader.GetInt32(2),
+                    LastModifiedBy = reader.GetString(3),
+                    Date = reader.GetDateTime(4)
+                };
+
+            }
+            //Close DataReader
+            reader.Close();
+            //Close the database connection
+            conn.Close();
+            return symptom;
+        }
+
+        //DELETE SYMPTOMS
+        public int DeleteSymptom(int symptomID)
+        {
+            //Instantiate a SqlCommand object, supply it with a DELETE SQL statement
+            //to delete a staff record specified by a Staff ID
+            SqlCommand cmd = conn.CreateCommand();
+            cmd.CommandText = @"DELETE FROM Symptoms
+                                WHERE SymptomID = @selectSymptomID";
+            cmd.Parameters.AddWithValue("@selectSymptomID", symptomID);
+            //Open a database connection
+            conn.Open();
+            int rowAffected = 0;
+            //Execute the DELETE SQL to remove the staff record
+            rowAffected += cmd.ExecuteNonQuery();
+            //Close database connection
+            conn.Close();
+            //Return number of row of staff record updated or deleted
+            return rowAffected;
+        }
+
+        public int DeleteQuestions(int symptomID)
+        {
+            //Instantiate a SqlCommand object, supply it with a DELETE SQL statement
+            //to delete a staff record specified by a Staff ID
+            SqlCommand cmd = conn.CreateCommand();
+            cmd.CommandText = @"DELETE FROM Questions
+                                WHERE SymptomID = @selectSymptomID";
+            cmd.Parameters.AddWithValue("@selectSymptomID", symptomID);
+            //Open a database connection
+            conn.Open();
+            int rowAffected = 0;
+            //Execute the DELETE SQL to remove the staff record
+            rowAffected += cmd.ExecuteNonQuery();
+            //Close database connection
+            conn.Close();
+            //Return number of row of staff record updated or deleted
+            return rowAffected;
+        }
     }
 }
 
