@@ -10,7 +10,7 @@
 <body>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@500&family=Mulish:wght@200&family=Raleway:wght@300;600&family=Space+Grotesk:wght@300&family=Ubuntu:wght@500&display=swap" rel="stylesheet">
     <header>
-        
+             
         <nav>
             <div class="picture">
                 <img class="logo-pic" src="~/lib/images/logo .png" />
@@ -24,17 +24,12 @@
                             <a class="active" asp-controller="" asp-controller="Admin" asp-action="Index">Home</a>
                         </li>
                         <li>
-                            <a class="nav-link" asp-area="" asp-controller="#" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link" asp-area="" asp-controller="Admin" asp-action="Index">Admin</a>
                         </li>
-                        <li>
-                            <a class="nav-link" asp-area="" asp-controller="Admin" asp-action="Index">View Symptoms</a>
-                        </li>
-                        <li>
+                        <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-controller="Admin" asp-action="ViewDiagnosis">View Diagnosis</a>
                         </li>
-                        <li>
-                            <a class="nav-link" href="~/Admin/ViewQuestions">FAQs</a>
-                        </li>
+                        
             </ul>
         </nav>
 
