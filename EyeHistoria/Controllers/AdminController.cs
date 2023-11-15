@@ -19,8 +19,16 @@ namespace EyeHistoria.Controllers
         // GET: AdminController
         public ActionResult Index()
         {
+            HttpContext.Session.SetString("Role", "Admin");
+
             List<Symptoms> symptomsList = context.GetAllSymptoms();
             return View(symptomsList);
+        }
+
+        public ActionResult LogOut()
+        {
+            HttpContext.Session.SetString("Role", "Guest");
+            return RedirectToAction("Index", "HomeController");
         }
 
         // GET: AdminController

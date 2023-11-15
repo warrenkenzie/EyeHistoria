@@ -27,6 +27,9 @@ namespace EyeHistoria.Controllers
 
         public IActionResult Index()
         {
+            // initialise HttpContext.Session;
+            HttpContext.Session.SetString("Role", "Guest");
+
             IndexViewModel indexViewModel = new IndexViewModel();
             // add the list of symptoms
             List<string> OLDCARTS = new List<string> { "Onset", "Location", "Duration" , "Characteristics" , "Aggravation", "Relief", "Timing", "Severity" };
