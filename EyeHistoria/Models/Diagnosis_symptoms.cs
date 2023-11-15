@@ -9,5 +9,7 @@
         public int DiagnosisID { get; set; }
 
         public List<Data_question> List_data_Questions { get; set; }
+
+       
     }
 }
