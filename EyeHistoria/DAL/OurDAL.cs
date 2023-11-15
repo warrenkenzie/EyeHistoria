@@ -573,6 +573,33 @@ namespace EyeHistoria.DAL
             //Return number of row of staff record updated or deleted
             return rowAffected;
         }
+
+        public List<int> Get_list_of_data_questionID_for_each_symptom_from_Questions(string symptomName)
+        {
+            //Create a SqlCommand object from connection object
+            SqlCommand cmd = conn.CreateCommand();
+            // query
+            cmd.CommandText = @"SELECT Data_questionID FROM Questions WHERE SymptomName = @symptomName AND Category = 'Follow-up'";
+            cmd.Parameters.AddWithValue("@symptomName", symptomName);
+            //A connection to database must be opened before any operations made.
+            conn.Open();
+
+            //Execute the SELECT SQL through a DataReader
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            List<int> list_of_data_questionID = new List<int>();
+            while (reader.Read())
+            {
+                list_of_data_questionID.Add(
+                    reader.GetInt32(0)
+                );
+            }
+            //Close DataReader
+            reader.Close();
+            //Close the database connection
+            conn.Close();
+            return list_of_data_questionID;
+        }
     }
 }
 
