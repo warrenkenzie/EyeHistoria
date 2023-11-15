@@ -123,12 +123,11 @@ namespace EyeHistoria.Controllers
                         {
                             if (list_of_submitted_symptoms[i].Severity_level.Count() == 0 || list_of_submitted_symptoms[i].Yes_No_data.Count() == 0)
                             {
-                                matched += 100 / diagnosis.List_diagnosis_symptoms.Count();
+                                matched += (float)100 / diagnosis.List_diagnosis_symptoms.Count();
                             }
                             else
                             {
-                                matched += GetMatch(diagnosis.List_diagnosis_symptoms[j], list_of_submitted_symptoms[i]) / diagnosis.List_diagnosis_symptoms.Count();
-                                float value = GetMatch(diagnosis.List_diagnosis_symptoms[j], list_of_submitted_symptoms[i]) / diagnosis.List_diagnosis_symptoms.Count();
+                                matched += (float)GetMatch(diagnosis.List_diagnosis_symptoms[j], list_of_submitted_symptoms[i]) / diagnosis.List_diagnosis_symptoms.Count();
                             }
                           
 
@@ -224,21 +223,17 @@ namespace EyeHistoria.Controllers
             // !   CALUCLATE PAIN MEASURE  ! //
             if (severity_input_from_checker > answer_severity)
             {
-                match = (float)(severity_input_from_checker - answer_severity) * 25 / (1 / data_Questions_count_weightage);
+                match = (float)(((severity_input_from_checker - answer_severity) * 25) / data_Questions_count_weightage);
             }
             else if (severity_input_from_checker < answer_severity)
             {
-                match = (float)(answer_severity - severity_input_from_checker) * 25 / (1 / data_Questions_count_weightage);
+                match = (float)(((answer_severity - severity_input_from_checker) * 25) / data_Questions_count_weightage);
             }
             else if (answer_severity == severity_input_from_checker)
             {
-                match = (float) 100 / (1 / data_Questions_count_weightage);
+                match = (float) 100 / data_Questions_count_weightage;
             }
-            else
-            {
-                return 0;
-            }
-            Console.WriteLine(match);
+            
             return match;
         }
 
@@ -247,13 +242,13 @@ namespace EyeHistoria.Controllers
             float probability = 0;
             if(answer_Yes_No == Yes_No_input_from_checker)
             {
-                probability = (float)100 / (1 / data_Questions_count_weightage);
+                probability = (float)100 / data_Questions_count_weightage;
             }
             else
             {
                 return probability;
             }
-
+           
             return probability;
         }
 
@@ -286,16 +281,7 @@ namespace EyeHistoria.Controllers
                     match += Calculate_Yes_No(data_question.DataValue, submit_symptom.Yes_No_data[data_question.Data_questionId], diagnosis_symptom.List_data_Questions.Count());
                 }
             }
-            /*for (int k = 0; k < list_of_submitted_symptoms[i].Yes_No_data.Count; k++)
-            {
-                //matched += Calculate_Severity_level(diagnosis.List_diagnosis_symptoms[j].);
-            }
-
-            for (int k = 0; k < list_of_submitted_symptoms[i].Severity_level.Count; k++)
-            {
-                matched += Calculate_Severity_level(diagnosis.List_diagnosis_symptoms[j]., list_of_submitted_symptoms[i].Severity_level[]);
-            }*/
-            return 0;
+            return match;
         }
         
     }
