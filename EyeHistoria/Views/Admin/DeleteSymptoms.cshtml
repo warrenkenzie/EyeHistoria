@@ -38,7 +38,8 @@
     </dl>
     
     <form asp-action="DeleteSymptoms" asp-controller="Admin">
-        <input type="submit" value="@Model" class=" btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
+        @*<input type="submit" value="@Model" class=" btn btn-danger" /> |*@
+        <input type="hidden" class="btn-check" name="SymptomID" id="SymptomID" autocomplete="off" value="@Model.SymptomID"> <!-- carries the symptomID to controller -->
+        <input type="submit" value="Submit Result" />
     </form>
 </div>
