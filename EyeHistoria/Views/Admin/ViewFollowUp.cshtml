@@ -1,0 +1,41 @@
+﻿@model List<EyeHistoria.Models.Data_question>
+
+@foreach (var item in Model)
+{
+    <div>
+        <h4>Data_question</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => item.Data_questionId)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => item.Data_questionId)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => item.DataType)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => item.DataType)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => item.DataValue)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => item.DataValue)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => item.Type)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => item.Type)
+            </dd>
+        </dl>
+    </div>
+    <div>
+        @Html.ActionLink("Edit", "Edit", new { id = item.Data_questionId }) |
+        <a asp-action="Index">Back to List</a>
+    </div>
+    <hr />
+}
+
