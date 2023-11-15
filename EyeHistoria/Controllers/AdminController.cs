@@ -198,5 +198,28 @@ namespace EyeHistoria.Controllers
             context.Delete(question.QuestionID);
             return RedirectToAction("ViewQuestions");
         }
+
+        // GET: AdminController/Delete/5
+        public ActionResult DeleteSymptoms(int? id)
+        {
+            if (id == null)
+            {
+                return RedirectToAction("Index");
+            }
+            Symptoms symptom = context.GetSymptomID(id.Value);
+            return View(symptom);
+        }
+
+        // POST: AdminController/Delete/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteSymptoms(Symptoms symptom)
+        {
+            // Delete the staff record from database
+            Console.WriteLine(symptom.SymptomID);
+            context.DeleteQuestions(symptom.SymptomID);
+            context.DeleteSymptom(symptom.SymptomID);
+            return RedirectToAction("Index");
+        }
     }
 }
