@@ -26,7 +26,9 @@
                 Match Rate
             </th>
             <th></th>
-            <th></th>
+                <th>
+                    Matched Symptoms 
+                </th>
         </tr>
     </thead>
     <tbody>
@@ -40,26 +42,28 @@
             </td>
             <td>
                 <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_@Html.DisplayFor(modelItem => item.Disease_name)" aria-expanded="false" aria-controls="collapse_@Html.DisplayFor(modelItem => item.Disease_name)">
-                    View Matched Symptoms Details
+                    View Details >
                 </button>
+                        
             </td>
-            <td>
-                <div class="collapse" id="collapse_@Html.DisplayFor(modelItem => item.Disease_name)">
-                    <!-- matched symptoms -->
-                    <div class="card card-body">
-                        <span style="color:green;">matched symptoms</span>
-                        @foreach (string matched_symptoms in item.Matched_symptoms)
-                        {
-                             <div>@matched_symptoms</div>
-                        }
-                        <span style="color:red;">unmatched symptoms</span>
-                        @foreach (string unmatched_symptoms in item.Unmatched_symptoms)
-                        {
-                             <div>@unmatched_symptoms</div>
-                        }
-                    </div>
-                </div>
-            </td>
+                    <td>
+                        <div class="collapse" id="collapse_@Html.DisplayFor(modelItem => item.Disease_name)">
+                            <!-- matched symptoms -->
+                            <div class="card card-body">
+                                <!--<span style="color:green;">matched symptoms</span>-->
+                                @foreach (string matched_symptoms in item.Matched_symptoms)
+                                {
+                                    <div>@matched_symptoms</div>
+                                }
+                                <!--<span style="color:red;">unmatched symptoms</span>-->
+                                @foreach (string unmatched_symptoms in item.Unmatched_symptoms)
+                                {
+                                    <div>@unmatched_symptoms</div>
+                                }
+                                
+                            </div>
+                        </div>
+                    </td>
         </tr>
 }
     </tbody>

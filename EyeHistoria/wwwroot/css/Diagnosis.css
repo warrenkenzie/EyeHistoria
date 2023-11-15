@@ -20,7 +20,10 @@ h1 {
     color: #283E56;
     margin-bottom: 10px;
 }
-
+thead {
+    background-color: #283E56;
+    color:white;
+}
 table {
     width: 100%;
     margin-top: 50px;
@@ -28,9 +31,10 @@ table {
 }
 .table1{
     background-color:white;
+    margin:30px;
 }
 th, td {
-    padding: 20px;
+    padding: 20px ;
     text-align: left;
     border-bottom: 1px solid #dee2e6;
 }
@@ -48,16 +52,19 @@ th, td {
         td button:hover {
             background-color: #0056b3;
         }
-
 .collapse {
     &:not(.show)
 
 {
-    display: none;
+    color:white;
 }
+.span {
+    &:not(.show)
 
+{
+    display:none;
 }
-
+}
 .collapsing {
     height: 0;
     overflow: hidden;
@@ -69,8 +76,10 @@ th, td {
     height: auto;
     @include transition($transition-collapse-width);
 }
+
 }
+
 th {
     background-color: #283E56;
-    color: white; 
+    color: white;
 }
