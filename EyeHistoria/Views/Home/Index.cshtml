@@ -58,11 +58,12 @@
                 @{
                     List<string> OLDCARTS = new List<string> { "Onset", "Location", "Duration", "Characteristics", "Aggravation", "Relief", "Timing", "Severity" };
                     // iterates through OLDCARTS acronym
-                    foreach(var ancronym in OLDCARTS)
+                    foreach (var ancronym in OLDCARTS)
                     {
                         <div>
-                            <p>@Html.Raw(ancronym)</p> 
-                            @foreach(var question in Model.General_Questions)
+                            <p>@Html.Raw(ancronym)</p>
+                            @*Iterates through all the questions*@
+                            @foreach (var question in Model.General_Questions)
                             {
                                 // if the ancronym matches pass through
                                 if (question.General_Question.Type == ancronym)
@@ -70,19 +71,40 @@
                                     // Each general question
                                     <ul id="@($"{question.General_Question.SymptomName}_{ancronym}")" style="display:none">
                                         @question.General_Question.QuestionText
-                                        @foreach(var follow_up_qns in question.Follow_Questions)
+                                        @foreach (var follow_up_qns in question.Follow_Questions)
                                         {
-                                            <li>@follow_up_qns.QuestionText</li>
+                                            // the follow up questions
+                                            <li>
+                                                @follow_up_qns.QuestionText
+                                                <br />
+                                                @if (follow_up_qns.Data_question.DataType == "Yes/No") // Yes/No options
+                                                {
+
+                                                    <input type="radio" class="btn-check" name="@($"{follow_up_qns.Data_question.Data_questionId}_Yes_No")" id="@($"{follow_up_qns.Data_question.Data_questionId}_Yes")" autocomplete="off" value="Yes">
+                                                    <label class="btn btn-outline-primary" for="@($"{follow_up_qns.Data_question.Data_questionId}_Yes")">Yes</label>
+                                                    <input type="radio" class="btn-check" name="@($"{follow_up_qns.Data_question.Data_questionId}_Yes_No")" id="@($"{follow_up_qns.Data_question.Data_questionId}_No")" autocomplete="off" value="Yes">
+                                                    <label class="btn btn-outline-primary" for="@($"{follow_up_qns.Data_question.Data_questionId}_No")">No</label>
+                                                }
+                                                else if (follow_up_qns.Data_question.DataType == "Severity") // Severity level
+                                                {
+                                                    // Severity input from 1 to 5
+                                                    for (int i = 1; i < 6; i++)
+                                                    {
+                                                        <input type="radio" class="btn-check" name="@follow_up_qns.Data_question.Data_questionId@Html.Raw("_Option")" id="@follow_up_qns.Data_question.Data_questionId@i" autocomplete="off" value="@i">
+                                                        <label class="btn btn-outline-primary" for="@follow_up_qns.Data_question.Data_questionId@i">@i</label>
+                                                    }
+                                                }
+                                            </li>
                                         }
                                         <span class="close">&times;</span>
                                     </ul>
                                 }
-                                
+
                             }
                         </div>
 
                     }
-                }
+                }   
                     
             </div>
         </div>
