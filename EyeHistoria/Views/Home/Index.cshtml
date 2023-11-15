@@ -60,18 +60,19 @@
                                                 <br/>
                                                 @if (follow_up_qns.Data_question.DataType == "Yes/No") // Yes/No options
                                                 {
-                                                    <input type="radio" class="btn-check" name="@($"{question.General_Question.SymptomName}_Yes_No")" id="@($"{question.General_Question.SymptomName}_Yes")" autocomplete="off" value="Yes">
-                                                    <label class="btn btn-outline-primary" for="@($"{question.General_Question.SymptomName}_Yes")">Yes</label>
-                                                    <input type="radio" class="btn-check" name="@($"{question.General_Question.SymptomName}_Yes_No")" id="@($"{question.General_Question.SymptomName}_No")" autocomplete="off" value="Yes">
-                                                    <label class="btn btn-outline-primary" for="@($"{question.General_Question.SymptomName}_No")">No</label>
+                                                    
+                                                    <input type="radio" class="btn-check" name="@($"{follow_up_qns.Data_question.Data_questionId}_Yes_No")" id="@($"{follow_up_qns.Data_question.Data_questionId}_Yes")" autocomplete="off" value="Yes">
+                                                    <label class="btn btn-outline-primary" for="@($"{follow_up_qns.Data_question.Data_questionId}_Yes")">Yes</label>
+                                                    <input type="radio" class="btn-check" name="@($"{follow_up_qns.Data_question.Data_questionId}_Yes_No")" id="@($"{follow_up_qns.Data_question.Data_questionId}_No")" autocomplete="off" value="Yes">
+                                                    <label class="btn btn-outline-primary" for="@($"{follow_up_qns.Data_question.Data_questionId}_No")">No</label>
                                                 }
                                                 else if (follow_up_qns.Data_question.DataType == "Severity") // Severity level
                                                 {
                                                     // Severity input from 1 to 5
                                                     for (int i = 1; i < 6; i++)
                                                     {
-                                                        <input type="radio" class="btn-check" name="@question.General_Question.SymptomName@Html.Raw("_Option")" id="@question.General_Question.SymptomName@i" autocomplete="off" value="@i">
-                                                        <label class="btn btn-outline-primary" for="@question.General_Question.SymptomName@i">@i</label>
+                                                            <input type="radio" class="btn-check" name="@follow_up_qns.Data_question.Data_questionId@Html.Raw("_Option")" id="@follow_up_qns.Data_question.Data_questionId@i" autocomplete="off" value="@i">
+                                                            <label class="btn btn-outline-primary" for="@follow_up_qns.Data_question.Data_questionId@i">@i</label>
                                                     }
                                                 }
                                             </li>
