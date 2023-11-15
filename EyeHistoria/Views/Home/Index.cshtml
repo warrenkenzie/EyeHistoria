@@ -27,11 +27,11 @@
         </div>
     </section>
     <div class="container">
+        <form method="post" action="~/Home/SubmitDiagnosis">    
         <h4>Select Patient's Symptoms</h4>
-
         <div class=row>
             <div class="col-sm-6">
-                <form method="post" action="~/Home/SubmitDiagnosis">
+                
                     @foreach (var symptom_item in Model.List_of_symptoms)
                     {
                         <div class="symptom">
@@ -52,7 +52,6 @@
                     }
     
                     <input type="submit" value="Submit Result" />
-                </form>
             </div>
             <div class="OLDCARTS">
                 @{
@@ -62,6 +61,7 @@
                     {
                         <div>
                             <p>@Html.Raw(ancronym)</p> 
+                            @*Iterates through all the questions*@
                             @foreach(var question in Model.General_Questions)
                             {
                                 // if the ancronym matches pass through
@@ -72,7 +72,28 @@
                                         @question.General_Question.QuestionText
                                         @foreach(var follow_up_qns in question.Follow_Questions)
                                         {
-                                            <li>@follow_up_qns.QuestionText</li>
+                                            // the follow up questions
+                                            <li>
+                                                @follow_up_qns.QuestionText
+                                                <br/>
+                                                @if (follow_up_qns.Data_question.DataType == "Yes/No") // Yes/No options
+                                                {
+                                                    
+                                                    <input type="radio" class="btn-check" name="@($"{follow_up_qns.Data_question.Data_questionId}_Yes_No")" id="@($"{follow_up_qns.Data_question.Data_questionId}_Yes")" autocomplete="off" value="Yes">
+                                                    <label class="btn btn-outline-primary" for="@($"{follow_up_qns.Data_question.Data_questionId}_Yes")">Yes</label>
+                                                    <input type="radio" class="btn-check" name="@($"{follow_up_qns.Data_question.Data_questionId}_Yes_No")" id="@($"{follow_up_qns.Data_question.Data_questionId}_No")" autocomplete="off" value="Yes">
+                                                    <label class="btn btn-outline-primary" for="@($"{follow_up_qns.Data_question.Data_questionId}_No")">No</label>
+                                                }
+                                                else if (follow_up_qns.Data_question.DataType == "Severity") // Severity level
+                                                {
+                                                    // Severity input from 1 to 5
+                                                    for (int i = 1; i < 6; i++)
+                                                    {
+                                                            <input type="radio" class="btn-check" name="@follow_up_qns.Data_question.Data_questionId@Html.Raw("_Option")" id="@follow_up_qns.Data_question.Data_questionId@i" autocomplete="off" value="@i">
+                                                            <label class="btn btn-outline-primary" for="@follow_up_qns.Data_question.Data_questionId@i">@i</label>
+                                                    }
+                                                }
+                                            </li>
                                         }
                                         <span class="close">&times;</span>
                                     </ul>
@@ -86,6 +107,7 @@
                     
             </div>
         </div>
+        </form>
     </div>
 
     <!-- Passing Model.List_of_symptoms to Index.js -->
