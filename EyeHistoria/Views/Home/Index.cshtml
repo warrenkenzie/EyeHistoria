@@ -4,24 +4,39 @@
 }
 
 <!DOCTYPE html>
-
+<!-- test commit -->
 <html lang="en">
 <head>
     <meta charset="utf‐8" />
     <meta name="viewport" content="width=device‐width, initial‐scale=1.0" />
-    <link rel="stylesheet" href="~/css/Index.css" asp‐append‐version="true" />
+    <link rel="stylesheet" href="~/EyeHistoria.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" type="text/css" href="~/css/Index.css">
+    <link rel="stylesheet" type="text/css" href="~/css/Index1.css">
+
+
+          
+
 </head>
 <body>
+    <section class="hero-section">
+        <img src="~/lib/images/poto.jpg" alt="Wide Image">
+        <div class="hero-content">
+            <h1>Welcome to EyeHistoria</h1>
+            <p>Explore the symptoms and submit diagnosis.</p>
+            <button onclick="scrollToSymptoms()">Explore Symptoms</button>
+        </div>
+    </section>
     <div class="container">
-        <form method="post" action="~/Home/SubmitDiagnosis">
+        <form method="post" action="~/Home/SubmitDiagnosis">    
+        <h4>Select Patient's Symptoms</h4>
         <div class=row>
             <div class="col-sm-6">
                 
                     @foreach (var symptom_item in Model.List_of_symptoms)
                     {
                         <div class="symptom">
-                            <label for="@symptom_item.SymptomName">@symptom_item.SymptomName</label>
-                            <input type="checkbox" id="@symptom_item.SymptomName" name="@symptom_item.SymptomName" value="@symptom_item.SymptomName" 
+                            <label for="@symptom_item.SymptomName">
+                            <input type="checkbox" style="display:none" id="@symptom_item.SymptomName" name="@symptom_item.SymptomName" value="@symptom_item.SymptomName" 
                                         data-onset="@symptom_item.SymptomName@Html.Raw("_Onset")" 
                                         data-location="@symptom_item.SymptomName@Html.Raw("_Location")"
                                         data-duration="@symptom_item.SymptomName@Html.Raw("_Duration")"
@@ -29,13 +44,16 @@
                                         data-aggravation="@symptom_item.SymptomName@Html.Raw("_Aggravation")"
                                         data-relief="@symptom_item.SymptomName@Html.Raw("_Relief")"
                                         data-timing="@symptom_item.SymptomName@Html.Raw("_Timing")"
-                                        data-severity="@symptom_item.SymptomName@Html.Raw("_Severity")">
+                                   data-severity="@symptom_item.SymptomName@Html.Raw("_Severity")">
+                                   <span class="symptom_names">@symptom_item.SymptomName</span>
+                            </label>
                         </div>
+
                     }
     
                     <input type="submit" value="Submit Result" />
             </div>
-            <div class="col-sm-6">
+            <div class="OLDCARTS">
                 @{
                     List<string> OLDCARTS = new List<string> { "Onset", "Location", "Duration", "Characteristics", "Aggravation", "Relief", "Timing", "Severity" };
                     // iterates through OLDCARTS acronym

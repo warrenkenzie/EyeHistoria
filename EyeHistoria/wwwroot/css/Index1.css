@@ -1,0 +1,109 @@
+﻿body {
+    font-family: 'Trebuchet MS';
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+
+form {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f4f4f4;
+    border-radius: 8px;
+    /* box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.symptom {
+    box-sizing: border-box;
+    
+}
+
+.symptom_names {
+    flex: 1;
+    border: 2px solid #3759b9;
+    color: #3759b9;
+    border-radius: 5px;
+    text-align: center;
+    padding: 8px;
+    transition: background-color 0.3s, color 0.3s;
+    cursor: pointer;
+    margin: 10px;
+}
+
+    .symptom_names:hover {
+        background-color: #3759b9;
+        color: #ffffff;
+    }
+
+input[type="checkbox"] {
+    display: none;
+}
+
+    input[type="checkbox"] + .symptom_names {
+        cursor: pointer;
+    }
+
+    input[type="checkbox"]:checked + .symptom_names {
+        background-color: #3759b9;
+        color: white;
+    }
+
+input[type="submit"] {
+    background-color: #4caf50;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+    input[type="submit"]:hover {
+        background-color: #45a049;
+    }
+
+.col-sm-6 div {
+    margin: 5px;
+    margin-bottom: 25px;
+}
+
+h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+
+
+
+.OLDCARTS > div {
+    width: 48%; /* Adjust the width as needed */
+}
+
+p {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 5px;
+}
+
+
+
+
+.close {
+    color: red;
+    font-weight: bold;
+    cursor: pointer;
+}

@@ -232,12 +232,13 @@ namespace EyeHistoria.Controllers
         // POST: AdminController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteSymptoms(Symptoms symptom)
+        public ActionResult DeleteSymptoms(IFormCollection formdata)
         {
             // Delete the staff record from database
-            Console.WriteLine(symptom.SymptomID);
-            context.DeleteQuestions(symptom.SymptomID);
-            context.DeleteSymptom(symptom.SymptomID);
+            int symptomID = Convert.ToInt32(formdata["SymptomID"]);
+            Console.WriteLine(symptomID);
+            context.DeleteQuestions(symptomID);
+            context.DeleteSymptom(symptomID);
             return RedirectToAction("Index");
         }
     }
