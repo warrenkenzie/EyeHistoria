@@ -183,6 +183,36 @@ namespace EyeHistoria.Controllers
             }
         }
 
+        // GET: AdminController/Edit/5
+        public ActionResult UpdateDiagnosis(int? id)
+        {
+            Diagnosis diagnosis = context.GetDiagnostics(id.Value);
+            if (diagnosis == null)
+            {
+                return RedirectToAction("Index");
+            }
+            return View(diagnosis);
+        }
+
+        // POST: AdminController/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult UpdateDiagnosis(Diagnosis diagnosis)
+        {
+            if (ModelState.IsValid)
+            {
+                //Update staff record to database
+                context.UpdateDiagnosis(diagnosis);
+                return RedirectToAction("ViewDiagnosis");
+            }
+            else
+            {
+                //Input validation fails, return to the view
+                //to display error message
+                return View(diagnosis);
+            }
+        }
+
         // GET: AdminController/Delete/5
         public ActionResult DeleteQuestions(int id)
         {
@@ -197,6 +227,29 @@ namespace EyeHistoria.Controllers
             // Delete the staff record from database
             context.Delete(question.QuestionID);
             return RedirectToAction("ViewQuestions");
+        }
+
+        public ActionResult DeleteSymptoms(int? id)
+        {
+            if (id == null)
+            {
+                return RedirectToAction("Index");
+            }
+            Symptoms symptoms = context.GetSymptoms(id.Value);
+            if (symptoms == null)
+            {
+                return RedirectToAction("Index");
+            }
+            return View(symptoms);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteSymptoms(Symptoms symptoms)
+        {
+            // Delete the staff record from database
+            context.DeleteSymptoms(symptoms.SymptomID);
+            return RedirectToAction("Index");
         }
     }
 }

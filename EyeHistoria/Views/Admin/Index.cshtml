@@ -13,9 +13,6 @@
                 @Html.DisplayNameFor(model => model.SymptomName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.AdminID)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.LastModifiedBy)
             </th>
             <th>
@@ -34,18 +31,14 @@
                 @Html.DisplayFor(modelItem => item.SymptomName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.AdminID)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.LastModifiedBy)
             </td>
             <td>
                  @Html.DisplayFor(modelItem => item.Date)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                    <a asp-action="DeleteSymptoms" asp-controller="Admin"
+                       asp-route-id="@item.SymptomID">Delete</a>
             </td>
         </tr>
 }

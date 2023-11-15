@@ -63,6 +63,38 @@ namespace EyeHistoria.DAL
             return symptomsList;
         }
 
+        public Symptoms GetSymptoms(int? id)
+        {
+            Symptoms symptoms = new Symptoms();
+            //Create a SqlCommand object from connection object
+            SqlCommand cmd = conn.CreateCommand();
+            //Specify the SELECT SQL statement 
+            cmd.CommandText = @"SELECT * FROM Symptoms WHERE SymptomID = @selectSymptomID";
+            cmd.Parameters.AddWithValue("@selectSymptomID", id);
+            //Open a database connection
+            conn.Open();
+            //Execute the SELECT SQL through a DataReader
+            SqlDataReader reader = cmd.ExecuteReader();
+            //Read all records until the end, save data into a symptoms list
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    symptoms.SymptomID = reader.GetInt32(0);
+                    symptoms.SymptomName = reader.GetString(1);
+                    symptoms.AdminID = reader.GetInt32(2);
+                    symptoms.LastModifiedBy = reader.GetString(3);
+                    symptoms.Date = reader.GetDateTime(4);
+                
+                }
+            }
+            //Close DataReader
+            reader.Close();
+            //Close the database connection
+            conn.Close();
+            return symptoms;
+        }
+
         public List<Question> Get_All_GeneralQuestions()
         {
             //Create a SqlCommand object from connection object
@@ -220,6 +252,8 @@ namespace EyeHistoria.DAL
             //Return id when no error occurs.
             return diagnosis.DiagnosisID;
         }
+
+
 
         public bool IsSymptomExist(string symptomName, int symptomID)
         {
@@ -387,6 +421,25 @@ namespace EyeHistoria.DAL
             return questionlist;
         }
 
+        public int DeleteSymptoms(int symptomID)
+        {
+            //Instantiate a SqlCommand object, supply it with a DELETE SQL statement
+            //to delete a staff record specified by a Staff ID
+            SqlCommand cmd = conn.CreateCommand();
+            cmd.CommandText = @"DELETE FROM Symptoms 
+                                WHERE SymptomID = @selectSymptomID";
+            cmd.Parameters.AddWithValue("@selectSymptomID", symptomID);
+            //Open a database connection
+            conn.Open();
+            int rowAffected = 0;
+            //Execute the DELETE SQL to remove the staff record
+            rowAffected += cmd.ExecuteNonQuery();
+            //Close database connection
+            conn.Close();
+            //Return number of row of staff record updated or deleted
+            return rowAffected;
+        }
+
         public int AddQuestion(Question question)
         {
             //Create a SqlCommand object from connection object
@@ -468,6 +521,72 @@ namespace EyeHistoria.DAL
             conn.Close();
             //Return number of row of staff record updated or deleted
             return rowAffected;
+        }
+
+        public Diagnosis GetDiagnostics(int diagnosisID)
+        {
+            Diagnosis diagnosis = new Diagnosis();
+            //Create a SqlCommand object from connection object
+            SqlCommand cmd = conn.CreateCommand();
+            // query
+            cmd.CommandText = @"SELECT * FROM Diagnosis WHERE DiagnosisID = @selectedDiagnosisID";
+            //Define the parameter used in SQL statement, value for the
+            //parameter is retrieved from the method parameter “DiagnosisID”.
+            cmd.Parameters.AddWithValue("@selectedDiagnosisID", diagnosisID);
+            //A connection to database must be opened before any operations made.
+            conn.Open();
+            //Execute the SELECT SQL through a DataReader
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+
+                    diagnosis.DiagnosisID = reader.GetInt32(0);
+                    diagnosis.DiagnosisName = reader.GetString(1);
+                    diagnosis.LearnMore = reader.GetString(2);
+                    diagnosis.List_of_diagnosis_symptoms = reader.GetString(3).Split(',').Select(symptom => symptom.Trim()).ToList();
+                    diagnosis.Tests = reader.GetString(4);
+                    diagnosis.AdminID = reader.GetInt32(5);
+                    diagnosis.LastModifiedBy = reader.GetString(6);
+                    diagnosis.Date = reader.GetDateTime(7);
+
+                }
+            }
+            //Close DataReader
+            reader.Close();
+            //Close the database connection
+            conn.Close();
+            return diagnosis;
+        }
+
+        public int UpdateDiagnosis(Diagnosis diagnosis)
+        {
+            //Create a SqlCommand object from connection object
+            SqlCommand cmd = conn.CreateCommand();
+            //Specify an UPDATE SQL statement
+            cmd.CommandText = @"UPDATE Diagnosis SET DiagnosisName=@diagnosisname, 
+                                LearnMore=@learnmore, List_of_diagnosis_symptoms=@list_of_diagnosis_symptoms,
+                                Tests=@tests, AdminID=@adminid, LastModifiedBy=@lastmodifiedby, Date=@date
+                                WHERE DiagnosisID = @selectedDiagnosisID";
+            //Define the parameters used in SQL statement, value for each parameter
+            //is retrieved from respective class's property.
+            cmd.Parameters.AddWithValue("@diagnosisname", diagnosis.DiagnosisName);
+            cmd.Parameters.AddWithValue("@learnmore", diagnosis.LearnMore);
+            cmd.Parameters.AddWithValue("@list_of_diagnosis_symptoms", diagnosis.List_of_diagnosis_symptoms);
+            cmd.Parameters.AddWithValue("@tests", diagnosis.Tests);
+            cmd.Parameters.AddWithValue("@adminid", diagnosis.AdminID);
+            cmd.Parameters.AddWithValue("@lastmodifiedby", diagnosis.LastModifiedBy);
+            cmd.Parameters.AddWithValue("@date", diagnosis.Date);
+            cmd.Parameters.AddWithValue("@date", diagnosis.DiagnosisID);
+            //Open a database connection
+            conn.Open();
+            //ExecuteNonQuery is used for UPDATE and DELETE
+            int count = cmd.ExecuteNonQuery();
+            //Close the database connection
+            conn.Close();
+            return count;
         }
     }
 }
