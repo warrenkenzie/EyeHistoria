@@ -53,6 +53,12 @@
                 <span asp-validation-for="FollowUpID" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="Data_questionID" class="control-label"></label>
+                @Html.DropDownListFor(model => model.Data_questionID, ViewData["QuestionList"] as SelectList, "Select a Symptom", new { @class = "form-control" })
+                <span asp-validation-for="Data_questionID" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>

@@ -35,7 +35,15 @@ namespace EyeHistoria.Controllers
         // GET: AdminController/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            List<Diagnosis_symptoms> diagnosis_symptoms = context.Get_List_Diagnostic_Symptom_BasedOn_DiagnosisID(id);
+            return View(diagnosis_symptoms);
+        }
+
+        // GET: AdminController/Details/5
+        public ActionResult ViewFollowUp(int id)
+        {
+            List<Data_question> data_question = context.Get_List_Data_question_BasedOn_Diagnosis_symptomsID(id);
+            return View(data_question);
         }
 
         // GET: AdminController/Create
@@ -119,6 +127,13 @@ namespace EyeHistoria.Controllers
 
                 //Add staff record to database
                 diagnosis_processed.DiagnosisID = context.AddDiagnosis(diagnosis_processed);
+                for (int i = 0; i < diagnosis_processed.List_of_diagnosis_symptoms.Count(); i++)
+                {
+                    Diagnosis_symptoms diagnosis_Symptoms = new Diagnosis_symptoms();
+                    diagnosis_Symptoms.SymptomName = diagnosis_processed.List_of_diagnosis_symptoms[i];
+                    diagnosis_Symptoms.DiagnosisID = diagnosis_processed.DiagnosisID; 
+                    diagnosis_Symptoms.Diagnosis_symptomsID = context.AddDiagnosisSymptoms(diagnosis_Symptoms);
+                }
                 //Redirect user to Staff/Index view
                 return RedirectToAction("ViewDiagnosis");
             }
@@ -135,6 +150,10 @@ namespace EyeHistoria.Controllers
             Question question = new Question();
             question.AdminID = 1;
             question.LastModifiedBy = "Jonathan Hong Yi Hao";
+            // Assume you have a method in your context to retrieve symptoms from the database
+            var symptoms = context.Get_List_Data_question();
+      
+            ViewData["QuestionList"] = new SelectList(symptoms, "Data_questionsID", "CombinedDisplay");
             return View(question);
         }
 
