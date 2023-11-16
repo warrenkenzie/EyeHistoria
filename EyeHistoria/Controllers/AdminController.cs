@@ -32,10 +32,19 @@ namespace EyeHistoria.Controllers
         }
 
         // GET: AdminController
-        public ActionResult ViewDiagnosis()
+        public async Task<IActionResult> ViewDiagnosis(string searchString)
         {
             List<Diagnosis> diagnosisList = context.Get_Diagnostics();
-            return View(diagnosisList);
+
+            var list_of_diagnosis = from diagnosis in diagnosisList 
+                                    select diagnosis;
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                list_of_diagnosis = list_of_diagnosis.Where(diagnosis => diagnosis.DiagnosisName.ToString().Contains(searchString));
+            }
+
+            return View(list_of_diagnosis);
         }
 
         public ActionResult ViewQuestions()
