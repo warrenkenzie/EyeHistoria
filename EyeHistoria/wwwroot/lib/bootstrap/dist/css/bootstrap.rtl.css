@@ -3990,7 +3990,7 @@ textarea.form-control-lg {
 }
 .navbar-nav {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   padding-right: 0;
   margin-bottom: 0;
   list-style: none;
