@@ -15,6 +15,7 @@ h1 {
     display: flex;
     justify-content: center;
     color: #283E56;
+    margin-top: 20px;
 }
 table {
     border-collapse: collapse;
@@ -41,3 +42,4 @@ a {
 i {
     font-size: 18px;
 }
+
