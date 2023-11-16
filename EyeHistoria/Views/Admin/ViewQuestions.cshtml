@@ -1,5 +1,7 @@
 ﻿@model IEnumerable<EyeHistoria.Models.Question>
 <link rel="stylesheet" type="text/css" href="~/css/Index.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="~/css/ViewQuestions.css">
 
 
 @{
@@ -19,10 +21,13 @@
             <option value="QuestionText" class="dropdown-item">Question Content</option>
             <option value="QuestionID" class="dropdown-item">Question ID</option>
         </select>
-        <input type="text" name="SearchString" class="form-control" id="diagnosisInput" aria-label="Text input with dropdown button">
-        <input type="submit" value="Search" class="btn btn-outline-secondary" />
-    </div>
-</form>
+        <div class="search-container">
+            <form action="">
+              <input type="text" placeholder="Search..." name="SearchString" id="diagnosisInput" aria-label="Text input with dropdown button">
+              <button type="submit" value="Search"><i class="fa fa-search"></i></button>
+            </form>
+</div>
+       </form> 
 <table class="table">
     <thead>
         <tr>

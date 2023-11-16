@@ -25,7 +25,7 @@ nav{
     color: #283E56;
     text-decoration: none;
 }
-.navbar-nav {
+.nav-bar {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -35,18 +35,18 @@ nav{
 }
 
     /* Remove default list styling */
-    .navbar-nav, .navbar-nav li {
+    .nav-bar, .nav-bar li {
         list-style: none;
         margin: 0;
         padding: 0;
     }
         /* Style the navbar links */
-        .navbar-nav li {
+        .nav-bar li {
             margin: 0 15px; /* Adjust the spacing between links */
         }
 
         /* Style the links */
-        .navbar-nav a {
+        .nav-bar a {
             text-decoration: none;
             color: #283E56; /* Set the link color */
             font-weight: bold;
@@ -59,23 +59,23 @@ nav{
            
 
             /* Hover styles */
-            .navbar-nav a:hover {
+            .nav-bar a:hover {
                
                 border-bottom-color: #283E56;
             }
 
                 /* Change the line color when hovered */
-                .navbar-nav a:hover:after {
+                .nav-bar a:hover:after {
                     border-bottom-color: #283E56;
                 }
 
             /* Style the active link */
-            .navbar-nav a.active {
+            .nav-bar a.active {
                 border-bottom-color: #283E56;
             }
 
                 /* If you want the line to be visible on the active link as well, add the following styles */
-                .navbar-nav a.active:after {
+                .nav-bar a.active:after {
                     background-color: yellow; /* Set the color for the line on the active link */
                 }
 
