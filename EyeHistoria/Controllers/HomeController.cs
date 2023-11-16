@@ -153,7 +153,7 @@ namespace EyeHistoria.Controllers
                 // calculate the match of list of symptoms to disease and if more than 50%, add it to list_diseases_obj
                 //float matched = (float)num_of_matched_symptoms / diagnosis.List_of_diagnosis_symptoms.Count() * 100;
 
-                Disease disease_obj = new Disease(diagnosis.DiagnosisName, matched, matched_symptoms, unmatched_symptoms,diagnosis.LearnMore);
+                Disease disease_obj = new Disease(diagnosis.DiagnosisName, matched, matched_symptoms, unmatched_symptoms,diagnosis.LearnMore,diagnosis.Tests);
                 list_diseases_obj.Add(disease_obj);
 
                 // reset num_of_matched_symptoms to 0 for the next iteration
