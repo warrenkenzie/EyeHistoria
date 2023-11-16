@@ -15,7 +15,9 @@
     max-height: 25%;
     max-width: 25%;
 }
-
+nav{
+    margin:0;
+}
 .navbar-brand {
     max-width: 0px;
     background-color: #D4E9F9;
@@ -25,6 +27,7 @@
 }
 .navbar-nav {
     display: flex;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
     height: 50px; /* Adjust the height as needed */

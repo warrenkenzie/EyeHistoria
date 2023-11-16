@@ -1,11 +1,16 @@
 ﻿@model IEnumerable<EyeHistoria.Models.Symptoms>
 
+<link rel="stylesheet" type="text/css" href="~/css/Index.css">
+<link rel="stylesheet" type="text/css" href="~/css/Admin.css">
+
+
 
 <h1>Symptoms</h1>
 
 <hr />
 <p>
-    <a class="btn btn-primary" asp-action="Create">Create New</a>
+    <a class="btn btn-primary" asp-area="" asp-controller="Admin" asp-action="Create">+ Create New</a>
+
 </p>
 <form asp-action="Index" method="get">
     <div class="input-group mb-3">
