@@ -6,11 +6,12 @@
         public Symptoms Symptom { get; set; }
         public Dictionary<int, string> Yes_No_data { get; set;}
         public Dictionary<int, int> Severity_level { get; set; }
-
+        public List<Question> FollowUp_Questions { get; set; }
         public Submit_symptoms()
         {
             Yes_No_data = new Dictionary<int, string>();
             Severity_level = new Dictionary<int, int>();
+            FollowUp_Questions = new List<Question>();
         }
 
     }

@@ -31,12 +31,24 @@
                     <span style="font-weight:bold;">@submit_symptom.SymptomName_ticked</span>
                     @foreach (var yes_no_data in @submit_symptom.Yes_No_data)
                     {
-                        <div style="font-weight:bold;">@yes_no_data.Key : @yes_no_data.Value</div>
-                        
+                        foreach(Question followUp_Question in submit_symptom.FollowUp_Questions)
+                        {
+                            if (followUp_Question.Data_questionID == yes_no_data.Key)
+                            {
+                                <div>@followUp_Question.QuestionText : @yes_no_data.Value</div>
+                            }
+                        }     
                     }
                     @foreach (var severity_level in @submit_symptom.Severity_level)
                     {
-                        <div style="font-weight:bold;">@severity_level.Key : @severity_level.Value</div>
+                        foreach (Question followUp_Question in submit_symptom.FollowUp_Questions)
+                        {
+                            if (followUp_Question.Data_questionID == severity_level.Key)
+                            {
+                                <div>@followUp_Question.QuestionText : @severity_level.Value</div>
+
+                            }
+                        }
                     }
                 }
             </td>
@@ -94,7 +106,7 @@
                     <div style="font-weight:bold;">@matched_symptom.Key</div>
                     foreach (var data_question in matched_symptom.Value)
                     {
-                        <div> - @data_question.DataType : @data_question.DataValue</div>
+                        <div> - @data_question.DataType -> Ans : @data_question.DataValue</div>
                     }
                 }
             </td>
@@ -105,7 +117,7 @@
                     <div style="font-weight:bold;">@unmatched_symptom.Key</div>
                     foreach (var data_question in unmatched_symptom.Value)
                     {
-                        <div> - @data_question.DataType : @data_question.DataValue</div>
+                        <div> - @data_question.DataType -> Ans : @data_question.DataValue</div>
                     }
                 }
             </td>

@@ -144,6 +144,48 @@ namespace EyeHistoria.DAL
             return list_of_followUp_questions;
         }
 
+        public Question Get_Follow_Qn_BasedOn_DataQuestionID(int DataQuestionID)
+        {
+            //Create a SqlCommand object from connection object
+            SqlCommand cmd = conn.CreateCommand();
+            // query
+            cmd.CommandText = @"SELECT * FROM Questions WHERE Data_questionID = @data_questionID";
+
+            cmd.Parameters.AddWithValue("@data_questionID", DataQuestionID);
+
+            //A connection to database must be opened before any operations made.
+            conn.Open();
+
+            //Execute the SELECT SQL through a DataReader
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            Question question = null;
+            if (reader.Read())
+            {
+                question = new Question
+                {
+                    QuestionID = reader.GetInt32(0),
+                    QuestionText = reader.GetString(1),
+                    Type = reader.GetString(2),
+                    Category = reader.GetString(3),
+                    SymptomID = reader.GetInt32(4),
+                    SymptomName = reader.GetString(5),
+                    AdminID = reader.GetInt32(6),
+                    LastModifiedBy = reader.GetString(7),
+                    Date = reader.GetDateTime(8),
+                    FollowUpID = (!reader.IsDBNull(9) ? reader.GetInt32(9) : null),
+                    Data_questionID = (!reader.IsDBNull(10) ? reader.GetInt32(10) : null)
+                };
+
+            }
+            
+            //Close DataReader
+            reader.Close();
+            //Close the database connection
+            conn.Close();
+            return question;
+        }
+
         public List<Diagnosis> Get_Diagnostics()
         {
             //Create a SqlCommand object from connection object

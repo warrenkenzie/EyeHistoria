@@ -93,12 +93,14 @@ namespace EyeHistoria.Controllers
                         {
                             //submit_Symptoms.Yes_No_data = formData[symptom.SymptomName + "_Yes_No"].ToString();
                             submit_Symptoms.Yes_No_data.Add(Data_questionID, formData[Data_questionID + "_Yes_No"].ToString());
+                            submit_Symptoms.FollowUp_Questions.Add(symptomDAL.Get_Follow_Qn_BasedOn_DataQuestionID(Data_questionID));
                         }
 
                         if (formData[Data_questionID + "_Option"].ToString() != "") 
                         {
                             //submit_Symptoms.Severity_level = Convert.ToInt32(formData[symptom.SymptomName + "_Option"]);
                             submit_Symptoms.Severity_level.Add(Data_questionID, Convert.ToInt32(formData[Data_questionID + "_Option"]));
+                            submit_Symptoms.FollowUp_Questions.Add(symptomDAL.Get_Follow_Qn_BasedOn_DataQuestionID(Data_questionID));
                         }
                     }
                     // add the object to list
@@ -161,21 +163,9 @@ namespace EyeHistoria.Controllers
             }
            
             ViewData["List_FormInput"] = list_of_submitted_symptoms;
+            // Sort list_diseases_obj by match
+            list_diseases_obj = list_diseases_obj.OrderByDescending(disease_obj => disease_obj.Match).ToList();
             return View(list_diseases_obj);
-        }
-
-        // generates a dict of diseases
-        Dictionary<string, List<string>> Generate_list_of_diseases()
-        {
-            Dictionary<string, List<string>> list_of_diseases = new Dictionary<string, List<string>>();
-            List<string> cataract = new List<string> { "Eye Redness", "Eye Irritation", "Eye Pain" };
-            List<string> blindness = new List<string> { "Eye Irritation" };
-            List<string> swollenEyes = new List<string> { "Eye Irritation", "Eye Irritation" };  
-            list_of_diseases.Add("cataract", cataract);
-            list_of_diseases.Add("blindness", blindness);
-            list_of_diseases.Add("swollenEyes", swollenEyes);
-
-            return list_of_diseases;
         }
 
         // get list of diagnosis
