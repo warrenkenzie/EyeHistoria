@@ -19,12 +19,28 @@ namespace EyeHistoria.Controllers
         private OurDAL context = new OurDAL();
 
         // GET: AdminController
-        public ActionResult Index()
+        public async Task<IActionResult> Index(string searchString, string searchBy)
         {
             HttpContext.Session.SetString("Role", "Admin");
 
             List<Symptoms> symptomsList = context.GetAllSymptoms();
-            return View(symptomsList);
+
+            var list_of_symptom = from symptom in symptomsList
+                                    select symptom;
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                if (searchBy == "SymptomID")
+                {
+                    list_of_symptom = list_of_symptom.Where(symptom => symptom.SymptomID.ToString().Contains(searchString));
+                }
+                else if (searchBy == "SymptomID")
+                {
+                    list_of_symptom = list_of_symptom.Where(symptom => symptom.SymptomID.ToString().Contains(searchString));
+                }
+            }
+            
+            return View(list_of_symptom);
         }
 
         public ActionResult LogOut()
@@ -59,18 +75,18 @@ namespace EyeHistoria.Controllers
         {
             List<Question> questionlist = context.GetQuestions();
 
-            var list_of_questions = from diagnosis in questionlist
-                                    select diagnosis;
+            var list_of_questions = from question in questionlist
+                                    select question;
 
             if (!string.IsNullOrEmpty(searchString))
             {
                 if (searchBy == "QuestionText")
                 {
-                    list_of_questions = list_of_questions.Where(diagnosis => diagnosis.QuestionText.ToString().Contains(searchString));
+                    list_of_questions = list_of_questions.Where(question => question.QuestionText.ToString().Contains(searchString));
                 }
                 else if (searchBy == "QuestionID")
                 {
-                    list_of_questions = list_of_questions.Where(diagnosis => diagnosis.QuestionID.ToString().Contains(searchString));
+                    list_of_questions = list_of_questions.Where(question => question.QuestionID.ToString().Contains(searchString));
                 }
             }
 
