@@ -8,10 +8,8 @@
 .symptom_checker {
     max-width: 100%;
     margin: 0 auto;
-    padding: 20px;
     background-color: #f4f4f4;
     border-radius: 8px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;

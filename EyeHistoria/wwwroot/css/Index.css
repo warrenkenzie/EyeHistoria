@@ -16,14 +16,19 @@
     max-width: 25%;
 }
 
-
+.navbar-brand {
+    max-width: 0px;
+    background-color: #D4E9F9;
+    font-size: 20px;
+    color: #283E56;
+    text-decoration: none;
+}
 .navbar-nav {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 50px; /* Adjust the height as needed */
     background-color: #D4E9F9; /* Add a background color to the navbar */
-
 }
 
     /* Remove default list styling */
