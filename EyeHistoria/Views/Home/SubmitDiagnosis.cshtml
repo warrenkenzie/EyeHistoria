@@ -12,7 +12,44 @@
 
 
 <h1>Patient's Diagnosis</h1>
-
+@{
+    List<Submit_symptoms> list_of_submitted_symptoms = ViewData["List_FormInput"] as List<Submit_symptoms>;
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Optometrist Input
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                @*@foreach (Submit_symptoms submit_symptoms in list_of_submitted_symptoms)
+                {
+                    <span style="font-weight:bold;">@submit_symptoms.SymptomName_ticked</span>
+                    @foreach (var yes_no_data in @submit_symptoms.Yes_No_data)
+                    {
+                        <div style="font-weight:bold;">@matched_symptom.Key</div>
+                        foreach (var data_question in matched_symptom.Value)
+                        {
+                            <div> - @data_question.DataType : @data_question.DataValue</div>
+                        }
+                    }
+                    @foreach (var severity_level in @submit_symptoms.Severity_level)
+                    {
+                        <div style="font-weight:bold;">@matched_symptom.Key</div>
+                        foreach (var data_question in matched_symptom.Value)
+                        {
+                            <div> - @data_question.DataType : @data_question.DataValue</div>
+                        }
+                    }
+                }*@
+            </td>
+        </tr>
+    </tbody>
+</table>
 <hr />
 
 <div class="table1">
@@ -32,10 +69,11 @@
                 Possible Tests
             </th>
             <th>
-
+                <span style="color:green;">Matched Symptoms</span>
+                 
             </th>
             <th>
-                Matched Symptoms 
+                <span style="color:red;">UnMatched Symptoms</span>
             </th>
         </tr>
     </thead>
@@ -57,30 +95,27 @@
                 @Html.DisplayFor(modelItem => item.Tests)
             </td>
             <td>
-                <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_@Html.DisplayFor(modelItem => item.Disease_name)" aria-expanded="false" aria-controls="collapse_@Html.DisplayFor(modelItem => item.Disease_name)">
-                    View Details >
-                </button>
-                        
+                <!-- matched symptoms -->
+                @foreach (var matched_symptom in item.Matched_symptoms)
+                {
+                    <div style="font-weight:bold;">@matched_symptom.Key</div>
+                    foreach (var data_question in matched_symptom.Value)
+                    {
+                        <div> - @data_question.DataType : @data_question.DataValue</div>
+                    }
+                }
             </td>
-                    <td>
-                        <div class="collapse" id="collapse_@Html.DisplayFor(modelItem => item.Disease_name)">
-                            <!-- matched symptoms -->
-                            <div class="card card-body">
-                                <span style="color:green;">matched symptoms</span>
-                                @foreach (string matched_symptoms in item.Matched_symptoms)
-                                {
-                                    <div>@matched_symptoms</div>
-                                }
-                                <br/>
-                                <span style="color:red;">unmatched symptoms</span>
-                                @foreach (string unmatched_symptoms in item.Unmatched_symptoms)
-                                {
-                                    <div>@unmatched_symptoms</div>
-                                }
-                                
-                            </div>
-                        </div>
-                    </td>
+            <td>
+                <!-- UnMatched symptoms -->
+                @foreach (var unmatched_symptom in item.Unmatched_symptoms)
+                {
+                    <div style="font-weight:bold;">@unmatched_symptom.Key</div>
+                    foreach (var data_question in unmatched_symptom.Value)
+                    {
+                        <div> - @data_question.DataType : @data_question.DataValue</div>
+                    }
+                }
+            </td>
         </tr>
 }
     </tbody>

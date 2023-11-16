@@ -105,16 +105,14 @@ namespace EyeHistoria.Controllers
                     list_of_submitted_symptoms.Add(submit_Symptoms);
                 }
             }
-
-            Console.WriteLine(list_of_submitted_symptoms);
           
             int num_of_matched_symptoms = 0;
             float matched = 0;
             // goes through the list of diseases
             foreach (Diagnosis diagnosis in list_of_diagnosis_SQL)
             {
-                List<string> matched_symptoms = new List<string>();
-                List<string> unmatched_symptoms = new List<string>();
+                Dictionary<string,List<Data_question>> matched_symptoms = new Dictionary<string, List<Data_question>>();
+                Dictionary<string, List<Data_question>> unmatched_symptoms = new Dictionary<string, List<Data_question>>();
                 // iterates through symptoms sent
                 for (int i = 0; i < diagnosis.List_diagnosis_symptoms.Count(); i++)
                 {
@@ -125,7 +123,7 @@ namespace EyeHistoria.Controllers
                         // goes through the list symptoms of a disease and then true if the syptom matches list_of_symptoms
                         if (list_of_submitted_symptoms[j].SymptomName_ticked == diagnosis.List_diagnosis_symptoms[i].SymptomName)
                         {
-                            if (list_of_submitted_symptoms[j].Severity_level.Count() == 0 || list_of_submitted_symptoms[j].Yes_No_data.Count() == 0)
+                            if (!diagnosis.List_diagnosis_symptoms[i].List_data_Questions.Any())
                             {
                                 matched += (float)100 / diagnosis.List_diagnosis_symptoms.Count();
                             }
@@ -133,9 +131,9 @@ namespace EyeHistoria.Controllers
                             {
                                 matched += (float)GetMatch(diagnosis.List_diagnosis_symptoms[i], list_of_submitted_symptoms[j]) / diagnosis.List_diagnosis_symptoms.Count();
                             }
-                          
+                            
 
-                            matched_symptoms.Add(diagnosis.List_diagnosis_symptoms[i].SymptomName);
+                            matched_symptoms.Add(diagnosis.List_diagnosis_symptoms[i].SymptomName, diagnosis.List_diagnosis_symptoms[i].List_data_Questions);
                             num_of_matched_symptoms++;
                             itsAmatch = true;
                             break;
@@ -144,7 +142,7 @@ namespace EyeHistoria.Controllers
                     // if there are no matched symptoms, add it to unmatched_symptoms
                     if (itsAmatch == false)
                     {
-                        unmatched_symptoms.Add(diagnosis.List_diagnosis_symptoms[i].SymptomName);
+                        unmatched_symptoms.Add(diagnosis.List_diagnosis_symptoms[i].SymptomName, diagnosis.List_diagnosis_symptoms[i].List_data_Questions);
                     }
                 }
 
@@ -162,7 +160,7 @@ namespace EyeHistoria.Controllers
 
             }
            
-            ViewData["diagnosis"] = num_of_matched_symptoms;
+            ViewData["List_FormInput"] = list_of_submitted_symptoms;
             return View(list_diseases_obj);
         }
 
