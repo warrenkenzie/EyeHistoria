@@ -34,9 +34,9 @@ namespace EyeHistoria.Controllers
                 {
                     list_of_symptom = list_of_symptom.Where(symptom => symptom.SymptomID.ToString().Contains(searchString));
                 }
-                else if (searchBy == "SymptomID")
+                else if (searchBy == "SymptomName")
                 {
-                    list_of_symptom = list_of_symptom.Where(symptom => symptom.SymptomID.ToString().Contains(searchString));
+                    list_of_symptom = list_of_symptom.Where(symptom => symptom.SymptomName.ToString().Contains(searchString));
                 }
             }
             
