@@ -238,26 +238,30 @@ namespace EyeHistoria.Controllers
         // GET: AdminController/Edit/5
         public ActionResult UpdateQuestion(int id)
         {
-            return View();
-        }
+			if (id == null)
+			{ //Query string parameter not provided
+			  //Return to listing page, not allowed to edit
+				return RedirectToAction("ViewQuestions");
+			}
+            Question question = context.GetDetails(id);
+			if (question == null)
+			{
+				//Return to listing page, not allowed to edit
+				return RedirectToAction("Question");
+			}
+			return View(question);
+		}
 
         // POST: AdminController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult UpdateQuestion(Question question)
         {
-            if (ModelState.IsValid)
-            {
+           
                 //Update staff record to database
                 context.UpdateQuestion(question);
                 return RedirectToAction("ViewQuestions");
-            }
-            else
-            {
-                //Input validation fails, return to the view
-                //to display error message
-                return View(question);
-            }
+
         }
 
         // GET: AdminController/Delete/5
@@ -272,7 +276,7 @@ namespace EyeHistoria.Controllers
         public ActionResult DeleteQuestions(Question question)
         {
             // Delete the staff record from database
-            context.Delete(question.QuestionID);
+            context.DeleteQuestion(question.QuestionID);
             return RedirectToAction("ViewQuestions");
         }
 
