@@ -9,6 +9,8 @@ using System.Drawing.Text;
 using Humanizer;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Collections.Generic;
+using System.Drawing.Printing;
+using System.Diagnostics;
 
 namespace EyeHistoria.Controllers
 {
@@ -28,20 +30,51 @@ namespace EyeHistoria.Controllers
         public ActionResult LogOut()
         {
             HttpContext.Session.SetString("Role", "Guest");
-            return RedirectToAction("Index", "HomeController");
+            return RedirectToAction("Index", "Home");
         }
 
         // GET: AdminController
-        public ActionResult ViewDiagnosis()
-        {
+        public async Task<IActionResult> ViewDiagnosis(string searchString, string searchBy) { 
+     
             List<Diagnosis> diagnosisList = context.Get_Diagnostics();
-            return View(diagnosisList);
+            var list_of_diagnosis = from diagnosis in diagnosisList
+                                    select diagnosis;
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                if(searchBy == "DiagnosisName")
+                {
+                    list_of_diagnosis = list_of_diagnosis.Where(diagnosis => diagnosis.DiagnosisName.ToString().Contains(searchString));
+                }
+                else if (searchBy == "DiagnosisID")
+                {
+                    list_of_diagnosis = list_of_diagnosis.Where(diagnosis => diagnosis.DiagnosisID.ToString().Contains(searchString));
+                }
+            }
+
+            return View(list_of_diagnosis);
         }
 
-        public ActionResult ViewQuestions()
+        public async Task<IActionResult> ViewQuestions(string searchString,string searchBy)
         {
             List<Question> questionlist = context.GetQuestions();
-            return View(questionlist);
+
+            var list_of_questions = from diagnosis in questionlist
+                                    select diagnosis;
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                if (searchBy == "QuestionText")
+                {
+                    list_of_questions = list_of_questions.Where(diagnosis => diagnosis.QuestionText.ToString().Contains(searchString));
+                }
+                else if (searchBy == "QuestionID")
+                {
+                    list_of_questions = list_of_questions.Where(diagnosis => diagnosis.QuestionID.ToString().Contains(searchString));
+                }
+            }
+
+            return View(list_of_questions);
         }
 
         // GET: AdminController/Details/5

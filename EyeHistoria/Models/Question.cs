@@ -41,7 +41,7 @@ namespace EyeHistoria.Models
 
         public int? Data_questionID { get; set; }
 
-        public Data_question Data_question { get; set; }
+        public Data_question? Data_question { get; set; }
 
         public Question()
         {
@@ -64,6 +64,6 @@ namespace EyeHistoria.Models
             Data_question = data_question;
         }
 
-        public List<string> List_of_diagnosis_symptoms { get; set; }
+        public List<string>? List_of_diagnosis_symptoms { get; set; }
     }
 }

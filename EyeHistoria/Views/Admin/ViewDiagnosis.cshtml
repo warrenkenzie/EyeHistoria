@@ -5,6 +5,22 @@
 <p>
     <a asp-action="AddDiagnosis">Create New</a>
 </p>
+<div>
+    <form asp-action="ViewDiagnosis" method="get">
+
+
+        <div class="input-group mb-3">
+            Search Diagnosis:
+            <select class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" name="searchBy">
+                <option value="#" class="dropdown-item">Filter By</option>
+                <option value="DiagnosisName" class="dropdown-item">DiagnosisName</option>
+                <option value="DiagnosisID" class="dropdown-item">DiagnosisID</option>
+            </select>
+            <input type="text" name="SearchString" class="form-control" id="diagnosisInput" aria-label="Text input with dropdown button">
+            <input type="submit" value="Search" class="btn btn-outline-secondary" />
+        </div>
+    </form>
+</div>
 <table class="table">
     <thead>
         <tr>
@@ -71,3 +87,7 @@
 }
     </tbody>
 </table>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/ViewDiagnosis.js"></script>

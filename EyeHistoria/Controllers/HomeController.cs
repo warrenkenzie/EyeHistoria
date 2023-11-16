@@ -226,11 +226,11 @@ namespace EyeHistoria.Controllers
             // !   CALUCLATE PAIN MEASURE  ! //
             if (severity_input_from_checker > answer_severity)
             {
-                match = (float)(((severity_input_from_checker - answer_severity) * 25) / data_Questions_count_weightage);
+                match = (float)((100 - ((severity_input_from_checker - answer_severity) * 25)) / data_Questions_count_weightage);
             }
             else if (severity_input_from_checker < answer_severity)
             {
-                match = (float)(((answer_severity - severity_input_from_checker) * 25) / data_Questions_count_weightage);
+                match = (float)((100 - ((answer_severity - severity_input_from_checker)) * 25) / data_Questions_count_weightage);
             }
             else if (answer_severity == severity_input_from_checker)
             {
