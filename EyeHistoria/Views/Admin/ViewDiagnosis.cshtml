@@ -41,9 +41,6 @@
                 @Html.DisplayNameFor(model => model.Tests)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.AdminID)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.LastModifiedBy)
             </th>
             <th>
@@ -69,11 +66,8 @@
             <td>
                 @string.Join(", ", item.List_of_diagnosis_symptoms)
             </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Tests)
-                </td>
             <td>
-                @Html.DisplayFor(modelItem => item.AdminID)
+                @Html.DisplayFor(modelItem => item.Tests)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.LastModifiedBy)
@@ -82,7 +76,7 @@
                 @Html.DisplayFor(modelItem => item.Date)
             </td>
             <td>
-                <a asp-action="Details" asp-route-id="@item.DiagnosisID">Hello</a>
+                <a asp-action="Details" asp-route-id="@item.DiagnosisID">Data Questions</a>
             </td>
         </tr>
 }

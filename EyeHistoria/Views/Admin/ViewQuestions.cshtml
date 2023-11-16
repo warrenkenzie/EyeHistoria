@@ -43,22 +43,13 @@
                 @Html.DisplayNameFor(model => model.Category)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.SymptomID)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.SymptomName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AdminID)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.LastModifiedBy)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Date)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FollowUpID)
             </th>
             <th></th>
         </tr>
@@ -79,22 +70,13 @@
                 @Html.DisplayFor(modelItem => item.Category)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.SymptomID)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.SymptomName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AdminID)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.LastModifiedBy)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Date)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FollowUpID)
             </td>
             <td>
                 @Html.ActionLink("Update", "UpdateQuestion", new {id = item.QuestionID }) |
