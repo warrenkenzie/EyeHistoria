@@ -106,7 +106,7 @@ namespace EyeHistoria.Controllers
                 }
             }
 
-            
+            Console.WriteLine(list_of_submitted_symptoms);
           
             int num_of_matched_symptoms = 0;
             float matched = 0;

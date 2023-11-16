@@ -35,7 +35,9 @@
         <div popover id="popover">
             <h2>Symptom Checker</h2>
             <hr>
-            <p>Simply select a symptom the patient is experiencing. Then, consider asking any of the questions generated below.</p>
+            <p>Simply select a symptom the patient is experiencing. Then, consider asking any of the questions generated below. Once satisfied, click on "Submit Result" and our system will calculate
+                the possible diagnosis. Feel free to read up and consider performing the suggested tests.
+            </p>
             <button popovertarget="popover" popovertargetaction="hide">Close</button>
         </div>
             <div class="row">
@@ -66,9 +68,9 @@
             <div class="OLDCARTS">
                 <ul>
                     <span style="font-weight: bold;">Starting Questions</span>
-                    <li>- What is your medical history?</li>
-                    <li>- What is your current condition?</li>
-                    <li>- Do you have any medical conditions you want to share?</li>
+                    <li>- Do you have any allergies?</li>
+                    <li>- Are you on any medication?</li>
+                    <li>- Do you have any medical conditions/history you want to share?</li>
                 </ul>
                 @{
                     List<string> OLDCARTS = new List<string> { "Onset", "Location", "Duration", "Characteristics", "Aggravation", "Relief", "Timing", "Severity" };
