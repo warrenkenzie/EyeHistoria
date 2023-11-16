@@ -620,20 +620,62 @@ namespace EyeHistoria.DAL
             return diagnosis_Symptoms.Diagnosis_symptomsID;
         }
 
+        public Question GetDetails(int questionID)
+        {
+            Question question = new Question();
+            //Create a SqlCommand object from connection object
+            SqlCommand cmd = conn.CreateCommand();
+            //Specify the SELECT SQL statement that 
+            //retrieves all attributes of a staff record.
+            cmd.CommandText = @"SELECT * FROM Questions
+                                WHERE QuestionID = @selectedQuestionID";
+            //Define the parameter used in SQL statement, value for the
+            //parameter is retrieved from the method parameter “staffId”.
+            cmd.Parameters.AddWithValue("@selectedQuestionID", questionID);
+            //Open a database connection
+            conn.Open();
+            //Execute SELCT SQL through a DataReader
+            SqlDataReader reader = cmd.ExecuteReader();
+            if (reader.HasRows)
+            {
+                //Read the record from database
+                while (reader.Read())
+                {
+                    // Fill staff object with values from the data reader 
+                    question.QuestionID = questionID;
+                    question.QuestionText = reader.GetString(1);
+                    question.Type = reader.GetString(2);    
+                    question.Category = reader.GetString(3);
+                    question.SymptomID = reader.GetInt32(4);
+                    question.SymptomName = reader.GetString(5);
+                    question.AdminID = reader.GetInt32(6);
+                    question.LastModifiedBy = reader.GetString(7);
+                    question.Date = reader.GetDateTime(8);
+                    question.FollowUpID = !reader.IsDBNull(9) ?
+                    reader.GetInt32(9) : (int?)null;
+                }
+            }
+            //Close data reader
+            reader.Close();
+            //Close database connection
+            conn.Close();
+            return question;
+        }
+
         public int UpdateQuestion(Question question)
         {
             //Create a SqlCommand object from connection object
             SqlCommand cmd = conn.CreateCommand();
             //Specify an UPDATE SQL statement
             cmd.CommandText = @"UPDATE Questions SET Question=@question, 
-                                type=@type, catregory=@category 
+                                Type=@type, Category=@category 
                                 WHERE QuestionID = @selectedQuestionID";
             //Define the parameters used in SQL statement, value for each parameter
             //is retrieved from respective class's property.
             cmd.Parameters.AddWithValue("@question", question.QuestionText);
             cmd.Parameters.AddWithValue("@type", question.Type);
             cmd.Parameters.AddWithValue("@category", question.Category);
-            cmd.Parameters.AddWithValue("@selectedQuestionID", question);
+            cmd.Parameters.AddWithValue("@selectedQuestionID", question.QuestionID);
             //Open a database connection
             conn.Open();
             //ExecuteNonQuery is used for UPDATE and DELETE
@@ -643,7 +685,7 @@ namespace EyeHistoria.DAL
             return count;
         }
 
-        public int Delete(int questionid)
+        public int DeleteQuestion(int questionid)
         {
             //Instantiate a SqlCommand object, supply it with a DELETE SQL statement
             //to delete a staff record specified by a Staff ID

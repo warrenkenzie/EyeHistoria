@@ -5,13 +5,25 @@
 
 
 
-<h1>Patient Records</h1>
+<h1>Symptoms</h1>
 
 <hr />
 <p>
     <a class="btn btn-primary" asp-area="" asp-controller="Admin" asp-action="Create">+ Create New</a>
 
 </p>
+<form asp-action="Index" method="get">
+    <div class="input-group mb-3">
+        Search Symptom:
+        <select class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" name="searchBy">
+            <option value="#" class="dropdown-item">Filter By</option>
+            <option value="SymptomID" class="dropdown-item">SymptomID</option>
+            <option value="SymptomName" class="dropdown-item">SymptomName</option>
+        </select>
+        <input type="text" name="SearchString" class="form-control" id="diagnosisInput" aria-label="Text input with dropdown button">
+        <input type="submit" value="Search" class="btn btn-outline-secondary" />
+    </div>
+</form>
 <table class="table table-bordered">
     <thead>
         <tr>
