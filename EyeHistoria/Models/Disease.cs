@@ -13,6 +13,8 @@ namespace EyeHistoria.Models
 
         public List<string> Unmatched_symptoms { get; set; }
 
+        public string LearnMore { get; set; }
+
         // default constructor
         public Disease()
         {
@@ -20,12 +22,13 @@ namespace EyeHistoria.Models
         }
 
         // constructor
-        public Disease(string disease, float match, List<string> matched_symptoms, List<string> unmatched_symptoms)
+        public Disease(string disease, float match, List<string> matched_symptoms, List<string> unmatched_symptoms,string learnMore)
         {
             Disease_name = disease;
             Match = match;
             Matched_symptoms = matched_symptoms;
             Unmatched_symptoms = unmatched_symptoms;
+            LearnMore = learnMore;
         }
     }
 }

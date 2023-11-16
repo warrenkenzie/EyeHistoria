@@ -27,7 +27,17 @@
         </div>
     </section>
     <div class="container">
-        <h4>Select Patient's Symptoms</h4>
+        <h4>Select Patient's Symptoms
+   
+            <button popovertarget="popover"><img src="~/image/Question_icon.png" width="15" height="15" popovertarget="popover"></button>
+      
+        </h4>
+        <div popover id="popover">
+            <h2>Symptom Checker</h2>
+            <hr>
+            <p>Simply select a symptom the patient is experiencing. Then, consider asking any of the questions generated below.</p>
+            <button popovertarget="popover" popovertargetaction="hide">Close</button>
+        </div>
             <div class="row">
             <form method="post" action="~/Home/SubmitDiagnosis">
             <div class="col-sm-6">
@@ -54,6 +64,12 @@
                 <input type="submit" value="Submit Result" />
             </div>
             <div class="OLDCARTS">
+                <ul>
+                    <span style="font-weight: bold;">Starting Questions</span>
+                    <li>- What is your medical history?</li>
+                    <li>- What is your current condition?</li>
+                    <li>- Do you have any medical conditions you want to share?</li>
+                </ul>
                 @{
                     List<string> OLDCARTS = new List<string> { "Onset", "Location", "Duration", "Characteristics", "Aggravation", "Relief", "Timing", "Severity" };
                     // iterates through OLDCARTS acronym

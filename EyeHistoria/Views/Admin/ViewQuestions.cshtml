@@ -14,20 +14,19 @@
     <a asp-action="AddQuestions">Add Question</a>
 </p>
 <form asp-action="ViewQuestions" method="get">
+
+
     <div class="input-group mb-3">
-        Search Questions:
+        Search Diagnosis:
         <select class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" name="searchBy">
             <option value="#" class="dropdown-item">Filter By</option>
             <option value="QuestionText" class="dropdown-item">Question Content</option>
-            <option value="QuestionID" class="dropdown-item">Question ID</option>
+            <option value="QuestionID" class="dropdown-item">QuestionID</option>
         </select>
-        <div class="search-container">
-            <form action="">
-              <input type="text" placeholder="Search..." name="SearchString" id="diagnosisInput" aria-label="Text input with dropdown button">
-              <button type="submit" value="Search"><i class="fa fa-search"></i></button>
-            </form>
-</div>
-       </form> 
+        <input type="text" name="SearchString" class="form-control" id="diagnosisInput" aria-label="Text input with dropdown button">
+        <input type="submit" value="Search" class="btn btn-outline-secondary" />
+    </div>
+</form>
 <table class="table">
     <thead>
         <tr>
