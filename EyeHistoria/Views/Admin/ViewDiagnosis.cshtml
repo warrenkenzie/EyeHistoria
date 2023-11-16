@@ -7,20 +7,17 @@
 </p>
 <div>
     <form asp-action="ViewDiagnosis" method="get">
-        <p>
-            Search Diagnosis : <input type="text" name="SearchString" />
-            <input type="submit" value="Search">
-        </p>
+
+
         <div class="input-group mb-3">
-            <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Dropdown</button>
-            <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Action</a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
-                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#">Separated link</a></li>
-            </ul>
-            <input type="text" class="form-control" aria-label="Text input with dropdown button">
+            Search Diagnosis:
+            <select class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" name="searchBy">
+                <option value="#" class="dropdown-item">Filter By</option>
+                <option value="DiagnosisName" class="dropdown-item">DiagnosisName</option>
+                <option value="DiagnosisID" class="dropdown-item">DiagnosisID</option>
+            </select>
+            <input type="text" name="SearchString" class="form-control" id="diagnosisInput" aria-label="Text input with dropdown button">
+            <input type="submit" value="Search" class="btn btn-outline-secondary" />
         </div>
     </form>
 </div>
@@ -93,3 +90,4 @@
 
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/ViewDiagnosis.js"></script>
