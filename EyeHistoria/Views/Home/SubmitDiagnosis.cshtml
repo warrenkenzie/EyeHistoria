@@ -26,26 +26,19 @@
     <tbody>
         <tr>
             <td>
-                @*@foreach (Submit_symptoms submit_symptoms in list_of_submitted_symptoms)
+                @foreach (Submit_symptoms submit_symptom in list_of_submitted_symptoms)
                 {
-                    <span style="font-weight:bold;">@submit_symptoms.SymptomName_ticked</span>
-                    @foreach (var yes_no_data in @submit_symptoms.Yes_No_data)
+                    <span style="font-weight:bold;">@submit_symptom.SymptomName_ticked</span>
+                    @foreach (var yes_no_data in @submit_symptom.Yes_No_data)
                     {
-                        <div style="font-weight:bold;">@matched_symptom.Key</div>
-                        foreach (var data_question in matched_symptom.Value)
-                        {
-                            <div> - @data_question.DataType : @data_question.DataValue</div>
-                        }
+                        <div style="font-weight:bold;">@yes_no_data.Key : @yes_no_data.Value</div>
+                        
                     }
-                    @foreach (var severity_level in @submit_symptoms.Severity_level)
+                    @foreach (var severity_level in @submit_symptom.Severity_level)
                     {
-                        <div style="font-weight:bold;">@matched_symptom.Key</div>
-                        foreach (var data_question in matched_symptom.Value)
-                        {
-                            <div> - @data_question.DataType : @data_question.DataValue</div>
-                        }
+                        <div style="font-weight:bold;">@severity_level.Key : @severity_level.Value</div>
                     }
-                }*@
+                }
             </td>
         </tr>
     </tbody>
