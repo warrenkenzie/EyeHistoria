@@ -6,17 +6,18 @@
 
 <h1>UpdateQuestion</h1>
 
-<h4>Question</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="UpdateQuestion">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="QuestionID" class="control-label"></label>
-                <input asp-for="QuestionID" class="form-control" />
-                <span asp-validation-for="QuestionID" class="text-danger"></span>
-            </div>
+            <input type="hidden" asp-for="QuestionID" />
+            <input type="hidden" asp-for="SymptomID" />
+            <input type="hidden" asp-for="SymptomName" />
+            <input type="hidden" asp-for="AdminID" />
+            <input type="hidden" asp-for="LastModifiedBy" />
+            <input type="hidden" asp-for="Date" />
+            <input type="hidden" asp-for="FollowUpID" />
             <div class="form-group">
                 <label asp-for="QuestionText" class="control-label"></label>
                 <input asp-for="QuestionText" class="form-control" />
@@ -33,45 +34,12 @@
                 <span asp-validation-for="Category" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="SymptomID" class="control-label"></label>
-                <input asp-for="SymptomID" class="form-control" />
-                <span asp-validation-for="SymptomID" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="SymptomName" class="control-label"></label>
-                <input asp-for="SymptomName" class="form-control" />
-                <span asp-validation-for="SymptomName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="AdminID" class="control-label"></label>
-                <input asp-for="AdminID" class="form-control" />
-                <span asp-validation-for="AdminID" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="LastModifiedBy" class="control-label"></label>
-                <input asp-for="LastModifiedBy" class="form-control" />
-                <span asp-validation-for="LastModifiedBy" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Date" class="control-label"></label>
-                <input asp-for="Date" class="form-control" />
-                <span asp-validation-for="Date" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="FollowUpID" class="control-label"></label>
-                <input asp-for="FollowUpID" class="form-control" />
-                <span asp-validation-for="FollowUpID" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
