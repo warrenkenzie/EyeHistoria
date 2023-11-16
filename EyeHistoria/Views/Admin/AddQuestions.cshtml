@@ -52,11 +52,6 @@
                 <input asp-for="FollowUpID" class="form-control" />
                 <span asp-validation-for="FollowUpID" class="text-danger"></span>
             </div>
-            <select asp-for="Data_questionID"
-                    asp-items="@(new SelectList(
-                     @ViewData["dataquestionlist"] as List <Data_question>,
-                     "Data_questionID", "CombinedDisplay"))"
-                    class="form-select"></select>
 
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
