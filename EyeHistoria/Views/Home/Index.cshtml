@@ -92,11 +92,10 @@
                                         {
                                             // the follow up questions
                                             <li>
-                                                @follow_up_qns.QuestionText
+                                                - @follow_up_qns.QuestionText
                                                 <br />
                                                 @if (follow_up_qns.Data_question.DataType == "Yes/No") // Yes/No options
                                                 {
-
                                                     <input type="radio" class="btn-check" name="@($"{follow_up_qns.Data_question.Data_questionId}_Yes_No")" id="@($"{follow_up_qns.Data_question.Data_questionId}_Yes")" autocomplete="off" value="Yes">
                                                     <label class="btn btn-outline-primary" for="@($"{follow_up_qns.Data_question.Data_questionId}_Yes")">Yes</label>
                                                     <input type="radio" class="btn-check" name="@($"{follow_up_qns.Data_question.Data_questionId}_Yes_No")" id="@($"{follow_up_qns.Data_question.Data_questionId}_No")" autocomplete="off" value="Yes">
@@ -116,7 +115,6 @@
                                         <span class="close">&times;</span>
                                     </ul>
                                 }
-
                             }
                         </div>
 
