@@ -48,6 +48,37 @@ namespace EyeHistoria.Controllers
             }
         }
 
+        // GET: ProcessController/Create
+        public ActionResult Add2()
+        {
+            return View();
+        }
+
+        // POST: ProcessController/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Add2(ChiefComplaint chiefComplaint)
+        {
+            if (ModelState.IsValid)
+            {
+                //Add staff record to database
+                chiefComplaint.p_id = processContext.Add2(chiefComplaint);
+                //Redirect user to Staff/Index view
+                return RedirectToAction("ChiefComplaintProcess");
+            }
+            else
+            {
+                //Input validation fails, return to the Create view
+                //to display error message
+                return View(chiefComplaint);
+            }
+        }
+
+        public ActionResult ChiefComplaintProcess()
+        {
+            return View();
+        }
+
         // GET: ProcessController/Edit/5
         public ActionResult Edit(int id)
         {
