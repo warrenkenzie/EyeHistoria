@@ -47,5 +47,28 @@ namespace EyeHistoria.DAL
             //Return id when no error occurs.
             return demographic.p_id;
         }
+
+        public int Add2(ChiefComplaint chiefcomplaint)
+        {
+            //Create a SqlCommand object from connection object
+            SqlCommand cmd = conn.CreateCommand();
+            //Specify an INSERT SQL statement which will
+            //return the auto-generated StaffID after insertion
+            cmd.CommandText = @"INSERT INTO ChiefComplaint (p_chief_complaint) 
+                                    OUTPUT INSERTED.p_id
+                                    VALUES(@p_chiefcomplaint)";
+            //Define the parameters used in SQL statement, value for each parameter
+            //is retrieved from respective class's property.
+            cmd.Parameters.AddWithValue("@p_chiefcomplaint", chiefcomplaint.p_chiefcomplaint);
+            //A connection to database must be opened before any operations made.
+            conn.Open();
+            //ExecuteScalar is used to retrieve the auto-generated
+            //StaffID after executing the INSERT SQL statement
+            chiefcomplaint.p_id = (int)cmd.ExecuteScalar();
+            //A connection should be closed after operations.
+            conn.Close();
+            //Return id when no error occurs.
+            return chiefcomplaint.p_id;
+        }
     }
 }
