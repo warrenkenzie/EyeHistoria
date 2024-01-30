@@ -1,4 +1,5 @@
 ﻿using EyeHistoria.DAL;
+using EyeHistoria.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -30,15 +31,20 @@ namespace EyeHistoria.Controllers
         // POST: ProcessController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(Demographic demographic)
         {
-            try
+            if (ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index));
+                //Add staff record to database
+                demographic.p_id = processContext.Add(demographic);
+                //Redirect user to Staff/Index view
+                return RedirectToAction("Index");
             }
-            catch
+            else
             {
-                return View();
+                //Input validation fails, return to the Create view
+                //to display error message
+                return View(demographic);
             }
         }
 
