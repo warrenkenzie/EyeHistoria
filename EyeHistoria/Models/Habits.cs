@@ -15,10 +15,10 @@ namespace EyeHistoria.Models
         public string p_drink { get; set; }
 
         [Display(Name = "Smoking Frequency")]
-        public int s_freq { get; set; }
+        public int? s_freq { get; set; }
 
         [Display(Name = "Drinking Frequency")]
-        public int d_freq {  get; set; }
+        public int? d_freq {  get; set; }
 
         [Required(ErrorMessage = "Gaming is required.")]
         [Display(Name = "Gaming")]

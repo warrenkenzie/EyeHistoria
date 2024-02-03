@@ -1,0 +1,28 @@
+﻿@model EyeHistoria.Models.Process
+
+<body>
+    <script type="text/javascript">
+        (function (d, t) {
+            var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
+            v.onload = function () {
+                window.voiceflow.chat.load({
+                    verify: { projectID: '65ae81a7103c763cd9106c71' },
+                    url: 'https://general-runtime.voiceflow.com',
+                    versionID: 'production',
+                    launch: {event : {type: "launch", payload: { 
+                        Demographics: {
+                            p_name: "@Model.demographic.p_name",
+                            p_race: "@Model.demographic.p_race",
+                            p_age: "@Model.demographic.p_age",
+                            p_occuption: "@Model.demographic.p_occupation",
+                            p_gender: "@Model.demographic.p_gender"
+                        }
+
+                    }}}
+                });
+            }
+            v.src = "https://cdn.voiceflow.com/widget/bundle.mjs"; v.type = "text/javascript"; s.parentNode.insertBefore(v, s);
+        })(document, 'script');
+    </script>
+
+</body>
