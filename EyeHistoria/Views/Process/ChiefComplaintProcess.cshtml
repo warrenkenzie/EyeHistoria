@@ -1,6 +1,91 @@
 ﻿@model EyeHistoria.Models.ChiefComplaint
 
-<h4>ChiefComplaint</h4>
+@{
+    Layout = "_ProcessLayout";
+}
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap">
+
+<style>
+    body {
+        font-family: 'Montserrat', sans-serif;
+        background-color: #f8f9fa;
+        margin: 20px; /* Add margin for overall spacing */
+    }
+
+    h4 {
+        color: #007bff;
+        font-size: 30px; /* Reduce font size for a balanced look */
+        margin-bottom: 20px; /* Add space below h4 */
+    }
+
+    h5 {
+        font-size: 18px;
+    }
+
+    .form-container {
+        font-family: 'Montserrat', sans-serif;
+        background-color: #fff;
+        border: 1px solid #ced4da;
+        border-radius: 14px;
+        padding: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    label {
+        font-weight: bold;
+        margin-bottom: 15px; /* Add more space between label and input */
+        display: block; /* Ensure each label is on a new line */
+    }
+
+    input[type="text"],
+    input[type="number"],
+    select {
+        font-family: 'Montserrat', sans-serif;
+        width: 100%;
+        max-width: 300px; /* Limit input box width */
+        padding: 10px;
+        box-sizing: border-box;
+        border: 1px solid #ced4da;
+        border-radius: 16px;
+        margin-bottom: 14px; /* Add space between input boxes */
+    }
+
+    input[type="submit"] {
+        font-family: 'Montserrat', sans-serif;
+        background-color: #007bff;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 16px;
+        cursor: pointer;
+    }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+    .next-link {
+        font-family: 'Montserrat', sans-serif;
+        margin-top: 20px;
+        display: block;
+        text-align: right;
+        color: #007bff;
+        text-decoration: none;
+    }
+
+        .next-link:hover {
+            text-decoration: underline;
+        }
+
+    /* Center the Next button */
+    .next-button-container {
+        text-align: right;
+    }
+</style>
+
+<h4>2. Chief Complaint</h4>
+<h5>Please find out why the patient has visited the optometrist today.</h5>
 <hr />
 <div class="row">
     <div class="col-md-4">
