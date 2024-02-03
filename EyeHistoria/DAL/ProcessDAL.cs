@@ -23,52 +23,81 @@ namespace EyeHistoria.DAL
         }
         public int Add(Demographic demographic)
         {
-            //Create a SqlCommand object from connection object
             SqlCommand cmd = conn.CreateCommand();
-            //Specify an INSERT SQL statement which will
-            //return the auto-generated StaffID after insertion
             cmd.CommandText = @"INSERT INTO Demographic (p_name, p_race, p_age, p_occupation, p_gender) 
-                                    OUTPUT INSERTED.p_id
-                                    VALUES(@p_name, @p_race, @p_age, @p_occupation, @p_gender)";
-            //Define the parameters used in SQL statement, value for each parameter
-            //is retrieved from respective class's property.
+                                OUTPUT INSERTED.p_id
+                                VALUES(@p_name, @p_race, @p_age, @p_occupation, @p_gender)";
             cmd.Parameters.AddWithValue("@p_name", demographic.p_name);
             cmd.Parameters.AddWithValue("@p_race", demographic.p_race);
             cmd.Parameters.AddWithValue("@p_age", demographic.p_age);
             cmd.Parameters.AddWithValue("@p_occupation", demographic.p_occupation);
             cmd.Parameters.AddWithValue("@p_gender", demographic.p_gender);
-            //A connection to database must be opened before any operations made.
+
             conn.Open();
-            //ExecuteScalar is used to retrieve the auto-generated
-            //StaffID after executing the INSERT SQL statement
             demographic.p_id = (int)cmd.ExecuteScalar();
-            //A connection should be closed after operations.
             conn.Close();
-            //Return id when no error occurs.
+
             return demographic.p_id;
         }
 
         public int Add2(ChiefComplaint chiefcomplaint)
         {
-            //Create a SqlCommand object from connection object
             SqlCommand cmd = conn.CreateCommand();
-            //Specify an INSERT SQL statement which will
-            //return the auto-generated StaffID after insertion
             cmd.CommandText = @"INSERT INTO ChiefComplaint (p_chief_complaint) 
-                                    OUTPUT INSERTED.p_id
-                                    VALUES(@p_chiefcomplaint)";
-            //Define the parameters used in SQL statement, value for each parameter
-            //is retrieved from respective class's property.
+                                OUTPUT INSERTED.p_id
+                                VALUES(@p_chiefcomplaint)";
             cmd.Parameters.AddWithValue("@p_chiefcomplaint", chiefcomplaint.p_chiefcomplaint);
-            //A connection to database must be opened before any operations made.
+
             conn.Open();
-            //ExecuteScalar is used to retrieve the auto-generated
-            //StaffID after executing the INSERT SQL statement
             chiefcomplaint.p_id = (int)cmd.ExecuteScalar();
-            //A connection should be closed after operations.
             conn.Close();
-            //Return id when no error occurs.
+
             return chiefcomplaint.p_id;
+        }
+
+        public int Add3(PersonalOcularHistory personalOcularHistory)
+        {
+            SqlCommand cmd = conn.CreateCommand();
+            cmd.CommandText = @"INSERT INTO PersonalOcularHistory (p_id, p_prescription, p_procedure, p_condition, pre_type, pro_type, con_type, pre_sdate, pro_sdate, con_sdate, pre_edate, pro_edate, con_edate) 
+                        OUTPUT INSERTED.p_id
+                        VALUES(@p_id, @p_prescription, @p_procedure, @p_condition, @pre_type, @pro_type, @con_type, @pre_sdate, @pro_sdate, @con_sdate, @pre_edate, @pro_edate, @con_edate)";
+            cmd.Parameters.AddWithValue("@p_id", personalOcularHistory.p_id);
+            cmd.Parameters.AddWithValue("@p_prescription", personalOcularHistory.p_prescription);
+            cmd.Parameters.AddWithValue("@p_procedure", personalOcularHistory.p_procedure);
+            cmd.Parameters.AddWithValue("@p_condition", personalOcularHistory.p_condition);
+            cmd.Parameters.AddWithValue("@pre_type", personalOcularHistory.pre_type);
+            cmd.Parameters.AddWithValue("@pro_type", personalOcularHistory.pro_type);
+            cmd.Parameters.AddWithValue("@con_type", personalOcularHistory.con_type);
+            cmd.Parameters.AddWithValue("@pre_sdate", personalOcularHistory.pre_sdate);
+            cmd.Parameters.AddWithValue("@pro_sdate", personalOcularHistory.pro_sdate);
+            cmd.Parameters.AddWithValue("@con_sdate", personalOcularHistory.con_sdate);
+            cmd.Parameters.AddWithValue("@pre_edate", personalOcularHistory.pre_edate);
+            cmd.Parameters.AddWithValue("@pro_edate", personalOcularHistory.pro_edate);
+            cmd.Parameters.AddWithValue("@con_edate", personalOcularHistory.con_edate);
+
+            conn.Open();
+            personalOcularHistory.p_id = (int)cmd.ExecuteScalar();
+            conn.Close();
+
+            return personalOcularHistory.p_id;
+        }
+
+        public int Add4(FamilyOcularHistory familyOcularHistory)
+        {
+            SqlCommand cmd = conn.CreateCommand();
+            cmd.CommandText = @"INSERT INTO FamilyOcularHistory (p_id, pf_diseases, dis_type, dis_member) 
+                                OUTPUT INSERTED.p_id
+                                VALUES(@p_id, @pf_diseases, @dis_type, @dis_member)";
+            cmd.Parameters.AddWithValue("@p_id", familyOcularHistory.p_id);
+            cmd.Parameters.AddWithValue("@pf_diseases", familyOcularHistory.pf_diseases);
+            cmd.Parameters.AddWithValue("@dis_type", familyOcularHistory.dis_type);
+            cmd.Parameters.AddWithValue("@dis_member", familyOcularHistory.dis_member);
+
+            conn.Open();
+            familyOcularHistory.p_id = (int)cmd.ExecuteScalar();
+            conn.Close();
+
+            return familyOcularHistory.p_id;
         }
     }
 }

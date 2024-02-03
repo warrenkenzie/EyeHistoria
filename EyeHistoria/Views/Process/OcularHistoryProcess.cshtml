@@ -1,0 +1,106 @@
+﻿@model EyeHistoria.Models.OcularHistoryViewModel
+
+<h4>OcularHistoryViewModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-8">
+        <ul class="nav nav-tabs" id="ocularHistoryTabs">
+            <li class="nav-item">
+                <a class="nav-link active" id="personalTab" data-toggle="tab" href="#personalTabContent">Personal</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="familyTab" data-toggle="tab" href="#familyTabContent">Family</a>
+            </li>
+        </ul>
+
+        <div class="tab-content mt-3">
+            <!-- PersonalOcularHistory Tab Content -->
+            <div class="tab-pane fade show active" id="personalTabContent">
+                <form asp-action="OcularHistoryProcess" method="post">
+                    <!-- PersonalOcularHistory Fields -->
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="form-group">
+                        <label asp-for="PersonalOcularHistory.p_prescription"></label>
+                        <input asp-for="PersonalOcularHistory.p_prescription" class="form-control" />
+                        <span asp-validation-for="PersonalOcularHistory.p_prescription" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="PersonalOcularHistory.p_procedure"></label>
+                        <input asp-for="PersonalOcularHistory.p_procedure" class="form-control" />
+                        <span asp-validation-for="PersonalOcularHistory.p_procedure" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="PersonalOcularHistory.p_condition"></label>
+                        <input asp-for="PersonalOcularHistory.p_condition" class="form-control" />
+                        <span asp-validation-for="PersonalOcularHistory.p_condition" class="text-danger"></span>
+                    </div>
+
+                    <!-- Add other PersonalOcularHistory fields -->
+
+                    <div class="form-group">
+                        <input type="submit" value="Create" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+
+            <!-- FamilyOcularHistory Tab Content -->
+            <div class="tab-pane fade" id="familyTabContent">
+                <form asp-action="OcularHistoryProcess" method="post">
+                    <!-- FamilyOcularHistory Fields -->
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="form-group">
+                        <label asp-for="FamilyOcularHistory.pf_diseases"></label>
+                        <input asp-for="FamilyOcularHistory.pf_diseases" class="form-control" />
+                        <span asp-validation-for="FamilyOcularHistory.pf_diseases" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="FamilyOcularHistory.dis_type"></label>
+                        <input asp-for="FamilyOcularHistory.dis_type" class="form-control" />
+                        <span asp-validation-for="FamilyOcularHistory.dis_type" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="FamilyOcularHistory.dis_member"></label>
+                        <input asp-for="FamilyOcularHistory.dis_member" class="form-control" />
+                        <span asp-validation-for="FamilyOcularHistory.dis_member" class="text-danger"></span>
+                    </div>
+
+                    <!-- Add other FamilyOcularHistory fields -->
+
+                    <div class="form-group">
+                        <input type="submit" value="Create" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        $(document).ready(function () {
+            $('#ocularHistoryTabs a').on('click', function (e) {
+                e.preventDefault();
+                var targetTab = $(this).attr('href');
+                $('.tab-pane').removeClass('show active');
+                $(targetTab).addClass('show active');
+            });
+        });
+    </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.6.0/js/bootstrap.min.js"></script>
+}
+
+
