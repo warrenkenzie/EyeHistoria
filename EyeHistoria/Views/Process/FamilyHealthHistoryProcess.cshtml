@@ -1,6 +1,11 @@
 ﻿@model EyeHistoria.Models.FamilyHealthHistory
 
-<h4>FamilyHealthHistory</h4>
+@{
+    Layout = "_ProcessLayout";
+}
+
+<h4>4. Family Health History</h4>
+<h5>Please find out more about the patient's family, specifically their health history.</h5>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -17,12 +22,12 @@
             </div>
             <div class="form-group" id="hdis_type">
                 <label asp-for="hdis_type" class="control-label"></label>
-                <input asp-for="hdis_type" class="form-control" />
+                <input asp-for="hdis_type" class="form-control" placeholder="Diabetes" />
                 <span asp-validation-for="hdis_type" class="text-danger"></span>
             </div>
             <div class="form-group" id="hdis_member">
                 <label asp-for="hdis_member" class="control-label"></label>
-                <input asp-for="hdis_member" class="form-control" />
+                <input asp-for="hdis_member" class="form-control" placeholder="Mother"/>
                 <span asp-validation-for="hdis_member" class="text-danger"></span>
             </div>
 

@@ -1,47 +1,137 @@
 ﻿@model EyeHistoria.Models.Demographic
 
-<h4>Demographic</h4>
-<hr />
+@{
+    Layout = "_ProcessLayout";
+}
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap">
+
+<style>
+    body {
+        font-family: 'Montserrat', sans-serif;
+        background-color: #f8f9fa;
+        margin: 20px; /* Add margin for overall spacing */
+    }
+
+    h4 {
+        color: #007bff;
+        font-size: 30px; /* Reduce font size for a balanced look */
+        margin-bottom: 20px; /* Add space below h4 */
+    }
+
+    h5 {
+        font-size: 18px;
+    }
+
+    .form-container {
+        font-family: 'Montserrat', sans-serif;
+        background-color: #fff;
+        border: 1px solid #ced4da;
+        border-radius: 14px;
+        padding: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    label {
+        font-weight: bold;
+        margin-bottom: 15px; /* Add more space between label and input */
+        display: block; /* Ensure each label is on a new line */
+    }
+
+    input[type="text"],
+    input[type="number"],
+    select {
+        font-family: 'Montserrat', sans-serif;
+        width: 100%;
+        max-width: 300px; /* Limit input box width */
+        padding: 10px;
+        box-sizing: border-box;
+        border: 1px solid #ced4da;
+        border-radius: 16px;
+        margin-bottom: 14px; /* Add space between input boxes */
+    }
+
+    input[type="submit"] {
+        font-family: 'Montserrat', sans-serif;
+        background-color: #007bff;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 16px;
+        cursor: pointer;
+    }
+
+    input[type="submit"]:hover {
+        background-color: #0056b3;
+    }
+
+    .next-link {
+        font-family: 'Montserrat', sans-serif;
+        margin-top: 20px;
+        display: block;
+        text-align: right;
+        color: #007bff;
+        text-decoration: none;
+    }
+
+    .next-link:hover {
+        text-decoration: underline;
+    }
+
+    /* Center the Next button */
+    .next-button-container {
+        text-align: right;
+    }
+</style>
+
+<h4>1. Demographic</h4>
+<h5>Please collect the patient's personal information.</h5>
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Index">
+        <form asp-action="Index" class="form-container">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="p_name" class="control-label"></label>
-                <input asp-for="p_name" class="form-control" />
+                <input asp-for="p_name" class="form-control" placeholder="John Doe" />
                 <span asp-validation-for="p_name" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="p_race" class="control-label"></label>
-                <input asp-for="p_race" class="form-control" />
+                <input asp-for="p_race" class="form-control" placeholder="Chinese" />
                 <span asp-validation-for="p_race" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="p_age" class="control-label"></label>
-                <input asp-for="p_age" class="form-control" />
+                <input asp-for="p_age" class="form-control" placeholder="18" />
                 <span asp-validation-for="p_age" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="p_occupation" class="control-label"></label>
-                <input asp-for="p_occupation" class="form-control" />
+                <input asp-for="p_occupation" class="form-control" placeholder="Software Engineer" />
                 <span asp-validation-for="p_occupation" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="p_gender" class="control-label"></label>
-                <input asp-for="p_gender" class="form-control" />
+                <select asp-for="p_gender" class="form-control">
+                    <option value="M">Male</option>
+                    <option value="F">Female</option>
+                </select>
                 <span asp-validation-for="p_gender" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group next-button-container">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
-<div>
+<div class="next-link">
     <a asp-action="ChiefComplaintProcess">Next</a>
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
+</style>

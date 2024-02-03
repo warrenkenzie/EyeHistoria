@@ -1,6 +1,11 @@
 ﻿@model EyeHistoria.Models.PersonalHealthHistory
 
-<h4>PersonalHealthHistory</h4>
+@{
+    Layout = "_ProcessLayout";
+}
+
+<h4>4. Personal Health History</h4>
+<h5>Please find out more about the patient's health history.</h5>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -17,7 +22,7 @@
             </div>
             <div class="form-group" id="all_type">
                 <label asp-for="all_type" class="control-label"></label>
-                <input asp-for="all_type" class="form-control" />
+                <input asp-for="all_type" class="form-control" placeholder="Dust"/>
                 <span asp-validation-for="all_type" class="text-danger"></span>
             </div>
 
@@ -31,7 +36,7 @@
             </div>
             <div class="form-group" id="med_type">
                 <label asp-for="med_type" class="control-label"></label>
-                <input asp-for="med_type" class="form-control" />
+                <input asp-for="med_type" class="form-control" placeholder="Isotretinoin"/>
                 <span asp-validation-for="med_type" class="text-danger"></span>
             </div>
             <div class="form-group" id="med_sdate">
@@ -55,7 +60,7 @@
             </div>
             <div class="form-group" id="hcon_type">
                 <label asp-for="hcon_type" class="control-label"></label>
-                <input asp-for="hcon_type" class="form-control" />
+                <input asp-for="hcon_type" class="form-control" placeholder="Diabetes"/>
                 <span asp-validation-for="hcon_type" class="text-danger"></span>
             </div>
             <div class="form-group" id="hcon_sdate">

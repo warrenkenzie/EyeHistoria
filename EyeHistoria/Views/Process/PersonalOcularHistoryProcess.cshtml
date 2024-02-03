@@ -1,6 +1,11 @@
 ﻿@model EyeHistoria.Models.PersonalOcularHistory
 
-<h4>PersonalOcularHistory</h4>
+@{
+    Layout = "_ProcessLayout";
+}
+
+<h4>3. Personal Ocular History</h4>
+<h5>Please find out more about the patient's ocular history.</h5>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -18,7 +23,7 @@
 
             <div class="form-group" id="pre_type">
                 <label asp-for="pre_type" class="control-label"></label>
-                <input asp-for="pre_type" class="form-control" />
+                <input asp-for="pre_type" class="form-control" placeholder="Spectacles"/>
                 <span asp-validation-for="pre_type" class="text-danger"></span>
             </div>
 
@@ -36,7 +41,7 @@
 
             <div class="form-group">
                 <label asp-for="p_procedure" class="control-label"></label>
-                <select asp-for="p_procedure" class="form-control">
+                <select asp-for="p_procedure" class="form-control" >
                     <option value="Yes">Yes</option>
                     <option value="No" selected>No</option>
                 </select>
@@ -45,7 +50,7 @@
 
             <div class="form-group" id="pro_type">
                 <label asp-for="pro_type" class="control-label"></label>
-                <input asp-for="pro_type" class="form-control" />
+                <input asp-for="pro_type" class="form-control" placeholder="Glaucoma Surgery" />
                 <span asp-validation-for="pro_type" class="text-danger"></span>
             </div>
 
@@ -72,7 +77,7 @@
 
             <div class="form-group" id="con_type">
                 <label asp-for="con_type" class="control-label"></label>
-                <input asp-for="con_type" class="form-control" />
+                <input asp-for="con_type" class="form-control" placeholder="Cataracts" />
                 <span asp-validation-for="con_type" class="text-danger"></span>
             </div>
 
