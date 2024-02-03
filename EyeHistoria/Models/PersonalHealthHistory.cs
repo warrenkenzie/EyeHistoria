@@ -4,33 +4,36 @@ namespace EyeHistoria.Models
 {
     public class PersonalHealthHistory
     {
-        [Display(Name = "Patient ID")]
         public int p_id {  get; set; }
 
-        [Required(ErrorMessage = "Allergy is required.")]
-        [Display(Name = "Allergy")]
+        [Display(Name = "Does the patient have an allergy?")]
         public string p_allergy { get; set; }
 
-        [Required(ErrorMessage = "Medication is required.")]
-        [Display(Name = "Patient Medication")]
+        [Display(Name = "Is the patient on any medication?")]
         public string p_medication { get; set; }
 
-        [Required(ErrorMessage = "Health Condition is required.")]
-        [Display(Name = "Patient Health Condition")]
+        [Display(Name = "Does the patient suffer from any health condition?")]
         public string p_hcondition { get; set; }
 
+        [Display(Name = "Allergy:")]
         public string all_type { get; set; }
 
+        [Display(Name = "Medication:")]
         public string med_type { get; set; }
 
+        [Display(Name = "Health Condition:")]
         public string hcon_type { get; set; }
 
+        [Display(Name = "Date of medication presciption:")]
         public DateTime med_sdate { get; set; }
 
+        [Display(Name = "Date of health condition diagnosis:")]
         public DateTime hcon_sdate { get; set; }
 
+        [Display(Name = "Is the patient still on medication?")]
         public DateTime med_edate { get; set; }
 
+        [Display(Name = "Is patient fully recovered from said health condition?")]
         public DateTime hcon_edate { get; set; }
     }
 }

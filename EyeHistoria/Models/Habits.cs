@@ -6,32 +6,28 @@ namespace EyeHistoria.Models
     {
         public int p_id {  get; set; }
 
-        [Required(ErrorMessage = "Smoking is required.")]
-        [Display(Name = "Smoking")]
+        [Display(Name = "Does the patient smoke?")]
         public string p_smoke { get; set; }
 
-        [Required(ErrorMessage = "Drinking is required.")]
-        [Display(Name = "Drinking")]
+        [Display(Name = "Does the patient drink?")]
         public string p_drink { get; set; }
 
-        [Display(Name = "Smoking Frequency")]
+        [Display(Name = "Cigars/per day:")]
         public int s_freq { get; set; }
 
-        [Display(Name = "Drinking Frequency")]
+        [Display(Name = "Drinks/per day:")]
         public int d_freq {  get; set; }
 
-        [Required(ErrorMessage = "Gaming is required.")]
-        [Display(Name = "Gaming")]
+        [Display(Name = "Does the patient play video games?")]
         public string p_game { get; set; }
 
-        [Required(ErrorMessage = "Reading is required.")]
-        [Display(Name = "Reading")]
+        [Display(Name = "Does the patient read?")]
         public string p_read { get; set; }
 
-        [Display(Name = "Gaming Frequency")]
+        [Display(Name = "Hours/per day:")]
         public int g_freq { get; set; }
 
-        [Display(Name = "Reading Frequency")]
+        [Display(Name = "Hours/per day:")]
         public int r_freq { get; set; }
     }
 }
