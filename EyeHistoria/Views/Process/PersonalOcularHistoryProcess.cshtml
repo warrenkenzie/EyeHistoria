@@ -8,12 +8,6 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             <div class="form-group">
-                <label asp-for="p_id" class="control-label"></label>
-                <input asp-for="p_id" class="form-control" />
-                <span asp-validation-for="p_id" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
                 <label asp-for="p_prescription" class="control-label"></label>
                 <select asp-for="p_prescription" class="form-control">
                     <option value="Yes">Yes</option>
@@ -49,19 +43,19 @@
                 <span asp-validation-for="p_procedure" class="text-danger"></span>
             </div>
 
-            <div class="form-group" id="pre_type">
+            <div class="form-group" id="pro_type">
                 <label asp-for="pro_type" class="control-label"></label>
                 <input asp-for="pro_type" class="form-control" />
                 <span asp-validation-for="pro_type" class="text-danger"></span>
             </div>
 
-            <div class="form-group" id="pre_sdate">
+            <div class="form-group" id="pro_sdate">
                 <label asp-for="pro_sdate" class="control-label"></label>
                 <input asp-for="pro_sdate" class="form-control" />
                 <span asp-validation-for="pro_sdate" class="text-danger"></span>
             </div>
 
-            <div class="form-group" id="pre_edate">
+            <div class="form-group" id="pro_edate">
                 <label asp-for="pro_edate" class="control-label"></label>
                 <input asp-for="pro_edate" class="form-control" />
                 <span asp-validation-for="pro_edate" class="text-danger"></span>
@@ -69,8 +63,29 @@
 
             <div class="form-group">
                 <label asp-for="p_condition" class="control-label"></label>
-                <input asp-for="p_condition" class="form-control" />
+                <select asp-for="p_condition" class="form-control">
+                    <option value="Yes">Yes</option>
+                    <option value="No" selected>No</option>
+                </select>
                 <span asp-validation-for="p_condition" class="text-danger"></span>
+            </div>
+
+            <div class="form-group" id="con_type">
+                <label asp-for="con_type" class="control-label"></label>
+                <input asp-for="con_type" class="form-control" />
+                <span asp-validation-for="con_type" class="text-danger"></span>
+            </div>
+
+            <div class="form-group" id="con_sdate">
+                <label asp-for="con_sdate" class="control-label"></label>
+                <input asp-for="con_sdate" class="form-control" />
+                <span asp-validation-for="con_sdate" class="text-danger"></span>
+            </div>
+
+            <div class="form-group" id="con_edate">
+                <label asp-for="con_edate" class="control-label"></label>
+                <input asp-for="con_edate" class="form-control" />
+                <span asp-validation-for="con_edate" class="text-danger"></span>
             </div>
 
             <div class="form-group">
@@ -90,22 +105,28 @@
     }
     <script>
         $(document).ready(function () {
-            // Hide or show fields based on the initial value of p_prescription
+            // Hide or show fields based on the initial value of ...
             toggleFields1();
             toggleFields2();
+            toggleFields3();
 
             // Handle change event of p_prescription
             $('#p_prescription').on('change', function () {
-                toggleFields();
+                toggleFields1();
             });
 
             // Handle change event of p_procedure
-            $('#p_prescription').on('change', function () {
-                toggleFields();
+            $('#p_procedure').on('change', function () {
+                toggleFields2();
+            });
+
+            // Handle change event of p_condition
+            $('#p_condition').on('change', function () {
+                toggleFields3();
             });
 
             // Function to toggle visibility of fields
-            function toggleFields() {
+            function toggleFields1() {
                 var prescriptionValue = $('#p_prescription').val();
 
                 if (prescriptionValue === 'Yes') {
@@ -113,13 +134,27 @@
                 } else {
                     $('#pre_type, #pre_sdate, #pre_edate').hide();
                 }
+            }
 
+            // Function to toggle visibility of fields
+            function toggleFields2() {
                 var procedureValue = $('#p_procedure').val();
 
-                if (prescriptionValue === 'Yes') {
+                if (procedureValue === 'Yes') {
                     $('#pro_type, #pro_sdate, #pro_edate').show();
                 } else {
                     $('#pro_type, #pro_sdate, #pro_edate').hide();
+                }
+            }
+
+            // Function to toggle visibility of fields
+            function toggleFields3() {
+                var conditionValue = $('#p_condition').val();
+
+                if (conditionValue === 'Yes') {
+                    $('#con_type, #con_sdate, #con_edate').show();
+                } else {
+                    $('#con_type, #con_sdate, #con_edate').hide();
                 }
             }
         });

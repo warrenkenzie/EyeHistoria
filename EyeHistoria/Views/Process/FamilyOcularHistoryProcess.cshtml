@@ -4,28 +4,28 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="FamilyOcularHistoryProcess">
+        <form asp-action="FamilyOcularHistoryProcess" id="familyOcularForm">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="p_id" class="control-label"></label>
-                <input asp-for="p_id" class="form-control" />
-                <span asp-validation-for="p_id" class="text-danger"></span>
-            </div>
+            
             <div class="form-group">
                 <label asp-for="pf_diseases" class="control-label"></label>
-                <input asp-for="pf_diseases" class="form-control" />
+                <select asp-for="pf_diseases" class="form-control">
+                    <option value="Yes">Yes</option>
+                    <option value="No" selected>No</option>
+                </select>
                 <span asp-validation-for="pf_diseases" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group" id="dis_type">
                 <label asp-for="dis_type" class="control-label"></label>
                 <input asp-for="dis_type" class="form-control" />
                 <span asp-validation-for="dis_type" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group" id="dis_member">
                 <label asp-for="dis_member" class="control-label"></label>
                 <input asp-for="dis_member" class="form-control" />
                 <span asp-validation-for="dis_member" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
@@ -38,5 +38,29 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        $(document).ready(function () {
+            // Hide or show fields based on the initial value of pf_diseases
+            toggleFields1();
+
+            // Handle change event of pf_diseases
+            $('#pf_diseases').on('change', function () {
+                toggleFields1();
+            });
+
+            // Function to toggle visibility of fields
+            function toggleFields1() {
+                var diseasesValue = $('#pf_diseases').val();
+
+                if (diseasesValue === 'Yes') {
+                    $('#dis_type, #dis_member').show();
+                } else {
+                    $('#dis_type, #dis_member').hide();
+                }
+            }
+        });
+    </script>
 }

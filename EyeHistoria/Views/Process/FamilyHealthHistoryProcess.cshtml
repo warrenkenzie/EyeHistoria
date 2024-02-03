@@ -4,28 +4,28 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="FamilyHealthHistory">
+        <form asp-action="FamilyHealthHistory" id="familyHealthForm">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="p_id" class="control-label"></label>
-                <input asp-for="p_id" class="form-control" />
-                <span asp-validation-for="p_id" class="text-danger"></span>
-            </div>
+
             <div class="form-group">
                 <label asp-for="pf_hdiseases" class="control-label"></label>
-                <input asp-for="pf_hdiseases" class="form-control" />
+                <select asp-for="pf_hdiseases" class="form-control">
+                    <option value="Yes">Yes</option>
+                    <option value="No" selected>No</option>
+                </select>
                 <span asp-validation-for="pf_hdiseases" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group" id="hdis_type">
                 <label asp-for="hdis_type" class="control-label"></label>
                 <input asp-for="hdis_type" class="form-control" />
                 <span asp-validation-for="hdis_type" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group" id="hdis_member">
                 <label asp-for="hdis_member" class="control-label"></label>
                 <input asp-for="hdis_member" class="form-control" />
                 <span asp-validation-for="hdis_member" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
@@ -37,6 +37,31 @@
     <a asp-action="HabitsProcess">Next</a>
 </div>
 
+
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        $(document).ready(function () {
+            // Hide or show fields based on the initial value of pf_hdiseases
+            toggleFields1();
+
+            // Handle change event of pf_hdiseases
+            $('#pf_hdiseases').on('change', function () {
+                toggleFields1();
+            });
+
+            // Function to toggle visibility of fields
+            function toggleFields1() {
+                var diseasesValue = $('#pf_hdiseases').val();
+
+                if (diseasesValue === 'Yes') {
+                    $('#hdis_type, #hdis_member').show();
+                } else {
+                    $('#hdis_type, #hdis_member').hide();
+                }
+            }
+        });
+    </script>
 }

@@ -4,53 +4,66 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="HabitsProcess">
+        <form asp-action="HabitsProcess" id="habitsForm">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="p_id" class="control-label"></label>
-                <input asp-for="p_id" class="form-control" />
-                <span asp-validation-for="p_id" class="text-danger"></span>
-            </div>
+
             <div class="form-group">
                 <label asp-for="p_smoke" class="control-label"></label>
-                <input asp-for="p_smoke" class="form-control" />
+                <select asp-for="p_smoke" class="form-control">
+                    <option value="Yes">Yes</option>
+                    <option value="No" selected>No</option>
+                </select>
                 <span asp-validation-for="p_smoke" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="p_drink" class="control-label"></label>
-                <input asp-for="p_drink" class="form-control" />
-                <span asp-validation-for="p_drink" class="text-danger"></span>
-            </div>
-            <div class="form-group">
+            <div class="form-group" id="s_freq">
                 <label asp-for="s_freq" class="control-label"></label>
                 <input asp-for="s_freq" class="form-control" />
                 <span asp-validation-for="s_freq" class="text-danger"></span>
             </div>
+
             <div class="form-group">
+                <label asp-for="p_drink" class="control-label"></label>
+                <select asp-for="p_drink" class="form-control">
+                    <option value="Yes">Yes</option>
+                    <option value="No" selected>No</option>
+                </select>
+                <span asp-validation-for="p_drink" class="text-danger"></span>
+            </div>
+            <div class="form-group" id="d_freq">
                 <label asp-for="d_freq" class="control-label"></label>
                 <input asp-for="d_freq" class="form-control" />
                 <span asp-validation-for="d_freq" class="text-danger"></span>
             </div>
+
+
             <div class="form-group">
                 <label asp-for="p_game" class="control-label"></label>
-                <input asp-for="p_game" class="form-control" />
+                <select asp-for="p_game" class="form-control">
+                    <option value="Yes">Yes</option>
+                    <option value="No" selected>No</option>
+                </select>
                 <span asp-validation-for="p_game" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="p_read" class="control-label"></label>
-                <input asp-for="p_read" class="form-control" />
-                <span asp-validation-for="p_read" class="text-danger"></span>
-            </div>
-            <div class="form-group">
+            <div class="form-group" id="g_freq">
                 <label asp-for="g_freq" class="control-label"></label>
                 <input asp-for="g_freq" class="form-control" />
                 <span asp-validation-for="g_freq" class="text-danger"></span>
             </div>
+
             <div class="form-group">
+                <label asp-for="p_read" class="control-label"></label>
+                <select asp-for="p_read" class="form-control">
+                    <option value="Yes">Yes</option>
+                    <option value="No" selected>No</option>
+                </select>
+                <span asp-validation-for="p_read" class="text-danger"></span>
+            </div>
+            <div class="form-group" id="r_freq">
                 <label asp-for="r_freq" class="control-label"></label>
                 <input asp-for="r_freq" class="form-control" />
                 <span asp-validation-for="r_freq" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
@@ -63,5 +76,80 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        $(document).ready(function () {
+            // Hide or show fields based on the initial value of ...
+            toggleFields1();
+            toggleFields2();
+            toggleFields3();
+            toggleFields4();
+
+            // Handle change event of p_smoke
+            $('#p_smoke').on('change', function () {
+                toggleFields1();
+            });
+
+            // Handle change event of p_drink
+            $('#p_drink').on('change', function () {
+                toggleFields2();
+            });
+
+            // Handle change event of p_game
+            $('#p_game').on('change', function () {
+                toggleFields3();
+            });
+
+            // Handle change event of p_read
+            $('#p_read').on('change', function () {
+                toggleFields4();
+            });
+
+            // Function to toggle visibility of fields
+            function toggleFields1() {
+                var smokeValue = $('#p_smoke').val();
+
+                if (smokeValue === 'Yes') {
+                    $('#s_freq').show();
+                } else {
+                    $('#s_freq').hide();
+                }
+            }
+
+            // Function to toggle visibility of fields
+            function toggleFields2() {
+                var drinkValue = $('#p_drink').val();
+
+                if (drinkValue === 'Yes') {
+                    $('#d_freq').show();
+                } else {
+                    $('#d_freq').hide();
+                }
+            }
+
+            // Function to toggle visibility of fields
+            function toggleFields3() {
+                var gameValue = $('#p_game').val();
+
+                if (gameValue === 'Yes') {
+                    $('#g_freq').show();
+                } else {
+                    $('#g_freq').hide();
+                }
+            }
+
+            // Function to toggle visibility of fields
+            function toggleFields4() {
+                var readValue = $('#p_read').val();
+
+                if (readValue === 'Yes') {
+                    $('#r_freq').show();
+                } else {
+                    $('#r_freq').hide();
+                }
+            }
+        });
+    </script>
 }

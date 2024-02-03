@@ -4,63 +4,71 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="PersonalHealthHistoryProcess">
+        <form asp-action="PersonalHealthHistoryProcess" id="personalHealthForm">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="p_id" class="control-label"></label>
-                <input asp-for="p_id" class="form-control" />
-                <span asp-validation-for="p_id" class="text-danger"></span>
-            </div>
+
             <div class="form-group">
                 <label asp-for="p_allergy" class="control-label"></label>
-                <input asp-for="p_allergy" class="form-control" />
+                <select asp-for="p_allergy" class="form-control">
+                    <option value="Yes">Yes</option>
+                    <option value="No" selected>No</option>
+                </select>
                 <span asp-validation-for="p_allergy" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="p_medication" class="control-label"></label>
-                <input asp-for="p_medication" class="form-control" />
-                <span asp-validation-for="p_medication" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="p_hcondition" class="control-label"></label>
-                <input asp-for="p_hcondition" class="form-control" />
-                <span asp-validation-for="p_hcondition" class="text-danger"></span>
-            </div>
-            <div class="form-group">
+            <div class="form-group" id="all_type">
                 <label asp-for="all_type" class="control-label"></label>
                 <input asp-for="all_type" class="form-control" />
                 <span asp-validation-for="all_type" class="text-danger"></span>
             </div>
+
             <div class="form-group">
+                <label asp-for="p_medication" class="control-label"></label>
+                <select asp-for="p_medication" class="form-control">
+                    <option value="Yes">Yes</option>
+                    <option value="No" selected>No</option>
+                </select>
+                <span asp-validation-for="p_medication" class="text-danger"></span>
+            </div>
+            <div class="form-group" id="med_type">
                 <label asp-for="med_type" class="control-label"></label>
                 <input asp-for="med_type" class="form-control" />
                 <span asp-validation-for="med_type" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="hcon_type" class="control-label"></label>
-                <input asp-for="hcon_type" class="form-control" />
-                <span asp-validation-for="hcon_type" class="text-danger"></span>
-            </div>
-            <div class="form-group">
+            <div class="form-group" id="med_sdate">
                 <label asp-for="med_sdate" class="control-label"></label>
                 <input asp-for="med_sdate" class="form-control" />
                 <span asp-validation-for="med_sdate" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="hcon_sdate" class="control-label"></label>
-                <input asp-for="hcon_sdate" class="form-control" />
-                <span asp-validation-for="hcon_sdate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
+            <div class="form-group" id="med_edate">
                 <label asp-for="med_edate" class="control-label"></label>
                 <input asp-for="med_edate" class="form-control" />
                 <span asp-validation-for="med_edate" class="text-danger"></span>
             </div>
+
             <div class="form-group">
+                <label asp-for="p_hcondition" class="control-label"></label>
+                <select asp-for="p_hcondition" class="form-control">
+                    <option value="Yes">Yes</option>
+                    <option value="No" selected>No</option>
+                </select>
+                <span asp-validation-for="p_hcondition" class="text-danger"></span>
+            </div>
+            <div class="form-group" id="hcon_type">
+                <label asp-for="hcon_type" class="control-label"></label>
+                <input asp-for="hcon_type" class="form-control" />
+                <span asp-validation-for="hcon_type" class="text-danger"></span>
+            </div>
+            <div class="form-group" id="hcon_sdate">
+                <label asp-for="hcon_sdate" class="control-label"></label>
+                <input asp-for="hcon_sdate" class="form-control" />
+                <span asp-validation-for="hcon_sdate" class="text-danger"></span>
+            </div>
+            <div class="form-group" id="hcon_edate">
                 <label asp-for="hcon_edate" class="control-label"></label>
                 <input asp-for="hcon_edate" class="form-control" />
                 <span asp-validation-for="hcon_edate" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
@@ -73,5 +81,63 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        $(document).ready(function () {
+            // Hide or show fields based on the initial value of ...
+            toggleFields1();
+            toggleFields2();
+            toggleFields3();
+
+            // Handle change event of p_allergy
+            $('#p_allergy').on('change', function () {
+                toggleFields1();
+            });
+
+            // Handle change event of p_medication
+            $('#p_medication').on('change', function () {
+                toggleFields2();
+            });
+
+            // Handle change event of p_hcondition
+            $('#p_hcondition').on('change', function () {
+                toggleFields3();
+            });
+
+            // Function to toggle visibility of fields
+            function toggleFields1() {
+                var allergyValue = $('#p_allergy').val();
+
+                if (allergyValue === 'Yes') {
+                    $('#all_type').show();
+                } else {
+                    $('#all_type').hide();
+                }
+            }
+
+            // Function to toggle visibility of fields
+            function toggleFields2() {
+                var medicationValue = $('#p_medication').val();
+
+                if (medicationValue === 'Yes') {
+                    $('#med_type, #med_sdate, #med_edate').show();
+                } else {
+                    $('#med_type, #med_sdate, #med_edate').hide();
+                }
+            }
+
+            // Function to toggle visibility of fields
+            function toggleFields3() {
+                var healthConditionValue = $('#p_hcondition').val();
+
+                if (healthConditionValue === 'Yes') {
+                    $('#hcon_type, #hcon_sdate, #hcon_edate').show();
+                } else {
+                    $('#hcon_type, #hcon_sdate, #hcon_edate').hide();
+                }
+            }
+        });
+    </script>
 }
