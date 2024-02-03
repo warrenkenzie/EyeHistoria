@@ -141,6 +141,95 @@ namespace EyeHistoria.Controllers
             return View();
         }
 
+        // GET: ProcessController/Create
+        public ActionResult Add5()
+        {
+            return View();
+        }
+
+        // Personal Health History
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Add5(PersonalHealthHistory personalHealthHistory)
+        {
+            if (ModelState.IsValid)
+            {
+                personalHealthHistory.p_id = processContext.Add5(personalHealthHistory);
+                // Redirect or return a response based on your requirements
+                return RedirectToAction("PersonalHealthHistoryProcess");
+            }
+            else
+            {
+                // Handle validation errors
+                return View(personalHealthHistory);
+            }
+        }
+
+        public ActionResult PersonalHealthHistoryProcess()
+        {
+            return View();
+        }
+
+        // GET: ProcessController/Create
+        public ActionResult Add6()
+        {
+            return View();
+        }
+
+        // Family Health History
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Add6(FamilyHealthHistory familyHealthHistory)
+        {
+            if (ModelState.IsValid)
+            {
+                familyHealthHistory.p_id = processContext.Add6(familyHealthHistory);
+                // Redirect or return a response based on your requirements
+                return RedirectToAction("FamilyHealthHistoryProcess");
+            }
+            else
+            {
+                // Handle validation errors
+                return View(familyHealthHistory);
+            }
+        }
+
+        public ActionResult FamilyHealthHistoryProcess()
+        {
+            return View();
+        }
+
+        // GET: Habits/Create
+        public ActionResult Add7()
+        {
+            return View();
+        }
+
+        // Family Health History
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Add7(Habits habits)
+        {
+            if (ModelState.IsValid)
+            {
+                habits.p_id = processContext.Add7(habits);
+                // Redirect or return a response based on your requirements
+                return RedirectToAction("HabitsProcess");
+            }
+            else
+            {
+                // Handle validation errors
+                return View(habits);
+            }
+        }
+
+        public ActionResult HabitsProcess()
+        {
+            return View();
+        }
+
+
+
         // GET: ProcessController/Edit/5
         public ActionResult Edit(int id)
         {

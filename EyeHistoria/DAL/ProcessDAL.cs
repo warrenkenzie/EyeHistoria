@@ -99,5 +99,71 @@ namespace EyeHistoria.DAL
 
             return familyOcularHistory.p_id;
         }
+
+        public int Add5(PersonalHealthHistory personalHealthHistory)
+        {
+            SqlCommand cmd = conn.CreateCommand();
+            cmd.CommandText = @"INSERT INTO PersonalHealthHistory (p_id, p_allergy, p_medication, p_hcondition, all_type, med_type, hcon_type, med_sdate, hcon_sdate, med_edate, hcon_edate) 
+                        OUTPUT INSERTED.p_id
+                        VALUES(@p_id, @p_allergy, @p_medication, @p_hcondition, @all_type, @med_type, @hcon_type, @med_sdate, @hcon_sdate, @med_edate, @hcon_edate)";
+            cmd.Parameters.AddWithValue("@p_id", personalHealthHistory.p_id);
+            cmd.Parameters.AddWithValue("@p_allergy", personalHealthHistory.p_allergy);
+            cmd.Parameters.AddWithValue("@p_medication", personalHealthHistory.p_medication);
+            cmd.Parameters.AddWithValue("@p_hcondition", personalHealthHistory.p_hcondition);
+            cmd.Parameters.AddWithValue("@all_type", personalHealthHistory.all_type);
+            cmd.Parameters.AddWithValue("@med_type", personalHealthHistory.med_type);
+            cmd.Parameters.AddWithValue("@hcon_type", personalHealthHistory.hcon_type);
+            cmd.Parameters.AddWithValue("@med_sdate", personalHealthHistory.med_sdate);
+            cmd.Parameters.AddWithValue("@hcon_sdate", personalHealthHistory.hcon_sdate);
+            cmd.Parameters.AddWithValue("@med_edate", personalHealthHistory.med_edate);
+            cmd.Parameters.AddWithValue("@hcon_edate", personalHealthHistory.hcon_edate);
+
+            conn.Open();
+            personalHealthHistory.p_id = (int)cmd.ExecuteScalar();
+            conn.Close();
+
+            return personalHealthHistory.p_id;
+        }
+
+        public int Add6(FamilyHealthHistory familyHealthHistory)
+        {
+            SqlCommand cmd = conn.CreateCommand();
+            cmd.CommandText = @"INSERT INTO FamilyHealthHistory (p_id, pf_hdiseases, hdis_type, hdis_member) 
+                        OUTPUT INSERTED.p_id
+                        VALUES(@p_id, @pf_hdiseases, @hdis_type, @hdis_member)";
+            cmd.Parameters.AddWithValue("@p_id", familyHealthHistory.p_id);
+            cmd.Parameters.AddWithValue("@pf_hdiseases", familyHealthHistory.pf_hdiseases);
+            cmd.Parameters.AddWithValue("@hdis_type", familyHealthHistory.hdis_type);
+            cmd.Parameters.AddWithValue("@hdis_member", familyHealthHistory.hdis_member);
+
+            conn.Open();
+            familyHealthHistory.p_id = (int)cmd.ExecuteScalar();
+            conn.Close();
+
+            return familyHealthHistory.p_id;
+        }
+
+        public int Add7(Habits habits)
+        {
+            SqlCommand cmd = conn.CreateCommand();
+            cmd.CommandText = @"INSERT INTO Habits (p_id, p_smoke, p_drink, s_freq, d_freq, p_game, p_read, g_freq, r_freq) 
+                        OUTPUT INSERTED.p_id
+                        VALUES(@p_id, @p_smoke, @p_drink, @s_freq, @d_freq, @p_game, @p_read, @g_freq, @r_freq)";
+            cmd.Parameters.AddWithValue("@p_id", habits.p_id);
+            cmd.Parameters.AddWithValue("@p_smoke", habits.p_smoke);
+            cmd.Parameters.AddWithValue("@p_drink", habits.p_drink);
+            cmd.Parameters.AddWithValue("@s_freq", habits.s_freq);
+            cmd.Parameters.AddWithValue("@d_freq", habits.d_freq);
+            cmd.Parameters.AddWithValue("@p_game", habits.p_game);
+            cmd.Parameters.AddWithValue("@p_read", habits.p_read);
+            cmd.Parameters.AddWithValue("@g_freq", habits.g_freq);
+            cmd.Parameters.AddWithValue("@r_freq", habits.r_freq);
+
+            conn.Open();
+            habits.p_id = (int)cmd.ExecuteScalar();
+            conn.Close();
+
+            return habits.p_id;
+        }
     }
 }

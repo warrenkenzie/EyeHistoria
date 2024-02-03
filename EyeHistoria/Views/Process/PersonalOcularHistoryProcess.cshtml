@@ -4,73 +4,75 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="PersonalOcularHistoryProcess">
+        <form asp-action="PersonalOcularHistoryProcess" id="personalOcularForm">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
             <div class="form-group">
                 <label asp-for="p_id" class="control-label"></label>
                 <input asp-for="p_id" class="form-control" />
                 <span asp-validation-for="p_id" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="p_prescription" class="control-label"></label>
-                <input asp-for="p_prescription" class="form-control" />
+                <select asp-for="p_prescription" class="form-control">
+                    <option value="Yes">Yes</option>
+                    <option value="No" selected>No</option>
+                </select>
                 <span asp-validation-for="p_prescription" class="text-danger"></span>
             </div>
+
+            <div class="form-group" id="pre_type">
+                <label asp-for="pre_type" class="control-label"></label>
+                <input asp-for="pre_type" class="form-control" />
+                <span asp-validation-for="pre_type" class="text-danger"></span>
+            </div>
+
+            <div class="form-group" id="pre_sdate">
+                <label asp-for="pre_sdate" class="control-label"></label>
+                <input asp-for="pre_sdate" class="form-control" />
+                <span asp-validation-for="pre_sdate" class="text-danger"></span>
+            </div>
+
+            <div class="form-group" id="pre_edate">
+                <label asp-for="pre_edate" class="control-label"></label>
+                <input asp-for="pre_edate" class="form-control" />
+                <span asp-validation-for="pre_edate" class="text-danger"></span>
+            </div>
+
             <div class="form-group">
                 <label asp-for="p_procedure" class="control-label"></label>
-                <input asp-for="p_procedure" class="form-control" />
+                <select asp-for="p_procedure" class="form-control">
+                    <option value="Yes">Yes</option>
+                    <option value="No" selected>No</option>
+                </select>
                 <span asp-validation-for="p_procedure" class="text-danger"></span>
             </div>
+
+            <div class="form-group" id="pre_type">
+                <label asp-for="pro_type" class="control-label"></label>
+                <input asp-for="pro_type" class="form-control" />
+                <span asp-validation-for="pro_type" class="text-danger"></span>
+            </div>
+
+            <div class="form-group" id="pre_sdate">
+                <label asp-for="pro_sdate" class="control-label"></label>
+                <input asp-for="pro_sdate" class="form-control" />
+                <span asp-validation-for="pro_sdate" class="text-danger"></span>
+            </div>
+
+            <div class="form-group" id="pre_edate">
+                <label asp-for="pro_edate" class="control-label"></label>
+                <input asp-for="pro_edate" class="form-control" />
+                <span asp-validation-for="pro_edate" class="text-danger"></span>
+            </div>
+
             <div class="form-group">
                 <label asp-for="p_condition" class="control-label"></label>
                 <input asp-for="p_condition" class="form-control" />
                 <span asp-validation-for="p_condition" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="pre_type" class="control-label"></label>
-                <input asp-for="pre_type" class="form-control" />
-                <span asp-validation-for="pre_type" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="pro_type" class="control-label"></label>
-                <input asp-for="pro_type" class="form-control" />
-                <span asp-validation-for="pro_type" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="con_type" class="control-label"></label>
-                <input asp-for="con_type" class="form-control" />
-                <span asp-validation-for="con_type" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="pre_sdate" class="control-label"></label>
-                <input asp-for="pre_sdate" class="form-control" />
-                <span asp-validation-for="pre_sdate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="pro_sdate" class="control-label"></label>
-                <input asp-for="pro_sdate" class="form-control" />
-                <span asp-validation-for="pro_sdate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="con_sdate" class="control-label"></label>
-                <input asp-for="con_sdate" class="form-control" />
-                <span asp-validation-for="con_sdate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="pre_edate" class="control-label"></label>
-                <input asp-for="pre_edate" class="form-control" />
-                <span asp-validation-for="pre_edate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="pro_edate" class="control-label"></label>
-                <input asp-for="pro_edate" class="form-control" />
-                <span asp-validation-for="pro_edate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="con_edate" class="control-label"></label>
-                <input asp-for="con_edate" class="form-control" />
-                <span asp-validation-for="con_edate" class="text-danger"></span>
-            </div>
+
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
@@ -83,5 +85,43 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        $(document).ready(function () {
+            // Hide or show fields based on the initial value of p_prescription
+            toggleFields1();
+            toggleFields2();
+
+            // Handle change event of p_prescription
+            $('#p_prescription').on('change', function () {
+                toggleFields();
+            });
+
+            // Handle change event of p_procedure
+            $('#p_prescription').on('change', function () {
+                toggleFields();
+            });
+
+            // Function to toggle visibility of fields
+            function toggleFields() {
+                var prescriptionValue = $('#p_prescription').val();
+
+                if (prescriptionValue === 'Yes') {
+                    $('#pre_type, #pre_sdate, #pre_edate').show();
+                } else {
+                    $('#pre_type, #pre_sdate, #pre_edate').hide();
+                }
+
+                var procedureValue = $('#p_procedure').val();
+
+                if (prescriptionValue === 'Yes') {
+                    $('#pro_type, #pro_sdate, #pro_edate').show();
+                } else {
+                    $('#pro_type, #pro_sdate, #pro_edate').hide();
+                }
+            }
+        });
+    </script>
 }

@@ -1,0 +1,42 @@
+﻿@model EyeHistoria.Models.FamilyHealthHistory
+
+<h4>FamilyHealthHistory</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="FamilyHealthHistory">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="p_id" class="control-label"></label>
+                <input asp-for="p_id" class="form-control" />
+                <span asp-validation-for="p_id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="pf_hdiseases" class="control-label"></label>
+                <input asp-for="pf_hdiseases" class="form-control" />
+                <span asp-validation-for="pf_hdiseases" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="hdis_type" class="control-label"></label>
+                <input asp-for="hdis_type" class="form-control" />
+                <span asp-validation-for="hdis_type" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="hdis_member" class="control-label"></label>
+                <input asp-for="hdis_member" class="form-control" />
+                <span asp-validation-for="hdis_member" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="HabitsProcess">Next</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

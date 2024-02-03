@@ -1,0 +1,67 @@
+﻿@model EyeHistoria.Models.Habits
+
+<h4>Habits</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="HabitsProcess">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="p_id" class="control-label"></label>
+                <input asp-for="p_id" class="form-control" />
+                <span asp-validation-for="p_id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="p_smoke" class="control-label"></label>
+                <input asp-for="p_smoke" class="form-control" />
+                <span asp-validation-for="p_smoke" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="p_drink" class="control-label"></label>
+                <input asp-for="p_drink" class="form-control" />
+                <span asp-validation-for="p_drink" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="s_freq" class="control-label"></label>
+                <input asp-for="s_freq" class="form-control" />
+                <span asp-validation-for="s_freq" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="d_freq" class="control-label"></label>
+                <input asp-for="d_freq" class="form-control" />
+                <span asp-validation-for="d_freq" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="p_game" class="control-label"></label>
+                <input asp-for="p_game" class="form-control" />
+                <span asp-validation-for="p_game" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="p_read" class="control-label"></label>
+                <input asp-for="p_read" class="form-control" />
+                <span asp-validation-for="p_read" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="g_freq" class="control-label"></label>
+                <input asp-for="g_freq" class="form-control" />
+                <span asp-validation-for="g_freq" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="r_freq" class="control-label"></label>
+                <input asp-for="r_freq" class="form-control" />
+                <span asp-validation-for="r_freq" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
