@@ -25,7 +25,8 @@ namespace EyeHistoria.Controllers
         // GET: ProcessController/Create
         public ActionResult Create()
         {
-            return View();
+            Demographic demographic = new Demographic();    
+            return View(demographic);
         }
 
         // POST: ProcessController/Create
@@ -33,19 +34,12 @@ namespace EyeHistoria.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Demographic demographic)
         {
-            if (ModelState.IsValid)
-            {
+
                 //Add staff record to database
                 demographic.p_id = processContext.Add(demographic);
                 //Redirect user to Staff/Index view
                 return RedirectToAction("Index");
-            }
-            else
-            {
-                //Input validation fails, return to the Create view
-                //to display error message
-                return View(demographic);
-            }
+            
         }
 
         // GET: ProcessController/Create
