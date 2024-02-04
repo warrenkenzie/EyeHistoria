@@ -4,16 +4,109 @@
     Layout = "_ProcessLayout";
 }
 
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap">
+
+<style>
+    body {
+        font-family: 'Montserrat', sans-serif;
+        background-color: #f8f9fa;
+        margin: 20px; /* Add margin for overall spacing */
+    }
+
+    h4 {
+        color: #007bff;
+        font-size: 30px; /* Reduce font size for a balanced look */
+        margin-bottom: 20px; /* Add space below h4 */
+    }
+
+    h5 {
+        font-size: 18px;
+    }
+
+    /* Styling for general questions */
+    .general {
+        font-weight: bold; /* Add bold font for emphasis */
+        color: #007bff; /* Use a different color for general questions */
+    }
+
+    .form-container {
+        font-family: 'Montserrat', sans-serif;
+        background-color: #fff;
+        border: 1px solid #ced4da;
+        border-radius: 14px;
+        padding: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    label {
+        font-weight: bold;
+        margin-bottom: 15px; /* Add more space between label and input */
+        display: block; /* Ensure each label is on a new line */
+    }
+
+    input[type="text"],
+    input[type="number"],
+    input[type="date"],
+    input[type="datetime"],
+    input[type="datetime-local"],
+    select {
+        font-family: 'Montserrat', sans-serif;
+        width: 100%;
+        max-width: 500px; /* Limit input box width */
+        padding: 10px;
+        box-sizing: border-box;
+        border: 1px solid #ced4da;
+        border-radius: 16px;
+        margin-bottom: 14px; /* Add space between input boxes */
+    }
+
+    input[type="submit"] {
+        font-family: 'Montserrat', sans-serif;
+        background-color: #007bff;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 16px;
+        cursor: pointer;
+        transition: background-color 0.8s, color 0.8s, box-shadow 0.8s, transform 0.8s; /* Add box-shadow to the transition */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Initial box shadow */
+    }
+
+        input[type="submit"]:hover {
+            background-color: #28a745; /* Change background color on hover to green */
+            color: #fff; /* Change text color on hover to white */
+            transform: translateY(-3px); /* Offset the button slightly on hover */
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Adjust box shadow on hover */
+        }
+
+    .next-link {
+        font-family: 'Montserrat', sans-serif;
+        margin-top: 20px;
+        display: block;
+        text-align: right;
+        color: #007bff;
+        text-decoration: none;
+    }
+
+        .next-link:hover {
+            text-decoration: underline;
+        }
+
+    /* Center the Next button */
+    .next-button-container {
+        text-align: right;
+    }
+</style>
+
 <h4>5. Habits</h4>
 <h5>Please learn more about the patient's lifestyle, habits.</h5>
-<hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="HabitsProcess" id="habitsForm">
+        <form asp-action="HabitsProcess" id="habitsForm" class="form-container">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             <div class="form-group">
-                <label asp-for="p_smoke" class="control-label"></label>
+                <label asp-for="p_smoke" class="control-label general"></label>
                 <select asp-for="p_smoke" class="form-control">
                     <option value="Yes">Yes</option>
                     <option value="No" selected>No</option>
@@ -27,7 +120,7 @@
             </div>
 
             <div class="form-group">
-                <label asp-for="p_drink" class="control-label"></label>
+                <label asp-for="p_drink" class="control-label general"></label>
                 <select asp-for="p_drink" class="form-control">
                     <option value="Yes">Yes</option>
                     <option value="No" selected>No</option>
@@ -42,7 +135,7 @@
 
 
             <div class="form-group">
-                <label asp-for="p_game" class="control-label"></label>
+                <label asp-for="p_game" class="control-label general"></label>
                 <select asp-for="p_game" class="form-control">
                     <option value="Yes">Yes</option>
                     <option value="No" selected>No</option>
@@ -56,7 +149,7 @@
             </div>
 
             <div class="form-group">
-                <label asp-for="p_read" class="control-label"></label>
+                <label asp-for="p_read" class="control-label general"></label>
                 <select asp-for="p_read" class="form-control">
                     <option value="Yes">Yes</option>
                     <option value="No" selected>No</option>
@@ -69,14 +162,14 @@
                 <span asp-validation-for="r_freq" class="text-danger"></span>
             </div>
 
-            <div class="form-group">
+            <div class="form-group next-button-container">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
-<div>
+<div class="next-link">
     <a asp-action="ChatBot">Next</a>
 </div>
 

@@ -6,7 +6,7 @@ namespace EyeHistoria.Models
     {
         public int p_id {  get; set; }
 
-        [Display(Name = "Does the patient's family a history of health condition?")]
+        [Display(Name = "Does the patient's family have a history of health condition?")]
         public string pf_hdiseases { get; set; }
 
         [Display(Name = "Health Condition:")]

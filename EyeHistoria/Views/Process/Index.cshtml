@@ -59,11 +59,16 @@
         border: none;
         border-radius: 16px;
         cursor: pointer;
+        transition: background-color 0.8s, color 0.8s, box-shadow 0.8s, transform 0.8s; /* Add box-shadow to the transition */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Initial box shadow */
     }
 
-    input[type="submit"]:hover {
-        background-color: #0056b3;
-    }
+        input[type="submit"]:hover {
+            background-color: #28a745; /* Change background color on hover to green */
+            color: #fff; /* Change text color on hover to white */
+            transform: translateY(-3px); /* Offset the button slightly on hover */
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Adjust box shadow on hover */
+        }
 
     .next-link {
         font-family: 'Montserrat', sans-serif;
