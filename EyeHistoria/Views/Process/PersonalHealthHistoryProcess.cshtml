@@ -4,16 +4,176 @@
     Layout = "_ProcessLayout";
 }
 
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap">
+
+<style>
+    body {
+        font-family: 'Montserrat', sans-serif;
+        background-color: #f8f9fa;
+        margin: 20px; /* Add margin for overall spacing */
+    }
+
+    .timeline-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        margin-bottom: 20px;
+    }
+
+    .timeline {
+        display: flex;
+        align-items: center;
+        flex: 1;
+    }
+
+    .timeline-circle {
+        width: 20px;
+        height: 20px;
+        background-color: #ced4da;
+        border-radius: 50%;
+        border: 2px solid #fff;
+        margin-right: 20px;
+    }
+
+        .timeline-circle:first-child {
+            background-color: #007bff;
+            margin-left: 0; /* Remove margin for the first circle */
+        }
+
+    .timeline-line {
+        flex: 1;
+        height: 2px;
+        background-color: #ced4da;
+        margin-left: -20px; /* Remove spacing at the start of the lines */
+    }
+
+    .timeline-circle:first-child {
+        background-color: #007bff;
+        margin-left: 0; /* Remove margin for the first two circles */
+    }
+
+    #nowtoo {
+        background-color: #007bff;
+        margin-left: 0; /* Remove margin for the first two circles */
+    }
+
+    #now {
+        background-color: #007bff;
+    }
+
+    h4 {
+        color: #007bff;
+        font-size: 30px; /* Reduce font size for a balanced look */
+        margin-bottom: 20px; /* Add space below h4 */
+    }
+
+    h5 {
+        font-size: 18px;
+    }
+
+    /* Styling for general questions */
+    .general {
+        font-weight: bold; /* Add bold font for emphasis */
+        color: #007bff; /* Use a different color for general questions */
+    }
+
+    .form-container {
+        font-family: 'Montserrat', sans-serif;
+        background-color: #fff;
+        border: 1px solid #ced4da;
+        border-radius: 14px;
+        padding: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    label {
+        font-weight: bold;
+        margin-bottom: 15px; /* Add more space between label and input */
+        display: block; /* Ensure each label is on a new line */
+    }
+
+    input[type="text"],
+    input[type="number"],
+    input[type="date"],
+    input[type="datetime"],
+    input[type="datetime-local"],
+    select {
+        font-family: 'Montserrat', sans-serif;
+        width: 100%;
+        max-width: 500px; /* Limit input box width */
+        padding: 10px;
+        box-sizing: border-box;
+        border: 1px solid #ced4da;
+        border-radius: 16px;
+        margin-bottom: 14px; /* Add space between input boxes */
+    }
+
+    input[type="submit"] {
+        font-family: 'Montserrat', sans-serif;
+        background-color: #007bff;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 16px;
+        cursor: pointer;
+        transition: background-color 0.8s, color 0.8s, box-shadow 0.8s, transform 0.8s; /* Add box-shadow to the transition */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Initial box shadow */
+    }
+
+        input[type="submit"]:hover {
+            background-color: #28a745; /* Change background color on hover to green */
+            color: #fff; /* Change text color on hover to white */
+            transform: translateY(-3px); /* Offset the button slightly on hover */
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Adjust box shadow on hover */
+        }
+
+    .next-link {
+        font-family: 'Montserrat', sans-serif;
+        margin-top: 20px;
+        display: block;
+        text-align: right;
+        color: #007bff;
+        text-decoration: none;
+    }
+
+        .next-link:hover {
+            text-decoration: underline;
+        }
+
+    /* Center the Next button */
+    .next-button-container {
+        text-align: right;
+    }
+</style>
+
+<h5>STEP FOUR: HEALTH HISTORY (PERSONAL)</h5>
+
+<div class="timeline-container">
+    <!-- Timeline -->
+    <div class="timeline">
+        <div class="timeline-circle"></div>
+        <div class="timeline-line" id="now"></div>
+        <div class="timeline-circle" id="nowtoo"></div>
+        <div class="timeline-line" id="now"></div>
+        <div class="timeline-circle" id="nowtoo"></div>
+        <div class="timeline-line" id="now"></div>
+        <div class="timeline-circle" id="nowtoo"></div>
+        <div class="timeline-line" id="now"></div>
+        <div class="timeline-circle"></div>
+        <div class="timeline-line"></div>
+        <div class="timeline-circle"></div>
+    </div>
+</div>
+
 <h4>4. Personal Health History</h4>
 <h5>Please find out more about the patient's health history.</h5>
-<hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="PersonalHealthHistoryProcess" id="personalHealthForm">
+        <form asp-action="PersonalHealthHistoryProcess" id="personalHealthForm" class="form-container">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             <div class="form-group">
-                <label asp-for="p_allergy" class="control-label"></label>
+                <label asp-for="p_allergy" class="control-label general"></label>
                 <select asp-for="p_allergy" class="form-control">
                     <option value="Yes">Yes</option>
                     <option value="No" selected>No</option>
@@ -27,7 +187,7 @@
             </div>
 
             <div class="form-group">
-                <label asp-for="p_medication" class="control-label"></label>
+                <label asp-for="p_medication" class="control-label general"></label>
                 <select asp-for="p_medication" class="form-control">
                     <option value="Yes">Yes</option>
                     <option value="No" selected>No</option>
@@ -51,7 +211,7 @@
             </div>
 
             <div class="form-group">
-                <label asp-for="p_hcondition" class="control-label"></label>
+                <label asp-for="p_hcondition" class="control-labe general"></label>
                 <select asp-for="p_hcondition" class="form-control">
                     <option value="Yes">Yes</option>
                     <option value="No" selected>No</option>
@@ -74,15 +234,11 @@
                 <span asp-validation-for="hcon_edate" class="text-danger"></span>
             </div>
 
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+            <div class="form-group next-button-container">
+                <input type="submit" value="Create" class="btn btn-primary" a asp-action="FamilyHealthHistoryProcess" />
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="FamilyHealthHistoryProcess">Next</a>
 </div>
 
 @section Scripts {

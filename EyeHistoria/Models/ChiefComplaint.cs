@@ -6,7 +6,7 @@ namespace EyeHistoria.Models
     {
         public int p_id { get; set; }
 
-        [Display(Name = "Purpose of patient's visit:")]
+        [Display(Name = "Reason for Patient's Visit:")]
         public string p_chiefcomplaint { get; set; }
     }
 }
