@@ -1,11 +1,20 @@
-﻿using System.Data.SqlClient;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
+using System.Diagnostics.Metrics;
+using System.Diagnostics.SymbolStore;
 using EyeHistoria.Models;
+using Humanizer;
+using MessagePack;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.CodeAnalysis;
 
 namespace EyeHistoria.DAL
 {
     public class ProcessDAL
     {
-        private IConfiguration Configuration { get; }
+        private IConfiguration Configuration { get; set; }
         private SqlConnection conn;
         //Constructor
         public ProcessDAL()
@@ -24,9 +33,11 @@ namespace EyeHistoria.DAL
         public int Add(Demographic demographic)
         {
             SqlCommand cmd = conn.CreateCommand();
-            cmd.CommandText = @"INSERT INTO Demographic (p_name, p_race, p_age, p_occupation, p_gender) 
-                                OUTPUT INSERTED.p_id
-                                VALUES(@p_name, @p_race, @p_age, @p_occupation, @p_gender)";
+
+            cmd.CommandText = @"INSERT INTO Demographic (p_name, p_race, p_age, p_occupation, p_gender)
+                                    OUTPUT INSERTED.p_id
+                                    VALUES(@p_name, @p_race, @p_age, @p_occupation, @p_gender)";
+      
             cmd.Parameters.AddWithValue("@p_name", demographic.p_name);
             cmd.Parameters.AddWithValue("@p_race", demographic.p_race);
             cmd.Parameters.AddWithValue("@p_age", demographic.p_age);
@@ -36,7 +47,6 @@ namespace EyeHistoria.DAL
             conn.Open();
             demographic.p_id = (int)cmd.ExecuteScalar();
             conn.Close();
-
             return demographic.p_id;
         }
 
