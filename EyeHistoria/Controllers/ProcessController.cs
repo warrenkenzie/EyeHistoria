@@ -10,69 +10,38 @@ namespace EyeHistoria.Controllers
 
         private ProcessDAL processContext = new ProcessDAL();
 
-        // GET: ProcessController
         public ActionResult Index()
         {
             return View();
         }
-
-        // GET: ProcessController/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: ProcessController/Create
         public ActionResult Create()
         { 
             return View();
         }
 
-        // POST: ProcessController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Index(Demographic demographic)
         {
             if (ModelState.IsValid)
             {
-                //Add staff record to database
-                demographic.p_id = processContext.Add(demographic);
-                //Redirect user to Staff/Index view
-                return RedirectToAction("Index");
+				// Add demographic record to the database
+				demographic.p_id = processContext.Add(demographic);
+                HttpContext.Session.SetInt32("demographic.p_id", demographic.p_id);
+				// Redirect user to ChiefComplaintProcess view
+				return RedirectToAction("ChiefComplaintProcess");
             }
             else
             {
-                //Input validation fails, return to the Create view
-                //to display error message
+                //Input validation fails, return to the View
                 return View();
             }
 
-        }
-
-        // GET: ProcessController/Create
-        public ActionResult Add2()
-        {
-            return View();
-        }
-
-        // POST: ProcessController/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Add2(ChiefComplaint chiefComplaint)
-        {
-            if (ModelState.IsValid)
-            {
-                //Add staff record to database
-                chiefComplaint.p_id = processContext.Add2(chiefComplaint);
-                //Redirect user to Staff/Index view
-                return RedirectToAction("ChiefComplaintProcess");
-            }
-            else
-            {
-                //Input validation fails, return to the Create view
-                //to display error message
-                return View(chiefComplaint);
-            }
         }
 
         public ActionResult ChiefComplaintProcess()
@@ -80,23 +49,46 @@ namespace EyeHistoria.Controllers
             return View();
         }
 
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ChiefComplaintProcess(ChiefComplaint chiefComplaint)
+        {
+            if (ModelState.IsValid)
+            {
+				// Add chiefComplaint record to the database
+				int storedId = HttpContext.Session.GetInt32("demographic.p_id") ?? 0;
+                chiefComplaint.p_id = storedId;
+                processContext.Add2(chiefComplaint);
+				// Redirect user to PersonalOcularHistoryProcess view
+				return RedirectToAction("PersonalOcularHistoryProcess");
+            }
+            else
+            {
+				
+				return View(chiefComplaint);
+            }
+        }
+
         // GET: ProcessController/Create
-        public ActionResult Add3()
+        public ActionResult PersonalOcularHistoryProcess()
         {
             return View();
         }
 
-        // POST: ProcessController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Add3(PersonalOcularHistory personalOcularHistory)
+        public ActionResult PersonalOcularHistoryProcess(PersonalOcularHistory personalOcularHistory)
         {
             if (ModelState.IsValid)
             {
                 // Add personal ocular history record to the database
+                int storedId = HttpContext.Session.GetInt32("demographic.p_id") ?? 0;
+                personalOcularHistory.p_id = storedId;
                 personalOcularHistory.p_id = processContext.Add3(personalOcularHistory);
-                // Redirect user to PersonalOcularHistoryProcess view
-                return RedirectToAction("PersonalOcularHistoryProcess");
+
+				// Redirect user to FamilyOcularHistoryProcess view
+				return RedirectToAction("FamilyOcularHistoryProcess");
             }
             else
             {
@@ -106,13 +98,8 @@ namespace EyeHistoria.Controllers
             }
         }
 
-        public ActionResult PersonalOcularHistoryProcess()
-        {
-            return View();
-        }
-
         // GET: ProcessController/Create
-        public ActionResult Add4()
+        public ActionResult FamilyOcularHistoryProcess()
         {
             return View();
         }
@@ -120,14 +107,16 @@ namespace EyeHistoria.Controllers
         // POST: ProcessController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Add4(FamilyOcularHistory familyOcularHistory)
+        public ActionResult FamilyOcularHistoryProcess(FamilyOcularHistory familyOcularHistory)
         {
             if (ModelState.IsValid)
             {
-                // Add family ocular history record to the database
+				// Add familyOcularHistory record to the database
+				int storedId = HttpContext.Session.GetInt32("demographic.p_id") ?? 0;
+                familyOcularHistory.p_id = storedId;
                 familyOcularHistory.p_id = processContext.Add4(familyOcularHistory);
-                // Redirect user to FamilyOcularHistoryProcess view
-                return RedirectToAction("FamilyOcularHistoryProcess");
+				// Redirect user to PersonalHealthHistoryProcess view
+				return RedirectToAction("PersonalHealthHistoryProcess");
             }
             else
             {
@@ -137,62 +126,22 @@ namespace EyeHistoria.Controllers
             }
         }
 
-        public ActionResult FamilyOcularHistoryProcess()
-        {
-            return View();
-        }
-
-        // GET: ProcessController/Create
-        public ActionResult Add5()
-        {
-            return View();
-        }
-
-        // Personal Health History
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Add5(PersonalHealthHistory personalHealthHistory)
-        {
-            if (ModelState.IsValid)
-            {
-                personalHealthHistory.p_id = processContext.Add5(personalHealthHistory);
-                // Redirect or return a response based on your requirements
-                return RedirectToAction("PersonalHealthHistoryProcess");
-            }
-            else
-            {
-                // Handle validation errors
-                return View(personalHealthHistory);
-            }
-        }
-
         public ActionResult PersonalHealthHistoryProcess()
         {
             return View();
         }
 
-        // GET: ProcessController/Create
-        public ActionResult Add6()
-        {
-            return View();
-        }
-
-        // Family Health History
+ 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Add6(FamilyHealthHistory familyHealthHistory)
+        public ActionResult PersonalHealthHistoryProcess(PersonalHealthHistory personalHealthHistory)
         {
-            if (ModelState.IsValid)
-            {
-                familyHealthHistory.p_id = processContext.Add6(familyHealthHistory);
-                // Redirect or return a response based on your requirements
-                return RedirectToAction("FamilyHealthHistoryProcess");
-            }
-            else
-            {
-                // Handle validation errors
-                return View(familyHealthHistory);
-            }
+			// Add personalHealthHistory record to the database
+			int storedId = HttpContext.Session.GetInt32("demographic.p_id") ?? 0;
+            personalHealthHistory.p_id = storedId;
+            personalHealthHistory.p_id = processContext.Add5(personalHealthHistory);
+			// Redirect user to FamilyHealthHistoryProcess view
+			return RedirectToAction("FamilyHealthHistoryProcess");
         }
 
         public ActionResult FamilyHealthHistoryProcess()
@@ -200,8 +149,21 @@ namespace EyeHistoria.Controllers
             return View();
         }
 
+        // Family Health History
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult FamilyHealthHistoryProcess(FamilyHealthHistory familyHealthHistory)
+        {
+			// Add familyHealthHistory record to the database
+			int storedId = HttpContext.Session.GetInt32("demographic.p_id") ?? 0;
+            familyHealthHistory.p_id = storedId;
+            processContext.Add6(familyHealthHistory);
+			// Redirect user to HabitsProcess view
+			return RedirectToAction("HabitsProcess");
+        }
+
         // GET: Habits/Create
-        public ActionResult Add7()
+        public ActionResult HabitsProcess()
         {
             return View();
         }
@@ -209,13 +171,16 @@ namespace EyeHistoria.Controllers
         // Family Health History
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Add7(Habits habits)
+        public ActionResult HabitsProcess(Habits habits)
         {
             if (ModelState.IsValid)
             {
+				// Add habits record to the database
+				int storedId = HttpContext.Session.GetInt32("demographic.p_id") ?? 0;
+                habits.p_id = storedId;
                 habits.p_id = processContext.Add7(habits);
-                // Redirect or return a response based on your requirements
-                return RedirectToAction("HabitsProcess");
+				// Redirect user to Summary view
+				return RedirectToAction("Summary");
             }
             else
             {
@@ -223,12 +188,6 @@ namespace EyeHistoria.Controllers
                 return View(habits);
             }
         }
-
-        public ActionResult HabitsProcess()
-        {
-            return View();
-        }
-
 
 
         // GET: ProcessController/Edit/5
@@ -312,31 +271,10 @@ namespace EyeHistoria.Controllers
             return View();
         }
 
-        public ActionResult ChatBot()
-        {
-            // VARIABLE, p_id_test, IS FOR TEST PUROSES THIS IS TO FIX p_id FOR NOW
-
-            int p_id = 1;
-
-            // load process
-            Demographic demographic = processContext.GetPatient_Demographic(p_id);
-            ChiefComplaint chiefComplaint = processContext.GetPatient_ChiefComplaint(p_id);
-            PersonalOcularHistory personalOcularHistory = processContext.GetPatient_PersonalOcularHistory(p_id);
-            FamilyOcularHistory familyOcularHistory = processContext.GetPatient_FamilyOcularHistory(p_id);
-            PersonalHealthHistory personalHealthHistory = processContext.GetPatient_PersonalHealthHistory(p_id);
-            FamilyHealthHistory familyHealthHistory = processContext.GetPatient_FamilyHealthHistory(p_id);
-            Habits habits = processContext.GetPatient_Habits(p_id);
-
-            Process process = new Process(demographic, chiefComplaint, personalOcularHistory, familyOcularHistory, personalHealthHistory, familyHealthHistory, habits);
-
-            return View(process);
-        }
-
         public ActionResult Summary()
         {
-            // VARIABLE, p_id_test, IS FOR TEST PUROSES THIS IS TO FIX p_id FOR NOW
 
-            int p_id = 1;
+            int p_id = HttpContext.Session.GetInt32("demographic.p_id") ?? 0;
 
             // load process
             Demographic demographic = processContext.GetPatient_Demographic(p_id);

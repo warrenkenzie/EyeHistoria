@@ -9,7 +9,7 @@
     body {
         font-family: 'Montserrat', sans-serif;
         background-color: #f8f9fa;
-        margin: 20px; /* Add margin for overall spacing */
+        margin: 20px;
     }
 
     .form-container {
@@ -21,19 +21,16 @@
 
     }
 
-    /* Styling for general questions */
     .general {
-        font-weight: bold; /* Add bold font for emphasis */
-        color: #007bff; /* Use a different color for general questions */
+        font-weight: bold; 
+        color: #007bff;
     }
 
-    /* Add some spacing between cards for better readability */
     .accordion-item {
         margin-bottom: 10px;
         padding-bottom: 10px;
     }
 
-    /* Add a subtle box-shadow to the cards for a card-like appearance */
     .accordion-body {
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         padding: 15px;
@@ -269,4 +266,65 @@
     </div>
 </div>
 
-<h3><strong>History-Taking Performance</strong></h3>
+<!--  CHATBOT  -->
+<body>
+    <script type="text/javascript">
+        (function (d, t) {
+            var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
+            v.onload = function () {
+                window.voiceflow.chat.load({
+                    verify: { projectID: '65ae81a7103c763cd9106c71' },
+                    url: 'https://general-runtime.voiceflow.com',
+                    versionID: 'production',
+                    launch: {
+                        event: {
+                            type: "launch", payload: {
+                                Demographics: {
+                                    p_name: "@Model.demographic.p_name",
+                                    p_race: "@Model.demographic.p_race",
+                                    p_age: "@Model.demographic.p_age",
+                                    p_occuption: "@Model.demographic.p_occupation",
+                                    p_gender: "@Model.demographic.p_gender"
+                                },
+                                ChiefComplaint: {
+                                    p_chiefcomplaint: "@Model.chiefComplaint.p_chiefcomplaint"
+                                },
+                                PersonalOcularHistory: {
+                                    p_prescription: "@Model.personalOcularHistory.p_prescription",
+                                    p_procedure: "@Model.personalOcularHistory.p_procedure",
+                                    p_condition: "@Model.personalOcularHistory.p_condition"
+                                },
+                                FamilyOcularHistory: {
+                                    pf_diseases: "@Model.familyOcularHistory.pf_diseases",
+                                    dis_type: "@Model.familyOcularHistory.dis_type",
+                                    dis_member: "@Model.familyOcularHistory.dis_member"
+                                },
+                                PersonalHealthHistory: {
+                                    p_allergy: "@Model.personalHealthHistory.p_allergy",
+                                    p_medication: "@Model.personalHealthHistory.p_medication",
+                                    p_hcondition: "@Model.personalHealthHistory.p_hcondition",
+                                    all_type: "@Model.personalHealthHistory.all_type",
+                                    med_type: "@Model.personalHealthHistory.med_type",
+                                    hcon_type: "@Model.personalHealthHistory.hcon_type"
+                                },
+                                FamilyHealthHistory: {
+                                    pf_hdiseases: "@Model.familyHealthHistory.pf_hdiseases",
+                                    hdis_type: "@Model.familyHealthHistory.hdis_type",
+                                    hdis_member: "@Model.familyHealthHistory.hdis_member"
+                                },
+                                Habits: {
+                                    p_smoke: "@Model.habits.p_smoke",
+                                    p_drink: "@Model.habits.p_drink",
+                                    s_freq: "@Model.habits.s_freq",
+                                    d_freq: "@Model.habits.d_freq"
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+            v.src = "https://cdn.voiceflow.com/widget/bundle.mjs"; v.type = "text/javascript"; s.parentNode.insertBefore(v, s);
+        })(document, 'script');
+    </script>
+
+</body>

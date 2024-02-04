@@ -10,7 +10,7 @@
     body {
         font-family: 'Montserrat', sans-serif;
         background-color: #f8f9fa;
-        margin: 20px; /* Add margin for overall spacing */
+        margin: 20px; 
     }
 
     .timeline-container {
@@ -37,14 +37,14 @@
 
         .timeline-circle:not(:last-child) {
             background-color: #007bff;
-            margin-left: 0; /* Remove margin for circles except the last one */
+            margin-left: 0; 
         }
 
     .timeline-line {
         flex: 1;
         height: 2px;
         background-color: #ced4da;
-        margin-left: -20px; /* Remove spacing at the start of the lines */
+        margin-left: -20px; 
     }
 
         .timeline-line:first-child {
@@ -57,18 +57,17 @@
 
     h4 {
         color: #007bff;
-        font-size: 30px; /* Reduce font size for a balanced look */
-        margin-bottom: 20px; /* Add space below h4 */
+        font-size: 30px; 
+        margin-bottom: 20px;
     }
 
     h5 {
         font-size: 18px;
     }
 
-    /* Styling for general questions */
     .general {
-        font-weight: bold; /* Add bold font for emphasis */
-        color: #007bff; /* Use a different color for general questions */
+        font-weight: bold;
+        color: #007bff;
     }
 
     .form-container {
@@ -82,8 +81,8 @@
 
     label {
         font-weight: bold;
-        margin-bottom: 15px; /* Add more space between label and input */
-        display: block; /* Ensure each label is on a new line */
+        margin-bottom: 15px; 
+        display: block; 
     }
 
     input[type="text"],
@@ -94,12 +93,12 @@
     select {
         font-family: 'Montserrat', sans-serif;
         width: 100%;
-        max-width: 500px; /* Limit input box width */
+        max-width: 500px; 
         padding: 10px;
         box-sizing: border-box;
         border: 1px solid #ced4da;
         border-radius: 16px;
-        margin-bottom: 14px; /* Add space between input boxes */
+        margin-bottom: 14px; 
     }
 
     input[type="submit"] {
@@ -110,15 +109,15 @@
         border: none;
         border-radius: 16px;
         cursor: pointer;
-        transition: background-color 0.8s, color 0.8s, box-shadow 0.8s, transform 0.8s; /* Add box-shadow to the transition */
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Initial box shadow */
+        transition: background-color 0.8s, color 0.8s, box-shadow 0.8s, transform 0.8s;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
     }
 
         input[type="submit"]:hover {
-            background-color: #28a745; /* Change background color on hover to green */
-            color: #fff; /* Change text color on hover to white */
-            transform: translateY(-3px); /* Offset the button slightly on hover */
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Adjust box shadow on hover */
+            background-color: #28a745; 
+            color: #fff; 
+            transform: translateY(-3px); 
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); 
         }
 
     .next-link {
@@ -134,7 +133,7 @@
             text-decoration: underline;
         }
 
-    /* Center the Next button */
+   
     .next-button-container {
         text-align: right;
     }
@@ -159,7 +158,7 @@
     </div>
 </div>
 
-<h4>5. Habits</h4>
+<h4>7. Habits</h4>
 <h5>Please learn more about the patient's lifestyle, habits.</h5>
 <div class="row">
     <div class="col-md-4">
@@ -224,7 +223,7 @@
             </div>
 
             <div class="form-group next-button-container">
-                <input type="submit" value="Create" class="btn btn-primary" a asp-action="Summary" />
+                <input type="submit" value="Create" class="btn btn-primary" a/>
             </div>
         </form>
     </div>
