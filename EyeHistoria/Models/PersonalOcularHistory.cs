@@ -24,13 +24,13 @@ namespace EyeHistoria.Models
         [Display(Name = "Eye Condition:")]
         public string? con_type { get; set; }
 
-        [Display(Name = "Date of prescription:")]
+        [Display(Name = "Date of Prescription:")]
         public DateTime? pre_sdate { get; set; }
 
-        [Display(Name = "Date of surgery/procedure:")]
+        [Display(Name = "Date of Surgery/Procedure:")]
         public DateTime? pro_sdate { get; set; }
 
-        [Display(Name = "Date of diagnosis:")]
+        [Display(Name = "Date of Diagnosis:")]
         public DateTime? con_sdate { get; set; }
 
         [Display(Name = "Has patient stop their eyewear usage?")]

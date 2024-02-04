@@ -13,6 +13,48 @@
         margin: 20px; /* Add margin for overall spacing */
     }
 
+    .timeline-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        margin-bottom: 20px;
+    }
+
+    .timeline {
+        display: flex;
+        align-items: center;
+        flex: 1;
+    }
+
+    .timeline-circle {
+        width: 20px;
+        height: 20px;
+        background-color: #ced4da;
+        border-radius: 50%;
+        border: 2px solid #fff;
+        margin-right: 20px;
+    }
+
+        .timeline-circle:first-child {
+            background-color: #007bff;
+            margin-left: 0; /* Remove margin for the first circle */
+        }
+
+    .timeline-line {
+        flex: 1;
+        height: 2px;
+        background-color: #ced4da;
+        margin-left: -20px; /* Remove spacing at the start of the lines */
+    }
+
+        .timeline-line:first-child {
+                background-color: #007bff;
+        }
+
+    #now {
+        background-color: #007bff;
+    }
+
     h4 {
         color: #007bff;
         font-size: 30px; /* Reduce font size for a balanced look */
@@ -70,24 +112,49 @@
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Adjust box shadow on hover */
         }
 
+    /* Styling for the "Next" link */
     .next-link {
-        font-family: 'Montserrat', sans-serif;
-        margin-top: 20px;
-        display: block;
-        text-align: right;
-        color: #007bff;
-        text-decoration: none;
+        position: fixed;
+        top: 50%;
+        right: 20px;
+        transform: translateY(30%);
+        color: #fff;
+        padding: 10px 20px;
+        cursor: pointer;
+        text-decoration: none !important; /* Remove default link underline */
+        transition:color 0.3s, transform 0.3s;
+        z-index: 999; /* Set a high z-index to ensure the link appears above other elements */
     }
 
-    .next-link:hover {
-        text-decoration: underline;
-    }
+        .next-link:hover {
+            color: #fff;
+            transform: translateY(2px);
+        }
 
     /* Center the Next button */
     .next-button-container {
         text-align: right;
     }
 </style>
+
+<h5>STEP ONE: DEMOGRAPHIC</h5>
+
+<div class="timeline-container">
+    <!-- Timeline -->
+    <div class="timeline">
+        <div class="timeline-circle"></div>
+        <div class="timeline-line" id="now"></div>
+        <div class="timeline-circle"></div>
+        <div class="timeline-line"></div>
+        <div class="timeline-circle"></div>
+        <div class="timeline-line"></div>
+        <div class="timeline-circle"></div>
+        <div class="timeline-line"></div>
+        <div class="timeline-circle"></div>
+        <div class="timeline-line"></div>
+        <div class="timeline-circle"></div>
+    </div>
+</div>
 
 <h4>1. Demographic</h4>
 <h5>Please collect the patient's personal information.</h5>
@@ -131,7 +198,7 @@
 </div>
 
 <div class="next-link">
-    <a asp-action="ChiefComplaintProcess">Next</a>
+    <a asp-action="ChiefComplaintProcess">NEXT ></a>
 </div>
 
 @section Scripts {
