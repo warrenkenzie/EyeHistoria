@@ -311,5 +311,25 @@ namespace EyeHistoria.Controllers
             return View();
         }
 
+        public ActionResult ChatBot()
+        {
+            // VARIABLE, p_id_test, IS FOR TEST PUROSES THIS IS TO FIX p_id FOR NOW
+
+            int p_id = 1;
+
+            // load process
+            Demographic demographic = processContext.GetPatient_Demographic(p_id);
+            ChiefComplaint chiefComplaint = processContext.GetPatient_ChiefComplaint(p_id);
+            PersonalOcularHistory personalOcularHistory = processContext.GetPatient_PersonalOcularHistory(p_id);
+            FamilyOcularHistory familyOcularHistory = processContext.GetPatient_FamilyOcularHistory(p_id);
+            PersonalHealthHistory personalHealthHistory = processContext.GetPatient_PersonalHealthHistory(p_id);
+            FamilyHealthHistory familyHealthHistory = processContext.GetPatient_FamilyHealthHistory(p_id);
+            Habits habits = processContext.GetPatient_Habits(p_id);
+
+            Process process = new Process(demographic, chiefComplaint, personalOcularHistory, familyOcularHistory, personalHealthHistory, familyHealthHistory, habits);
+
+            return View(process);
+        }
+
     }
 }

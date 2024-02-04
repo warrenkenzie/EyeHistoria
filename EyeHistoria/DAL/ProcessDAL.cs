@@ -165,5 +165,263 @@ namespace EyeHistoria.DAL
 
             return habits.p_id;
         }
+
+
+        // Retrieving based on p_id (patient id)
+        public Demographic GetPatient_Demographic(int p_id)
+        {
+            //Create a SqlCommand object from connection object
+            SqlCommand cmd = conn.CreateCommand();
+            // query
+            cmd.CommandText = @"SELECT * FROM Demographic WHERE p_id = @p_id";
+
+            cmd.Parameters.AddWithValue("@p_id", p_id);
+
+            //A connection to database must be opened before any operations made.
+            conn.Open();
+
+            //Execute the SELECT SQL through a DataReader
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            Demographic demographic = null;
+            if (reader.Read())
+            {
+                demographic = new Demographic
+                {
+                    p_id = reader.GetInt32(0),
+                    p_name = reader.GetString(1),
+                    p_race = reader.GetString(2),
+                    p_age = reader.GetInt32(3),
+                    p_occupation = reader.GetString(4),
+                    p_gender = reader.GetString(5)
+                };
+
+            }
+
+            //Close DataReader
+            reader.Close();
+            //Close the database connection
+            conn.Close();
+            return demographic;
+        }
+
+        // retrieves chiefcomplaint based on patient id
+        public ChiefComplaint GetPatient_ChiefComplaint(int p_id)
+        {
+            //Create a SqlCommand object from connection object
+            SqlCommand cmd = conn.CreateCommand();
+            // query
+            cmd.CommandText = @"SELECT * FROM ChiefComplaint WHERE p_id = @p_id";
+
+            cmd.Parameters.AddWithValue("@p_id", p_id);
+
+            //A connection to database must be opened before any operations made.
+            conn.Open();
+
+            //Execute the SELECT SQL through a DataReader
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            ChiefComplaint chiefComplaint = null;
+            if (reader.Read())
+            {
+                chiefComplaint = new ChiefComplaint
+                {
+                    p_id = reader.GetInt32(0),
+                    p_chiefcomplaint = reader.GetString(1)
+                };
+
+            }
+
+            //Close DataReader
+            reader.Close();
+            //Close the database connection
+            conn.Close();
+            return chiefComplaint;
+        }
+
+        // retrieves PersonalOcularHistory based on p_id
+        // NOTE: I am only getting the first 4 columns from the table
+        public PersonalOcularHistory GetPatient_PersonalOcularHistory(int p_id)
+        {
+            //Create a SqlCommand object from connection object
+            SqlCommand cmd = conn.CreateCommand();
+            // query
+            cmd.CommandText = @"SELECT * FROM PersonalOcularHistory WHERE p_id = @p_id";
+
+            cmd.Parameters.AddWithValue("@p_id", p_id);
+
+            //A connection to database must be opened before any operations made.
+            conn.Open();
+
+            //Execute the SELECT SQL through a DataReader
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            PersonalOcularHistory personalOcularHistory = null;
+            if (reader.Read())
+            {
+                personalOcularHistory = new PersonalOcularHistory
+                {
+                    p_id = reader.GetInt32(0),
+                    p_prescription = reader.GetString(1),
+                    p_procedure = reader.GetString(2),
+                    p_condition = reader.GetString(3)
+                };
+
+            }
+
+            //Close DataReader
+            reader.Close();
+            //Close the database connection
+            conn.Close();
+            return personalOcularHistory;
+        }
+
+        // gets family ocular history based on p_id
+        public FamilyOcularHistory GetPatient_FamilyOcularHistory(int p_id)
+        {
+            //Create a SqlCommand object from connection object
+            SqlCommand cmd = conn.CreateCommand();
+            // query
+            cmd.CommandText = @"SELECT * FROM FamilyOcularHistory WHERE p_id = @p_id";
+
+            cmd.Parameters.AddWithValue("@p_id", p_id);
+
+            //A connection to database must be opened before any operations made.
+            conn.Open();
+
+            //Execute the SELECT SQL through a DataReader
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            FamilyOcularHistory familyOcularHistory = null;
+            if (reader.Read())
+            {
+                familyOcularHistory = new FamilyOcularHistory
+                {
+                    p_id = reader.GetInt32(0),
+                    pf_diseases = reader.GetString(1),
+                    dis_type = (!reader.IsDBNull(2) ? reader.GetString(2) : null),
+                    dis_member = (!reader.IsDBNull(3) ? reader.GetString(3) : null)
+                };
+
+            }
+
+            //Close DataReader
+            reader.Close();
+            //Close the database connection
+            conn.Close();
+            return familyOcularHistory;
+        }
+
+        // gets the personalhealthhistory based on p_id only take first 7 columns
+        public PersonalHealthHistory GetPatient_PersonalHealthHistory(int p_id)
+        {
+            //Create a SqlCommand object from connection object
+            SqlCommand cmd = conn.CreateCommand();
+            // query
+            cmd.CommandText = @"SELECT * FROM PersonalHealthHistory WHERE p_id = @p_id";
+
+            cmd.Parameters.AddWithValue("@p_id", p_id);
+
+            //A connection to database must be opened before any operations made.
+            conn.Open();
+
+            //Execute the SELECT SQL through a DataReader
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            PersonalHealthHistory personalHealthHistory = null;
+            if (reader.Read())
+            {
+                personalHealthHistory = new PersonalHealthHistory
+                {
+                    p_id = reader.GetInt32(0),
+                    p_allergy = reader.GetString(1),
+                    p_medication = reader.GetString(2),
+                    p_hcondition = reader.GetString(3),
+                    all_type = (!reader.IsDBNull(4) ? reader.GetString(4) : null),
+                    med_type = (!reader.IsDBNull(5) ? reader.GetString(5) : null),
+                    hcon_type = (!reader.IsDBNull(6) ? reader.GetString(6) : null)
+                };
+
+            }
+
+            //Close DataReader
+            reader.Close();
+            //Close the database connection
+            conn.Close();
+            return personalHealthHistory;
+        }
+        public FamilyHealthHistory GetPatient_FamilyHealthHistory(int p_id)
+        {
+            //Create a SqlCommand object from connection object
+            SqlCommand cmd = conn.CreateCommand();
+            // query
+            cmd.CommandText = @"SELECT * FROM FamilyHealthHistory WHERE p_id = @p_id";
+
+            cmd.Parameters.AddWithValue("@p_id", p_id);
+
+            //A connection to database must be opened before any operations made.
+            conn.Open();
+
+            //Execute the SELECT SQL through a DataReader
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            FamilyHealthHistory familyHealthHistory = null;
+            if (reader.Read())
+            {
+                familyHealthHistory = new FamilyHealthHistory
+                {
+                    p_id = reader.GetInt32(0),
+                    pf_hdiseases = reader.GetString(1),
+                    hdis_type = (!reader.IsDBNull(2) ? reader.GetString(2) : null),
+                    hdis_member = (!reader.IsDBNull(3) ? reader.GetString(3) : null)
+                };
+
+            }
+
+            //Close DataReader
+            reader.Close();
+            //Close the database connection
+            conn.Close();
+            return familyHealthHistory;
+        }
+
+        // get habits based on p_id
+        // NOTE: only get first 5 columns
+        public Habits GetPatient_Habits(int p_id)
+        {
+            //Create a SqlCommand object from connection object
+            SqlCommand cmd = conn.CreateCommand();
+            // query
+            cmd.CommandText = @"SELECT * FROM Habits WHERE p_id = @p_id";
+
+            cmd.Parameters.AddWithValue("@p_id", p_id);
+
+            //A connection to database must be opened before any operations made.
+            conn.Open();
+
+            //Execute the SELECT SQL through a DataReader
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            Habits habits = null;
+            if (reader.Read())
+            {
+                habits = new Habits
+                {
+                    p_id = reader.GetInt32(0),
+                    p_smoke = reader.GetString(1),
+                    p_drink = reader.GetString(2),
+                    s_freq = (!reader.IsDBNull(3) ? reader.GetInt32(3) : null),
+                    d_freq = (!reader.IsDBNull(4) ? reader.GetInt32(4) : null)
+                };
+
+            }
+
+            //Close DataReader
+            reader.Close();
+            //Close the database connection
+            conn.Close();
+            return habits;
+        }
+
     }
 }

@@ -13,10 +13,10 @@ namespace EyeHistoria.Models
         public string p_drink { get; set; }
 
         [Display(Name = "Cigars/per day:")]
-        public int s_freq { get; set; }
+        public int? s_freq { get; set; }
 
         [Display(Name = "Drinks/per day:")]
-        public int d_freq {  get; set; }
+        public int? d_freq {  get; set; }
 
         [Display(Name = "Does the patient play video games?")]
         public string p_game { get; set; }
