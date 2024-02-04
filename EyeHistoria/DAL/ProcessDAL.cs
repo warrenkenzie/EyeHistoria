@@ -264,7 +264,17 @@ namespace EyeHistoria.DAL
                     p_id = reader.GetInt32(0),
                     p_prescription = reader.GetString(1),
                     p_procedure = reader.GetString(2),
-                    p_condition = reader.GetString(3)
+                    p_condition = reader.GetString(3),
+                    pre_type = (!reader.IsDBNull(4) ? reader.GetString(4) : null),
+                    pro_type = (!reader.IsDBNull(5) ? reader.GetString(5) : null),
+                    con_type = (!reader.IsDBNull(6) ? reader.GetString(6) : null),
+                    pre_sdate = (!reader.IsDBNull(7) ? reader.GetDateTime(7) : null),
+                    pro_sdate = (!reader.IsDBNull(8) ? reader.GetDateTime(8) : null),
+                    con_sdate = (!reader.IsDBNull(9) ? reader.GetDateTime(9) : null),
+                    pre_edate = (!reader.IsDBNull(10) ? reader.GetDateTime(10) : null),
+                    pro_edate = (!reader.IsDBNull(11) ? reader.GetDateTime(11) : null),
+                    con_edate = (!reader.IsDBNull(12) ? reader.GetDateTime(12) : null)
+
                 };
 
             }
@@ -339,7 +349,11 @@ namespace EyeHistoria.DAL
                     p_hcondition = reader.GetString(3),
                     all_type = (!reader.IsDBNull(4) ? reader.GetString(4) : null),
                     med_type = (!reader.IsDBNull(5) ? reader.GetString(5) : null),
-                    hcon_type = (!reader.IsDBNull(6) ? reader.GetString(6) : null)
+                    hcon_type = (!reader.IsDBNull(6) ? reader.GetString(6) : null),
+                    med_sdate = (!reader.IsDBNull(7) ? reader.GetDateTime(7) : null),
+                    hcon_sdate = (!reader.IsDBNull(8) ? reader.GetDateTime(8) : null),
+                    med_edate = (!reader.IsDBNull(9) ? reader.GetDateTime(9) : null),
+                    hcon_edate = (!reader.IsDBNull(10) ? reader.GetDateTime(10) : null)
                 };
 
             }
@@ -411,7 +425,11 @@ namespace EyeHistoria.DAL
                     p_smoke = reader.GetString(1),
                     p_drink = reader.GetString(2),
                     s_freq = (!reader.IsDBNull(3) ? reader.GetInt32(3) : null),
-                    d_freq = (!reader.IsDBNull(4) ? reader.GetInt32(4) : null)
+                    d_freq = (!reader.IsDBNull(4) ? reader.GetInt32(4) : null),
+                    p_game = reader.GetString(5),
+                    p_read = reader.GetString(6),
+                    g_freq = (!reader.IsDBNull(7) ? reader.GetInt32(7) : null),
+                    r_freq = (!reader.IsDBNull(8) ? reader.GetInt32(8) : null)
                 };
 
             }

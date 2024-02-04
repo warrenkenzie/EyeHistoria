@@ -25,9 +25,9 @@ namespace EyeHistoria.Models
         public string p_read { get; set; }
 
         [Display(Name = "Hours/per day:")]
-        public int g_freq { get; set; }
+        public int? g_freq { get; set; }
 
         [Display(Name = "Hours/per day:")]
-        public int r_freq { get; set; }
+        public int? r_freq { get; set; }
     }
 }

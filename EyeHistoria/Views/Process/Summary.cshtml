@@ -1,0 +1,137 @@
+﻿@model EyeHistoria.Models.Process
+
+@{
+    Layout = "_ProcessLayout";
+}
+
+<style>
+    /* Your existing styles... */
+</style>
+
+<h4>Session Summary</h4>
+<h5>Below is an overview of the patient's information and your history-taking performance analysis.</h5>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" />
+
+<div class="accordion" id="accordionPanelsStayOpenExample">
+    <div class="accordion-item">
+        <h2 class="accordion-header">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#demographicCollapse" aria-expanded="true" aria-controls="demographicCollapse">
+                Demographic Information
+            </button>
+        </h2>
+        <div id="demographicCollapse" class="accordion-collapse collapse show">
+            <div class="accordion-body">
+                <strong>Name:</strong> @Model.demographic.p_name <br />
+                <strong>Race:</strong> @Model.demographic.p_race <br />
+                <strong>Age:</strong> @Model.demographic.p_age <br />
+                <strong>Occupation:</strong> @Model.demographic.p_occupation <br />
+                <strong>Gender:</strong> @Model.demographic.p_gender <br />
+            </div>
+        </div>
+    </div>
+</div>
+<div class="accordion-item">
+    <h2 class="accordion-header">
+        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#chiefComplaintCollapse" aria-expanded="false" aria-controls="chiefComplaintCollapse">
+            Chief Complaint
+        </button>
+    </h2>
+    <div id="chiefComplaintCollapse" class="accordion-collapse collapse">
+        <div class="accordion-body">
+            <strong>Chief Complaint:</strong> @Model.chiefComplaint.p_chiefcomplaint <br />
+        </div>
+    </div>
+</div>
+<div class="accordion-item">
+    <h2 class="accordion-header">
+        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#personalOcularHistoryCollapse" aria-expanded="false" aria-controls="personalOcularHistoryCollapse">
+            Personal Ocular History
+        </button>
+    </h2>
+    <div id="personalOcularHistoryCollapse" class="accordion-collapse collapse">
+        <div class="accordion-body">
+            <strong>Has the patient been prescribed eyewear?</strong> @Model.personalOcularHistory.p_prescription <br />
+            <strong>Has patient undergone any eye surgery/procedure?</strong> @Model.personalOcularHistory.p_procedure <br />
+            <strong>Does patient suffer from any eye condition?</strong> @Model.personalOcularHistory.p_condition <br />
+            <strong>Eyewear:</strong> @Model.personalOcularHistory.pre_type <br />
+            <strong>Eye Surgery/Procedure:</strong> @Model.personalOcularHistory.pro_type <br />
+            <strong>Eye Condition:</strong> @Model.personalOcularHistory.con_type <br />
+            <strong>Date of Prescription:</strong> @Model.personalOcularHistory.pre_sdate <br />
+            <strong>Date of Surgery/Procedure:</strong> @Model.personalOcularHistory.pro_sdate <br />
+            <strong>Date of Diagnosis:</strong> @Model.personalOcularHistory.con_sdate <br />
+            <strong>Has patient stopped their eyewear usage?</strong> @Model.personalOcularHistory.pre_edate <br />
+            <strong>Has patient fully recovered from said eye surgery/procedure?</strong> @Model.personalOcularHistory.pro_edate <br />
+            <strong>Has the patient fully recovered from said eye condition?</strong> @Model.personalOcularHistory.con_edate <br />
+        </div>
+    </div>
+</div>
+<div class="accordion-item">
+    <h2 class="accordion-header">
+        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#familyOcularHistoryCollapse" aria-expanded="false" aria-controls="familyOcularHistoryCollapse">
+            Family Ocular History
+        </button>
+    </h2>
+    <div id="familyOcularHistoryCollapse" class="accordion-collapse collapse">
+        <div class="accordion-body">
+            <strong>Does the patient's family have a history of eye disease?</strong> @Model.familyOcularHistory.pf_diseases <br />
+            <strong>Eye Disease:</strong> @Model.familyOcularHistory.dis_type <br />
+            <strong>Family Member:</strong> @Model.familyOcularHistory.dis_member <br />
+        </div>
+    </div>
+</div>
+<div class="accordion-item">
+    <h2 class="accordion-header">
+        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#personalHealthHistoryCollapse" aria-expanded="false" aria-controls="personalHealthHistoryCollapse">
+            Personal Health History
+        </button>
+    </h2>
+    <div id="personalHealthHistoryCollapse" class="accordion-collapse collapse">
+        <div class="accordion-body">
+            <strong>Does the patient have an allergy?</strong> @Model.personalHealthHistory.p_allergy <br />
+            <strong>Is the patient on any medication?</strong> @Model.personalHealthHistory.p_medication <br />
+            <strong>Does the patient suffer from any health condition?</strong> @Model.personalHealthHistory.p_hcondition <br />
+            <strong>Allergy:</strong> @Model.personalHealthHistory.all_type <br />
+            <strong>Medication:</strong> @Model.personalHealthHistory.med_type <br />
+            <strong>Health Condition:</strong> @Model.personalHealthHistory.hcon_type <br />
+            <strong>Date of Prescription:</strong> @Model.personalHealthHistory.med_sdate <br />
+            <strong>Date of Diagnosis:</strong> @Model.personalHealthHistory.hcon_sdate <br />
+            <strong>Is the patient still on medication?</strong> @Model.personalHealthHistory.med_edate <br />
+            <strong>Is the patient fully recovered from said health condition?</strong> @Model.personalHealthHistory.hcon_edate <br />
+        </div>
+    </div>
+</div>
+<div class="accordion-item">
+    <h2 class="accordion-header">
+        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#familyHealthHistoryCollapse" aria-expanded="false" aria-controls="familyHealthHistoryCollapse">
+            Family Health History
+        </button>
+    </h2>
+    <div id="familyHealthHistoryCollapse" class="accordion-collapse collapse">
+        <div class="accordion-body">
+            <strong>Does the patient's family have a history of health condition?</strong> @Model.familyHealthHistory.pf_hdiseases <br />
+            <strong>Health Condition:</strong> @Model.familyHealthHistory.hdis_type <br />
+            <strong>Family Member:</strong> @Model.familyHealthHistory.hdis_member <br />
+        </div>
+    </div>
+</div>
+<div class="accordion-item">
+    <h2 class="accordion-header">
+        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#habitsCollapse" aria-expanded="false" aria-controls="habitsCollapse">
+            Habits
+        </button>
+    </h2>
+    <div id="habitsCollapse" class="accordion-collapse collapse">
+        <div class="accordion-body">
+            <strong>Does the patient smoke?</strong> @Model.habits.p_smoke <br />
+            <strong>Does the patient drink?</strong> @Model.habits.p_drink <br />
+            <strong>Cigars/per day:</strong> @Model.habits.s_freq <br />
+            <strong>Drinks/per day:</strong> @Model.habits.d_freq <br />
+            <strong>Does the patient play video games?</strong> @Model.habits.p_game <br />
+            <strong>Does the patient read?</strong> @Model.habits.p_read <br />
+            <strong>Hours/per day for video games:</strong> @Model.habits.g_freq <br />
+            <strong>Hours/per day for reading:</strong> @Model.habits.r_freq <br />
+        </div>
+    </div>
+</div>
+

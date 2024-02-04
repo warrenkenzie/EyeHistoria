@@ -25,15 +25,15 @@ namespace EyeHistoria.Models
         public string hcon_type { get; set; }
 
         [Display(Name = "Date of Presciption:")]
-        public DateTime med_sdate { get; set; }
+        public DateTime? med_sdate { get; set; }
 
         [Display(Name = "Date of Diagnosis:")]
-        public DateTime hcon_sdate { get; set; }
+        public DateTime? hcon_sdate { get; set; }
 
         [Display(Name = "Is the patient still on medication?")]
-        public DateTime med_edate { get; set; }
+        public DateTime? med_edate { get; set; }
 
         [Display(Name = "Is the patient full recovered from said health condition?")]
-        public DateTime hcon_edate { get; set; }
+        public DateTime? hcon_edate { get; set; }
     }
 }
