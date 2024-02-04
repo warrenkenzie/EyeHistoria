@@ -168,14 +168,10 @@
                 <span asp-validation-for="p_chiefcomplaint" class="text-danger"></span>
             </div>
             <div class="form-group next-button-container">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Create" class="btn btn-primary" a asp-action="PersonalOcularHistoryProcess" />
             </div>
         </form>
     </div>
-</div>
-
-<div class="next-link">
-    <a asp-action="PersonalOcularHistoryProcess">Next</a>
 </div>
 
 @section Scripts {
