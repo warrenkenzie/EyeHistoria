@@ -13,6 +13,54 @@
         margin: 20px; /* Add margin for overall spacing */
     }
 
+    .timeline-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        margin-bottom: 20px;
+    }
+
+    .timeline {
+        display: flex;
+        align-items: center;
+        flex: 1;
+    }
+
+    .timeline-circle {
+        width: 20px;
+        height: 20px;
+        background-color: #ced4da;
+        border-radius: 50%;
+        border: 2px solid #fff;
+        margin-right: 20px;
+    }
+
+        .timeline-circle:first-child {
+            background-color: #007bff;
+            margin-left: 0; /* Remove margin for the first circle */
+        }
+
+    .timeline-line {
+        flex: 1;
+        height: 2px;
+        background-color: #ced4da;
+        margin-left: -20px; /* Remove spacing at the start of the lines */
+    }
+
+    .timeline-circle:first-child {
+        background-color: #007bff;
+        margin-left: 0; /* Remove margin for the first two circles */
+    }
+
+    #nowtoo {
+        background-color: #007bff;
+        margin-left: 0; /* Remove margin for the first two circles */
+    }
+
+    #now {
+        background-color: #007bff;
+    }
+
     h4 {
         color: #007bff;
         font-size: 30px; /* Reduce font size for a balanced look */
@@ -97,6 +145,25 @@
         text-align: right;
     }
 </style>
+
+<h5>STEP FOUR: HEALTH HISTORY (FAMILY)</h5>
+
+<div class="timeline-container">
+    <!-- Timeline -->
+    <div class="timeline">
+        <div class="timeline-circle"></div>
+        <div class="timeline-line" id="now"></div>
+        <div class="timeline-circle" id="nowtoo"></div>
+        <div class="timeline-line" id="now"></div>
+        <div class="timeline-circle" id="nowtoo"></div>
+        <div class="timeline-line" id="now"></div>
+        <div class="timeline-circle" id="nowtoo"></div>
+        <div class="timeline-line" id="now"></div>
+        <div class="timeline-circle"></div>
+        <div class="timeline-line"></div>
+        <div class="timeline-circle"></div>
+    </div>
+</div>
 
 <h4>4. Family Health History</h4>
 <h5>Please find out more about the patient's family, specifically their health history.</h5>
